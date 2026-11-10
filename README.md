@@ -5,7 +5,8 @@ for Québec, one row per registered vehicle, and the tables computed from them.
 
 **Status: work in progress (November 10, 2026).** The ingestion, the vocabulary
 matching, the municipality link and the inference of vehicle type and fuel are
-built and measured. Figures, the note and the slide deck are not yet written.
+built and measured, and three first figures are drawn. The results are under
+review; the note and the slide deck are not yet written.
 
 ## Sources
 
@@ -50,8 +51,8 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
   (2023), 831,205 (2024). Ten counts are checked at each run (`ingest_checks.csv`).
 - **Vocabulary.** The open data hold 418 make codes; the release holds more
   than 7,000 make strings. Written as released, 87.4 % (2023) and 82.0 % (2024)
-  of vehicles match a make and model of the open data. After the rules: 97.9 %
-  and 97.6 % at make and model, 1.6 % and 1.9 % at make only, 0.4 % and 0.5 %
+  of vehicles match a make and model of the open data. After the rules: 97.1 %
+  and 96.8 % at make and model, 2.4 % and 2.7 % at make only, 0.4 % and 0.5 %
   unresolved. No string is matched by similarity.
 - **Municipalities.** 98.3 % of the vehicles of 2023–2024 are linked to a
   municipality code; 0.7 % carry a name shared by two municipalities of the same
@@ -66,9 +67,23 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
   years ahead (2018–2022), because the newest model years are not in the
   reference. Plug-in hybrids range from 44 % under to 11 % over.
 - **These tests use the curated strings of the open data.** They do not measure
-  the effect of the unedited strings of 2023–2024. One sign of that effect is
-  open: in Montréal the inferred count of motorhomes is 4,861 in 2023 against
-  723 published for 2022.
+  the effect of the unedited strings of 2023–2024. Two effects were found and
+  handled in the vocabulary step: rare variants inside the open data's own
+  codes (16 vehicles under HONDA `CRV` beside 1.1 million under `CR-V`), and
+  codes the release uses for other vehicles than the open data do (DODGE
+  `CARAV`, merged into `GRAND` by the curators; FORD `VAN`). The second kind is
+  detected from vehicles of model year 2021 or earlier, whose number per code
+  cannot grow after 2022, and reassigned by model-year profile
+  (`vocabulary_codes_used_differently.csv`, `vocabulary_codes_reassigned.csv`).
+  Check: motorhomes in Montréal, 723 published for 2022, 747 inferred for 2023.
+
+## Figures so far (`derived/figures/<type>/`, script beside its PNG and SVG, English and French)
+
+| Figure | What it shows |
+|---|---|
+| [`montreal-automobiles`](derived/figures/montreal-automobiles/montreal_automobiles_en.png) | Municipality of Montréal, 2011–2024: all vehicles, and automobiles and light trucks (published to 2022, inferred for 2023–2024) |
+| [`holdout-error`](derived/figures/holdout-error/holdout_error_en.png) | The inference applied to each published year, against the published count |
+| [`age-bands`](derived/figures/age-bands/age_bands_en.png) | Municipality of Montréal by vehicle age, 2011–2024 (nothing inferred) |
 
 ## Layout
 
