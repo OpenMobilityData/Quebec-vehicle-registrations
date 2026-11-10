@@ -1,0 +1,11 @@
+check,expected,found,ok
+rows 2022,7058605,7058605,True
+rows 2023,7169989,7169989,True
+rows 2024,7189594,7189594,True
+"Montréal 2023, all vehicles",832054,832054,True
+"Montréal 2024, all vehicles",831205,831205,True
+"Montréal 2022, automobiles and light trucks (type AU)",743494,743494,True
+"Montréal 2022, class PAU",656363,656363,True
+"Montréal 2022, class CAU",86702,86702,True
+"Québec 2022, snowmobiles (type MN)",237201,237201,True
+"Québec 2022, mopeds (type CY)",37511,37511,True

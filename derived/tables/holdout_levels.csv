@@ -1,0 +1,181 @@
+target,lead,year,reference,level,key,pct_vehicles,pct_probability_on_true_value
+vtype,1,2012,2011-2011,1,"make, model, model year",97.205,98.42
+vtype,1,2012,2011-2011,2,"make, model, recent model years",1.923,98.98
+vtype,1,2012,2011-2011,3,"make, model",0.319,98.67
+vtype,1,2012,2011-2011,4,"make, model year",0.072,80.43
+vtype,1,2012,2011-2011,5,make,0.145,92.27
+vtype,1,2012,2011-2011,6,none,0.336,
+vtype,1,2013,2011-2012,1,"make, model, model year",97.401,98.25
+vtype,1,2013,2011-2012,2,"make, model, recent model years",1.797,98.12
+vtype,1,2013,2011-2012,3,"make, model",0.326,99.7
+vtype,1,2013,2011-2012,4,"make, model year",0.104,78.04
+vtype,1,2013,2011-2012,5,make,0.047,71.62
+vtype,1,2013,2011-2012,6,none,0.325,
+vtype,1,2014,2011-2013,1,"make, model, model year",97.296,98.37
+vtype,1,2014,2011-2013,2,"make, model, recent model years",1.977,97.97
+vtype,1,2014,2011-2013,3,"make, model",0.297,99.83
+vtype,1,2014,2011-2013,4,"make, model year",0.049,76.03
+vtype,1,2014,2011-2013,5,make,0.072,83.89
+vtype,1,2014,2011-2013,6,none,0.309,
+vtype,1,2015,2012-2014,1,"make, model, model year",97.368,98.39
+vtype,1,2015,2012-2014,2,"make, model, recent model years",1.836,98.6
+vtype,1,2015,2012-2014,3,"make, model",0.312,99.81
+vtype,1,2015,2012-2014,4,"make, model year",0.058,79.11
+vtype,1,2015,2012-2014,5,make,0.12,85.9
+vtype,1,2015,2012-2014,6,none,0.306,
+vtype,1,2016,2013-2015,1,"make, model, model year",97.418,98.48
+vtype,1,2016,2013-2015,2,"make, model, recent model years",1.861,98.44
+vtype,1,2016,2013-2015,3,"make, model",0.311,99.69
+vtype,1,2016,2013-2015,4,"make, model year",0.057,76.83
+vtype,1,2016,2013-2015,5,make,0.05,75.98
+vtype,1,2016,2013-2015,6,none,0.302,
+vtype,1,2017,2014-2016,1,"make, model, model year",97.568,98.47
+vtype,1,2017,2014-2016,2,"make, model, recent model years",1.584,98.4
+vtype,1,2017,2014-2016,3,"make, model",0.316,99.55
+vtype,1,2017,2014-2016,4,"make, model year",0.152,86.77
+vtype,1,2017,2014-2016,5,make,0.075,79.21
+vtype,1,2017,2014-2016,6,none,0.305,
+vtype,1,2018,2015-2017,1,"make, model, model year",97.558,98.39
+vtype,1,2018,2015-2017,2,"make, model, recent model years",1.525,97.94
+vtype,1,2018,2015-2017,3,"make, model",0.334,99.79
+vtype,1,2018,2015-2017,4,"make, model year",0.197,92.24
+vtype,1,2018,2015-2017,5,make,0.084,87.22
+vtype,1,2018,2015-2017,6,none,0.302,
+vtype,1,2019,2016-2018,1,"make, model, model year",97.524,98.34
+vtype,1,2019,2016-2018,2,"make, model, recent model years",1.62,98.37
+vtype,1,2019,2016-2018,3,"make, model",0.349,97.94
+vtype,1,2019,2016-2018,4,"make, model year",0.124,73.74
+vtype,1,2019,2016-2018,5,make,0.065,81.7
+vtype,1,2019,2016-2018,6,none,0.318,
+vtype,1,2020,2017-2019,1,"make, model, model year",97.763,98.33
+vtype,1,2020,2017-2019,2,"make, model, recent model years",1.381,97.14
+vtype,1,2020,2017-2019,3,"make, model",0.321,99.84
+vtype,1,2020,2017-2019,4,"make, model year",0.097,90.78
+vtype,1,2020,2017-2019,5,make,0.13,89.84
+vtype,1,2020,2017-2019,6,none,0.308,
+vtype,1,2021,2018-2020,1,"make, model, model year",97.455,98.26
+vtype,1,2021,2018-2020,2,"make, model, recent model years",1.725,97.47
+vtype,1,2021,2018-2020,3,"make, model",0.316,99.79
+vtype,1,2021,2018-2020,4,"make, model year",0.11,81.07
+vtype,1,2021,2018-2020,5,make,0.067,89.34
+vtype,1,2021,2018-2020,6,none,0.328,
+vtype,1,2022,2019-2021,1,"make, model, model year",97.128,98.14
+vtype,1,2022,2019-2021,2,"make, model, recent model years",2.071,98.6
+vtype,1,2022,2019-2021,3,"make, model",0.316,99.77
+vtype,1,2022,2019-2021,4,"make, model year",0.102,82.69
+vtype,1,2022,2019-2021,5,make,0.053,91.08
+vtype,1,2022,2019-2021,6,none,0.33,
+vtype,2,2013,2011-2011,1,"make, model, model year",89.975,98.25
+vtype,2,2013,2011-2011,2,"make, model, recent model years",8.441,98.54
+vtype,2,2013,2011-2011,3,"make, model",0.408,97.8
+vtype,2,2013,2011-2011,4,"make, model year",0.116,74.7
+vtype,2,2013,2011-2011,5,make,0.575,89.88
+vtype,2,2013,2011-2011,6,none,0.486,
+vtype,2,2014,2011-2012,1,"make, model, model year",90.207,98.22
+vtype,2,2014,2011-2012,2,"make, model, recent model years",8.47,98.06
+vtype,2,2014,2011-2012,3,"make, model",0.526,99.76
+vtype,2,2014,2011-2012,4,"make, model year",0.131,77.08
+vtype,2,2014,2011-2012,5,make,0.345,77.53
+vtype,2,2014,2011-2012,6,none,0.322,
+vtype,2,2015,2011-2013,1,"make, model, model year",89.863,98.35
+vtype,2,2015,2011-2013,2,"make, model, recent model years",9.024,98.25
+vtype,2,2015,2011-2013,3,"make, model",0.326,99.73
+vtype,2,2015,2011-2013,4,"make, model year",0.071,77.18
+vtype,2,2015,2011-2013,5,make,0.407,82.99
+vtype,2,2015,2011-2013,6,none,0.309,
+vtype,2,2016,2012-2014,1,"make, model, model year",90.015,98.39
+vtype,2,2016,2012-2014,2,"make, model, recent model years",8.75,98.19
+vtype,2,2016,2012-2014,3,"make, model",0.353,99.75
+vtype,2,2016,2012-2014,4,"make, model year",0.1,77.61
+vtype,2,2016,2012-2014,5,make,0.474,86.09
+vtype,2,2016,2012-2014,6,none,0.307,
+vtype,2,2017,2013-2015,1,"make, model, model year",90.136,98.48
+vtype,2,2017,2013-2015,2,"make, model, recent model years",8.739,97.92
+vtype,2,2017,2013-2015,3,"make, model",0.366,99.2
+vtype,2,2017,2013-2015,4,"make, model year",0.087,76.71
+vtype,2,2017,2013-2015,5,make,0.362,84.87
+vtype,2,2017,2013-2015,6,none,0.31,
+vtype,2,2018,2014-2016,1,"make, model, model year",90.362,98.46
+vtype,2,2018,2014-2016,2,"make, model, recent model years",8.156,97.9
+vtype,2,2018,2014-2016,3,"make, model",0.359,99.42
+vtype,2,2018,2014-2016,4,"make, model year",0.199,84.64
+vtype,2,2018,2014-2016,5,make,0.618,88.43
+vtype,2,2018,2014-2016,6,none,0.306,
+vtype,2,2019,2015-2017,1,"make, model, model year",90.541,98.38
+vtype,2,2019,2015-2017,2,"make, model, recent model years",7.794,97.63
+vtype,2,2019,2015-2017,3,"make, model",0.405,98.09
+vtype,2,2019,2015-2017,4,"make, model year",0.278,85.0
+vtype,2,2019,2015-2017,5,make,0.654,92.53
+vtype,2,2019,2015-2017,6,none,0.328,
+vtype,2,2020,2016-2018,1,"make, model, model year",91.725,98.34
+vtype,2,2020,2016-2018,2,"make, model, recent model years",6.936,97.45
+vtype,2,2020,2016-2018,3,"make, model",0.415,98.0
+vtype,2,2020,2016-2018,4,"make, model year",0.162,74.21
+vtype,2,2020,2016-2018,5,make,0.44,86.01
+vtype,2,2020,2016-2018,6,none,0.323,
+vtype,2,2021,2017-2019,1,"make, model, model year",91.281,98.3
+vtype,2,2021,2017-2019,2,"make, model, recent model years",7.37,97.26
+vtype,2,2021,2017-2019,3,"make, model",0.42,99.72
+vtype,2,2021,2017-2019,4,"make, model year",0.133,88.81
+vtype,2,2021,2017-2019,5,make,0.456,90.09
+vtype,2,2021,2017-2019,6,none,0.34,
+vtype,2,2022,2018-2020,1,"make, model, model year",91.863,98.25
+vtype,2,2022,2018-2020,2,"make, model, recent model years",6.919,96.93
+vtype,2,2022,2018-2020,3,"make, model",0.361,99.67
+vtype,2,2022,2018-2020,4,"make, model year",0.149,82.31
+vtype,2,2022,2018-2020,5,make,0.339,88.67
+vtype,2,2022,2018-2020,6,none,0.369,
+fuel,1,2018,2017-2017,1,"make, model, model year",97.824,95.97
+fuel,1,2018,2017-2017,2,"make, model, recent model years",1.532,95.15
+fuel,1,2018,2017-2017,3,"make, model",0.049,88.42
+fuel,1,2018,2017-2017,4,"make, model year",0.206,94.44
+fuel,1,2018,2017-2017,5,make,0.084,96.35
+fuel,1,2018,2017-2017,6,none,0.304,
+fuel,1,2019,2017-2018,1,"make, model, model year",97.804,95.72
+fuel,1,2019,2017-2018,2,"make, model, recent model years",1.625,92.97
+fuel,1,2019,2017-2018,3,"make, model",0.06,89.99
+fuel,1,2019,2017-2018,4,"make, model year",0.128,86.31
+fuel,1,2019,2017-2018,5,make,0.065,92.08
+fuel,1,2019,2017-2018,6,none,0.319,
+fuel,1,2020,2017-2019,1,"make, model, model year",98.046,95.5
+fuel,1,2020,2017-2019,2,"make, model, recent model years",1.385,87.68
+fuel,1,2020,2017-2019,3,"make, model",0.032,75.56
+fuel,1,2020,2017-2019,4,"make, model year",0.097,89.13
+fuel,1,2020,2017-2019,5,make,0.13,97.59
+fuel,1,2020,2017-2019,6,none,0.309,
+fuel,1,2021,2018-2020,1,"make, model, model year",97.737,95.0
+fuel,1,2021,2018-2020,2,"make, model, recent model years",1.73,86.49
+fuel,1,2021,2018-2020,3,"make, model",0.027,83.87
+fuel,1,2021,2018-2020,4,"make, model year",0.11,76.59
+fuel,1,2021,2018-2020,5,make,0.067,89.89
+fuel,1,2021,2018-2020,6,none,0.329,
+fuel,1,2022,2019-2021,1,"make, model, model year",97.417,94.4
+fuel,1,2022,2019-2021,2,"make, model, recent model years",2.078,89.77
+fuel,1,2022,2019-2021,3,"make, model",0.019,79.98
+fuel,1,2022,2019-2021,4,"make, model year",0.102,68.34
+fuel,1,2022,2019-2021,5,make,0.053,62.27
+fuel,1,2022,2019-2021,6,none,0.331,
+fuel,2,2019,2017-2017,1,"make, model, model year",90.785,95.84
+fuel,2,2019,2017-2017,2,"make, model, recent model years",7.82,92.9
+fuel,2,2019,2017-2017,3,"make, model",0.121,93.92
+fuel,2,2019,2017-2017,4,"make, model year",0.289,94.06
+fuel,2,2019,2017-2017,5,make,0.656,88.92
+fuel,2,2019,2017-2017,6,none,0.329,
+fuel,2,2020,2017-2018,1,"make, model, model year",91.984,95.66
+fuel,2,2020,2017-2018,2,"make, model, recent model years",6.957,91.1
+fuel,2,2020,2017-2018,3,"make, model",0.128,93.55
+fuel,2,2020,2017-2018,4,"make, model year",0.166,85.86
+fuel,2,2020,2017-2018,5,make,0.442,94.51
+fuel,2,2020,2017-2018,6,none,0.324,
+fuel,2,2021,2017-2019,1,"make, model, model year",91.545,95.44
+fuel,2,2021,2017-2019,2,"make, model, recent model years",7.392,87.4
+fuel,2,2021,2017-2019,3,"make, model",0.132,78.37
+fuel,2,2021,2017-2019,4,"make, model year",0.133,88.39
+fuel,2,2021,2017-2019,5,make,0.457,92.99
+fuel,2,2021,2017-2019,6,none,0.341,
+fuel,2,2022,2018-2020,1,"make, model, model year",92.136,94.81
+fuel,2,2022,2018-2020,2,"make, model, recent model years",6.94,86.7
+fuel,2,2022,2018-2020,3,"make, model",0.064,85.54
+fuel,2,2022,2018-2020,4,"make, model year",0.15,75.48
+fuel,2,2022,2018-2020,5,make,0.34,76.09
+fuel,2,2022,2018-2020,6,none,0.37,

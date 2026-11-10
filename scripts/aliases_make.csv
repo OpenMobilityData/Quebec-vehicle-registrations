@@ -1,0 +1,39 @@
+make_raw,make,basis
+CANAM,CAN-A,Can-Am; same models (OUTLA SPYDE) as the curated CAN-A
+CANA,CAN-A,Can-Am; same models as the curated CAN-A
+CANAN,CAN-A,Can-Am misspelt
+BRP,CAN-A,Bombardier Recreational Products; Can-Am models
+ARTIC,ARCTI,Arctic Cat misspelt
+ARTICCAT,ARCTI,Arctic Cat
+ARCT,ARCTI,Arctic Cat
+CAT,CATER,Caterpillar
+DEERE,JOHND,John Deere
+JOHN,JOHND,John Deere
+JD,JOHND,John Deere
+JDEER,JOHND,John Deere
+JONHD,JOHND,John Deere misspelt
+JHOND,JOHND,John Deere misspelt
+DEER,JOHND,John Deere
+SKID,SKIDO,Ski-Doo
+SKID0,SKIDO,Ski-Doo with a zero
+MF,MASSE,Massey Ferguson
+MFERG,MASSE,Massey Ferguson
+MASSY,MASSE,Massey Ferguson misspelt
+FERGU,MASSE,Massey Ferguson
+CASEI,CASE,Case IH
+CASE1,CASE,Case IH with a one
+CASEIH,CASE,Case IH
+CASEH,CASE,Case IH
+CIH,CASE,Case IH
+C1H,CASE,Case IH with a one
+NOVAB,NOVA,Nova Bus
+NH,NEWHO,New Holland
+NEWH,NEWHO,New Holland
+NHOLL,NEWHO,New Holland
+TOYT,TOYOT,Toyota
+MERZ,MERCE,Mercedes-Benz
+FRHT,FREIG,Freightliner
+HD,HARLE,Harley-Davidson
+KUBAT,KUBOT,Kubota misspelt
+LEXS,LEXUS,Lexus
+BOMB,BOMBA,Bombardier

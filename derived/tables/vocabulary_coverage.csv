@@ -1,0 +1,67 @@
+year,level,make_rule,model_rule,vehicles,pct
+2023,make and model,exact,exact,6291768,87.751
+2023,make and model,first five,first five,135878,1.895
+2023,make and model,alias,exact,110093,1.535
+2023,make only,exact,unresolved,97412,1.359
+2023,make and model,exact,first five,94684,1.321
+2023,make and model,first five,exact,92881,1.295
+2023,make and model,exact,suffix removed,75925,1.059
+2023,make and model,exact,prefix,74205,1.035
+2023,make and model,exact,punctuation,42685,0.595
+2023,make and model,punctuation,exact,37936,0.529
+2023,make and model,exact,alias,36507,0.509
+2023,unresolved,unresolved,no make,30682,0.428
+2023,make and model,first five,suffix removed,12370,0.173
+2023,make only,alias,unresolved,8860,0.124
+2023,make and model,alias,first five,7843,0.109
+2023,make only,first five,unresolved,7627,0.106
+2023,make and model,alias,suffix removed,3350,0.047
+2023,make and model,prefix,exact,3042,0.042
+2023,make only,prefix,unresolved,2711,0.038
+2023,make and model,prefix,prefix,1078,0.015
+2023,make and model,alias,prefix,826,0.012
+2023,make and model,alias,punctuation,411,0.006
+2023,make only,punctuation,unresolved,353,0.005
+2023,make and model,first five,prefix,264,0.004
+2023,make and model,first five,punctuation,179,0.002
+2023,make and model,prefix,first five,133,0.002
+2023,make and model,prefix,suffix removed,86,0.001
+2023,make and model,punctuation,suffix removed,83,0.001
+2023,make and model,punctuation,prefix,48,0.001
+2023,make and model,punctuation,first five,32,0.0
+2023,make and model,prefix,alias,18,0.0
+2023,make and model,first five,alias,10,0.0
+2023,make and model,prefix,punctuation,9,0.0
+2024,make and model,exact,exact,5921480,82.362
+2024,make and model,first five,first five,305674,4.252
+2024,make and model,first five,exact,201171,2.798
+2024,make and model,exact,first five,180899,2.516
+2024,make and model,alias,exact,107300,1.492
+2024,make only,exact,unresolved,106089,1.476
+2024,make and model,exact,suffix removed,77420,1.077
+2024,make and model,exact,prefix,68366,0.951
+2024,make and model,exact,punctuation,39755,0.553
+2024,make and model,punctuation,exact,36992,0.515
+2024,unresolved,unresolved,no make,33961,0.472
+2024,make and model,exact,alias,33311,0.463
+2024,make only,first five,unresolved,19733,0.274
+2024,make and model,alias,first five,16204,0.225
+2024,make and model,first five,suffix removed,15914,0.221
+2024,make only,alias,unresolved,9540,0.133
+2024,make only,prefix,unresolved,4101,0.057
+2024,make and model,alias,suffix removed,3332,0.046
+2024,make and model,prefix,exact,3252,0.045
+2024,make and model,prefix,prefix,1905,0.026
+2024,make and model,alias,prefix,930,0.013
+2024,make and model,first five,prefix,489,0.007
+2024,make and model,first five,punctuation,429,0.006
+2024,make and model,alias,punctuation,405,0.006
+2024,make only,punctuation,unresolved,373,0.005
+2024,make and model,prefix,first five,217,0.003
+2024,make and model,prefix,suffix removed,115,0.002
+2024,make and model,punctuation,suffix removed,83,0.001
+2024,make and model,punctuation,prefix,57,0.001
+2024,make and model,punctuation,first five,35,0.0
+2024,make and model,prefix,alias,33,0.0
+2024,make and model,first five,alias,19,0.0
+2024,make and model,prefix,punctuation,10,0.0

@@ -1,0 +1,25 @@
+target,year,level,key,vehicles,pct
+vtype,2023,1,"make, model, model year",6611481,92.21
+vtype,2023,2,"make, model, recent model years",312083,4.353
+vtype,2023,3,"make, model",68723,0.958
+vtype,2023,4,"make, model year",137209,1.914
+vtype,2023,5,make,7695,0.107
+vtype,2023,6,none (unassigned),32798,0.457
+vtype,2024,1,"make, model, model year",6180860,85.97
+vtype,2024,2,"make, model, recent model years",742783,10.331
+vtype,2024,3,"make, model",64079,0.891
+vtype,2024,4,"make, model year",135620,1.886
+vtype,2024,5,make,30148,0.419
+vtype,2024,6,none (unassigned),36104,0.502
+fuel,2023,1,"make, model, model year",6611481,92.21
+fuel,2023,2,"make, model, recent model years",312083,4.353
+fuel,2023,3,"make, model",68723,0.958
+fuel,2023,4,"make, model year",137209,1.914
+fuel,2023,5,make,7695,0.107
+fuel,2023,6,none (unassigned),32798,0.457
+fuel,2024,1,"make, model, model year",6180860,85.97
+fuel,2024,2,"make, model, recent model years",742783,10.331
+fuel,2024,3,"make, model",64079,0.891
+fuel,2024,4,"make, model year",135620,1.886
+fuel,2024,5,make,30148,0.419
+fuel,2024,6,none (unassigned),36104,0.502

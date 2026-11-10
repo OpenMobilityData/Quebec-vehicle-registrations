@@ -1,0 +1,15 @@
+year,source,file,bytes,sha256,origin
+2011,open,Vehicule_En_Circulation_2011.csv,744969026,161dbcf40792e918686ab0f4c75cd886b733d9dff70813ee92020030fe244434,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2011.csv
+2012,open,Vehicule_En_Circulation_2012.csv,757193989,de52f7e491583127f4345326cb917d4932ed6c05911583cb9d392beb6968d6d6,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2012.csv
+2013,open,Vehicule_En_Circulation_2013.csv,770875124,4affb8bad77ccb9018c4e64c9390f24cb5f0a64a4a6f783065186b48cd091db2,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2013.csv
+2014,open,Vehicule_En_Circulation_2014.csv,777071553,007a33ae5360313380dc6ce28dc076cf1478129b95fc8a806f51618574e3bb0f,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2014.csv
+2015,open,Vehicule_En_Circulation_2015.csv,785909370,614eb94b8c850c7f7377c66ebaaee5d6220d59a435aca9ba580d8465163742ea,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2015.csv
+2016,open,Vehicule_En_Circulation_2016.csv,799017674,c4892f8e819da93ff387b22f37f96c65ae060be06117a8e9296a1a7157b430b3,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2016.csv
+2017,open,Vehicule_En_Circulation_2017.csv,842123554,6dd0ca254f6e3fd061f6acf972fa5f09615b0fa56d69e5f0a415532d84c7930a,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2017.csv
+2018,open,Vehicule_En_Circulation_2018.csv,849270354,a3a8a6f4ba36136c8745f9e8cdd5442e6cb7ba203a0e316252d9e6d9640fe3dd,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2018.csv
+2019,open,Vehicule_En_Circulation_2019.csv,860682143,27606dac388c97f0b6c5d10978995a4cbb355e0faee7df485dee710b00749d28,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2019.csv
+2020,open,Vehicule_En_Circulation_2020.csv,878223240,de90deda03b00cdf4b3c67c0988793b82abe59cb5320928ac509037ed8e54e80,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2020.csv
+2021,open,Vehicule_En_Circulation_2021.csv,897701774,e176302570d9dcb1fde11ff5ca9cc2883525dc1cf7f97e4036897d9cc816bcdc,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2021.csv
+2022,open,Vehicule_En_Circulation_2022.csv,905449870,84f57d77dca8eee189c734c79cde757bf0311ebb5d26694278c31b4db7e331f9,https://dq-prd-bucket1.s3.ca-central-1.amazonaws.com/saaq/Vehicule_En_Circulation_2022.csv
+2023,access,Vehicule_En_Circulation_2023_nonstandard.csv,366994789,a41b3201f8b4af1e2dbb5d2ec93ecf1db61189417f4168460aa4ce8254f0f053,"SAAQ, access-to-information file 03.06.34729"
+2024,access,Vehicule_En_Circulation_2024_nonstandard.csv,352909681,60d725dc343d196f3e833c97f360b3a9fddbdd12b2e35f09d555c04e9fcc09e1,"SAAQ, access-to-information file 03.06.34729"

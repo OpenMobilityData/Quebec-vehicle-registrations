@@ -1,0 +1,6 @@
+make,model_raw,model,basis
+FORD,RNG,RANGE,Ranger; the only curated Ford model in R with these model years
+JEEP,CHK,CHERO,Cherokee
+CHRYS,TWC,TOWN,Town & Country
+CHEVR,GM4,GMT-4,GMT-400 written without the hyphen
+PORSC,BOXTE,BOXST,Boxster misspelt
