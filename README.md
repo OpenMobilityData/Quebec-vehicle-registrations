@@ -22,6 +22,10 @@ review; the note and the slide deck are not yet written.
 - The raw files are not in this repository (0.7 to 0.9 GB each).
   `derived/tables/raw_manifest.csv` gives each file's size and SHA-256, and the
   download address of each open-data file.
+- Census: Statistics Canada, 2021 Census profile by dissemination area
+  (catalogue 98-401-X2021006). Postal-code points and FSA polygons used to share
+  dissemination areas among FSAs: Service Objects (March 2024) and DMTI Spatial,
+  CanMap Postal Code Suite v2024.3, both under licence and not redistributed.
 - Municipality codes and names: Institut de la statistique du Québec, « Banque
   de données des codes géographiques », image of July 31, 2025 (CC BY 4.0).
 
@@ -43,6 +47,7 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | 2 | `scripts/vocabulary.py` | The make and model strings of 2023–2024 mapped by stated rules onto the codes of the open data | `vocabulary_map`, `vocabulary_coverage`, `vocabulary_review` |
 | 3 | `scripts/geography.py` | Municipality names of 2023–2024 linked to the codes of 2011–2022 | `municipalities`, `municipality_match` |
 | 4 | `scripts/infer.py` | Type and fuel for 2023–2024 as expected counts; the same method applied to each published year and compared with what was published | `holdout_summary`, `holdout_levels`, `holdout_municipal`, `type_by_municipality`, `fuel_by_municipality`, `type_by_fsa`, `fuel_by_fsa`, `inference_levels` |
+| 5 | `scripts/census_fsa.py` | 2021 Census counts by FSA, built from dissemination areas shared among FSAs by postal codes; joined to the vehicles of 2023–2024 | `fsa_census_2021`, `fsa_vehicles_census` |
 
 ## Measurements so far
 
@@ -84,6 +89,7 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | [`montreal-automobiles`](derived/figures/montreal-automobiles/montreal_automobiles_en.png) | Municipality of Montréal, 2011–2024: all vehicles, and automobiles and light trucks (published to 2022, inferred for 2023–2024) |
 | [`holdout-error`](derived/figures/holdout-error/holdout_error_en.png) | The inference applied to each published year, against the published count |
 | [`age-bands`](derived/figures/age-bands/age_bands_en.png) | Municipality of Montréal by vehicle age, 2011–2024 (nothing inferred) |
+| [`fsa-households`](derived/figures/fsa-households/fsa_households_en.png) | Automobiles and light trucks per household by FSA (postal codes in H), 2024, against the share of commuters who drive (2021 Census) |
 
 ## Layout
 
