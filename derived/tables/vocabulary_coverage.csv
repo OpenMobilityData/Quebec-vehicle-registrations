@@ -1,67 +1,87 @@
 year,level,make_rule,model_rule,vehicles,pct
-2023,make and model,exact,exact,6291768,87.751
-2023,make and model,first five,first five,135878,1.895
-2023,make and model,alias,exact,110093,1.535
+2023,make and model,exact,exact,5798271,80.869
+2023,make and model,exact,punctuation,331372,4.622
+2023,make and model,exact,reassigned by model-year profile,160675,2.241
+2023,make and model,first five,first five,134491,1.876
+2023,make and model,alias,exact,104153,1.453
 2023,make only,exact,unresolved,97412,1.359
-2023,make and model,exact,first five,94684,1.321
-2023,make and model,first five,exact,92881,1.295
-2023,make and model,exact,suffix removed,75925,1.059
-2023,make and model,exact,prefix,74205,1.035
-2023,make and model,exact,punctuation,42685,0.595
-2023,make and model,punctuation,exact,37936,0.529
+2023,make and model,exact,first five,94063,1.312
+2023,make and model,first five,exact,92559,1.291
+2023,make and model,exact,suffix removed,73389,1.024
+2023,make and model,exact,prefix,70456,0.983
+2023,make only,exact,code used differently,51041,0.712
+2023,make and model,punctuation,exact,37733,0.526
 2023,make and model,exact,alias,36507,0.509
 2023,unresolved,unresolved,no make,30682,0.428
-2023,make and model,first five,suffix removed,12370,0.173
+2023,make and model,first five,suffix removed,12330,0.172
 2023,make only,alias,unresolved,8860,0.124
-2023,make and model,alias,first five,7843,0.109
+2023,make and model,alias,first five,7788,0.109
 2023,make only,first five,unresolved,7627,0.106
-2023,make and model,alias,suffix removed,3350,0.047
-2023,make and model,prefix,exact,3042,0.042
+2023,make only,alias,code used differently,5352,0.075
+2023,make and model,prefix,exact,2824,0.039
 2023,make only,prefix,unresolved,2711,0.038
-2023,make and model,prefix,prefix,1078,0.015
-2023,make and model,alias,prefix,826,0.012
-2023,make and model,alias,punctuation,411,0.006
+2023,make and model,alias,suffix removed,2379,0.033
+2023,make and model,alias,reassigned by model-year profile,1407,0.02
+2023,make only,first five,code used differently,1170,0.016
+2023,make and model,prefix,prefix,971,0.014
+2023,make and model,alias,punctuation,734,0.01
+2023,make and model,alias,prefix,710,0.01
+2023,make and model,first five,reassigned by model-year profile,561,0.008
 2023,make only,punctuation,unresolved,353,0.005
-2023,make and model,first five,prefix,264,0.004
-2023,make and model,first five,punctuation,179,0.002
+2023,make only,punctuation,code used differently,317,0.004
+2023,make and model,first five,prefix,241,0.003
+2023,make and model,first five,punctuation,220,0.003
+2023,make and model,prefix,reassigned by model-year profile,159,0.002
+2023,make and model,prefix,punctuation,145,0.002
 2023,make and model,prefix,first five,133,0.002
-2023,make and model,prefix,suffix removed,86,0.001
-2023,make and model,punctuation,suffix removed,83,0.001
-2023,make and model,punctuation,prefix,48,0.001
-2023,make and model,punctuation,first five,32,0.0
+2023,make and model,prefix,suffix removed,85,0.001
+2023,make only,prefix,code used differently,31,0.0
+2023,make and model,punctuation,first five,22,0.0
 2023,make and model,prefix,alias,18,0.0
+2023,make and model,punctuation,suffix removed,15,0.0
+2023,make and model,punctuation,prefix,12,0.0
 2023,make and model,first five,alias,10,0.0
-2023,make and model,prefix,punctuation,9,0.0
-2024,make and model,exact,exact,5921480,82.362
-2024,make and model,first five,first five,305674,4.252
-2024,make and model,first five,exact,201171,2.798
-2024,make and model,exact,first five,180899,2.516
-2024,make and model,alias,exact,107300,1.492
+2023,make and model,punctuation,reassigned by model-year profile,0,0.0
+2024,make and model,exact,exact,5434626,75.59
+2024,make and model,exact,punctuation,336751,4.684
+2024,make and model,first five,first five,302086,4.202
+2024,make and model,first five,exact,200261,2.785
+2024,make and model,exact,first five,179338,2.494
+2024,make and model,exact,reassigned by model-year profile,150315,2.091
 2024,make only,exact,unresolved,106089,1.476
-2024,make and model,exact,suffix removed,77420,1.077
-2024,make and model,exact,prefix,68366,0.951
-2024,make and model,exact,punctuation,39755,0.553
-2024,make and model,punctuation,exact,36992,0.515
+2024,make and model,alias,exact,101594,1.413
+2024,make and model,exact,suffix removed,75094,1.044
+2024,make and model,exact,prefix,64968,0.904
+2024,make only,exact,code used differently,46828,0.651
+2024,make and model,punctuation,exact,36792,0.512
 2024,unresolved,unresolved,no make,33961,0.472
 2024,make and model,exact,alias,33311,0.463
 2024,make only,first five,unresolved,19733,0.274
-2024,make and model,alias,first five,16204,0.225
-2024,make and model,first five,suffix removed,15914,0.221
+2024,make and model,alias,first five,16133,0.224
+2024,make and model,first five,suffix removed,15869,0.221
 2024,make only,alias,unresolved,9540,0.133
+2024,make only,alias,code used differently,5234,0.073
 2024,make only,prefix,unresolved,4101,0.057
-2024,make and model,alias,suffix removed,3332,0.046
-2024,make and model,prefix,exact,3252,0.045
-2024,make and model,prefix,prefix,1905,0.026
-2024,make and model,alias,prefix,930,0.013
-2024,make and model,first five,prefix,489,0.007
-2024,make and model,first five,punctuation,429,0.006
-2024,make and model,alias,punctuation,405,0.006
+2024,make only,first five,code used differently,3072,0.043
+2024,make and model,prefix,exact,2928,0.041
+2024,make and model,alias,suffix removed,2404,0.033
+2024,make and model,prefix,prefix,1735,0.024
+2024,make and model,first five,reassigned by model-year profile,1409,0.02
+2024,make and model,alias,reassigned by model-year profile,1266,0.018
+2024,make and model,alias,prefix,806,0.011
+2024,make and model,alias,punctuation,734,0.01
+2024,make and model,first five,punctuation,539,0.007
+2024,make and model,first five,prefix,441,0.006
 2024,make only,punctuation,unresolved,373,0.005
+2024,make only,punctuation,code used differently,311,0.004
+2024,make and model,prefix,punctuation,244,0.003
+2024,make and model,prefix,reassigned by model-year profile,233,0.003
 2024,make and model,prefix,first five,217,0.003
-2024,make and model,prefix,suffix removed,115,0.002
-2024,make and model,punctuation,suffix removed,83,0.001
-2024,make and model,punctuation,prefix,57,0.001
-2024,make and model,punctuation,first five,35,0.0
+2024,make and model,prefix,suffix removed,114,0.002
 2024,make and model,prefix,alias,33,0.0
+2024,make only,prefix,code used differently,28,0.0
+2024,make and model,punctuation,first five,23,0.0
+2024,make and model,punctuation,prefix,22,0.0
 2024,make and model,first five,alias,19,0.0
-2024,make and model,prefix,punctuation,10,0.0
+2024,make and model,punctuation,suffix removed,17,0.0
+2024,make and model,punctuation,reassigned by model-year profile,2,0.0
