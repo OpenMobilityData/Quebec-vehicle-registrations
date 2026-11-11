@@ -54,6 +54,7 @@ lag = la.assign(g=la.age_band.map({"16-19": "y", "20-24": "y", "65 ans ou plus":
 sc = pd.read_csv(T / "trend_scenario.csv").set_index("year"); per_year = round((sc.trend_2011_2021[2035] - sc.trend_2011_2021[2011]) / 24)
 st = pd.read_csv(T / "storage_equivalents.csv").set_index("case")
 pr = pd.read_csv(T / "vehicles_per_1000_residents.csv").set_index("year")
+gc = pd.read_csv(T / "growth_by_city.csv").set_index("place")
 sb = pd.read_csv(T / "street_space_bounds.csv").set_index("quantity").value
 fa = pd.read_csv(T / "fsa_vehicle_age.csv").set_index("fsa")
 fc = pd.read_csv(T / "fsa_census_comparison.csv").set_index("fsa"); fc = fc[fc.households >= 1000]
@@ -262,6 +263,10 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 """ + fig("trend-scenario", "trend_scenario") + r"""
 \end{frame}
 
+\begin{frame}{Slower growth after 2021: Montréal and elsewhere}
+""" + fig("growth-by-city", "growth_by_city") + r"""
+\end{frame}
+
 \begin{frame}{The same series against two hypothetical bounds}
 """ + fig("trend-scenario", "trend_thresholds") + r"""
 \end{frame}
@@ -392,6 +397,10 @@ Automobiles and light trucks & """ + " & ".join(n(mau[y]) for y in (2011, 2021, 
 From 2011 to 2021 the municipality gained """ + n(mau[2021] - mau[2011]) + r""" automobiles and light trucks ($+$""" + p(100 * (mau[2021] / mau[2011] - 1)) + r"""~\%). The published count of 2022 is """ + n(mau[2021] - mau[2022]) + r""" lower than that of 2021, and the count of all vehicles falls by """ + n(allv[2021] - allv[2022]) + r""" the same year; the reason is not established here. The inferred counts of 2023 and 2024 stand """ + n(mau[2023] - mau[2021]) + r""" and """ + n(mau[2024] - mau[2021]) + r""" above 2021. Per 1{,}000 residents, there were """ + p(pr.per_1000_residents[2016], 0) + r""" automobiles and light trucks at the 2016 Census and """ + p(pr.per_1000_residents[2021], 0) + r""" at the 2021 Census.
 
 """ + nfig("trend-scenario", "trend_scenario", "The straight line through the counts of 2011--2021, carried to 2035, and the later counts.", 0.9) + r"""
+
+Growth since 2021 has been slower than in the previous decade, in Montréal and in most of the large cities of Québec (Figure~\ref{fig:growth}). The number of automobiles and light trucks grew by """ + p(gc.pct_per_year_2011_2016["Montréal"], 2) + r"""~\% a year in Montréal from 2011 to 2016, """ + p(gc.pct_per_year_2016_2021["Montréal"], 2) + r"""~\% from 2016 to 2021 and """ + p(gc.pct_per_year_2021_2024["Montréal"], 2) + r"""~\% from 2021 to 2024; in Laval the three rates are """ + ", ".join(p(gc[c]["Laval"], 2) for c in gc.columns[:3]) + r"""~\%, in Longueuil """ + ", ".join(p(gc[c]["Longueuil"], 2) for c in gc.columns[:3]) + r"""~\%, in Gatineau """ + ", ".join(p(gc[c]["Gatineau"], 2) for c in gc.columns[:3]) + r"""~\%, in the city of Québec """ + ", ".join(p(gc[c]["Québec (city)"], 2) for c in gc.columns[:3]) + r"""~\%, and in the rest of Québec """ + ", ".join(p(gc[c]["Rest of Québec"], 2) for c in gc.columns[:3]) + r"""~\%. The last period ends with inferred counts and spans the change from one source to the other. The cause of the slower growth is not established here: it appears at the same time in several cities and in the province as a whole.
+
+\begin{figure}[H]\centering\includegraphics[width=0.9\linewidth]{""" + str(FIG / "growth-by-city" / "growth_by_city_en.png") + r"""}\caption{Yearly growth in automobiles and light trucks, by period.}\label{fig:growth}\end{figure}
 
 A straight line through the published counts of 2011--2021 adds """ + n(per_year) + r""" vehicles a year. It is not a forecast. The published count of 2022 is """ + n(abs(sc.count_minus_trend[2022])) + r""" below it, and the inferred count of 2024 is """ + n(abs(sc.count_minus_trend[2024])) + r""" below it.
 

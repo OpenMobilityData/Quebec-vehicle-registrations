@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="756pt" height="374.4pt" viewBox="0 0 756 374.4" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-11T07:39:39.301270</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 374.4 
+L 756 374.4 
+L 756 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="patch_2">
+    <path d="M 52.92 310.752 
+L 733.32 310.752 
+L 733.32 67.392 
+L 52.92 67.392 
+z
+" style="fill: #ffffff"/>
+   </g>
+   <g id="matplotlib.axis_1">
+    <g id="xtick_1">
+     <g id="line2d_1"/>
+     <g id="text_1">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="121.032557" y="323.296" transform="rotate(-0 121.032557 323.296)">Montréal</text>
+     </g>
+    </g>
+    <g id="xtick_2">
+     <g id="line2d_2"/>
+     <g id="text_2">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="211.728371" y="323.296" transform="rotate(-0 211.728371 323.296)">Laval</text>
+     </g>
+    </g>
+    <g id="xtick_3">
+     <g id="line2d_3"/>
+     <g id="text_3">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="302.424186" y="323.296" transform="rotate(-0 302.424186 323.296)">Longueuil</text>
+     </g>
+    </g>
+    <g id="xtick_4">
+     <g id="line2d_4"/>
+     <g id="text_4">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="393.12" y="323.296" transform="rotate(-0 393.12 323.296)">Gatineau</text>
+     </g>
+    </g>
+    <g id="xtick_5">
+     <g id="line2d_5"/>
+     <g id="text_5">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="483.815814" y="323.296" transform="rotate(-0 483.815814 323.296)">Québec (city)</text>
+     </g>
+    </g>
+    <g id="xtick_6">
+     <g id="line2d_6"/>
+     <g id="text_6">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="574.511629" y="323.296" transform="rotate(-0 574.511629 323.296)">Rest of Québec</text>
+     </g>
+    </g>
+    <g id="xtick_7">
+     <g id="line2d_7"/>
+     <g id="text_7">
+      <text style="font-size: 9.5px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="665.207443" y="323.296" transform="rotate(-0 665.207443 323.296)">All of Québec</text>
+     </g>
+    </g>
+   </g>
+   <g id="matplotlib.axis_2">
+    <g id="ytick_1">
+     <g id="line2d_8">
+      <path d="M 52.92 280.332 
+L 733.32 280.332 
+" clip-path="url(#pc1b907be0a)" style="fill: none; stroke: #e2e4e1; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_9"/>
+     <g id="text_8">
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #5f6b74" x="49.42" y="285.092" transform="rotate(-0 49.42 285.092)">0.0 %</text>
+     </g>
+    </g>
+    <g id="ytick_2">
+     <g id="line2d_10">
+      <path d="M 52.92 219.492 
+L 733.32 219.492 
+" clip-path="url(#pc1b907be0a)" style="fill: none; stroke: #e2e4e1; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_11"/>
+     <g id="text_9">
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #5f6b74" x="49.42" y="224.252" transform="rotate(-0 49.42 224.252)">0.5 %</text>
+     </g>
+    </g>
+    <g id="ytick_3">
+     <g id="line2d_12">
+      <path d="M 52.92 158.652 
+L 733.32 158.652 
+" clip-path="url(#pc1b907be0a)" style="fill: none; stroke: #e2e4e1; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_13"/>
+     <g id="text_10">
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #5f6b74" x="49.42" y="163.412" transform="rotate(-0 49.42 163.412)">1.0 %</text>
+     </g>
+    </g>
+    <g id="ytick_4">
+     <g id="line2d_14">
+      <path d="M 52.92 97.812 
+L 733.32 97.812 
+" clip-path="url(#pc1b907be0a)" style="fill: none; stroke: #e2e4e1; stroke-width: 0.8; stroke-linecap: square"/>
+     </g>
+     <g id="line2d_15"/>
+     <g id="text_11">
+      <text style="font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: end; fill: #5f6b74" x="49.42" y="102.572" transform="rotate(-0 49.42 102.572)">1.5 %</text>
+     </g>
+    </g>
+   </g>
+   <g id="line2d_16">
+    <path d="M 529.163722 310.752 
+L 529.163722 67.392 
+" clip-path="url(#pc1b907be0a)" style="fill: none; stroke: #c9cdd2; stroke-width: 0.8; stroke-linecap: square"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 52.92 310.752 
+L 733.32 310.752 
+" style="fill: none; stroke: #c9cdd2; stroke-width: 0.8; stroke-linejoin: miter; stroke-linecap: square"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 83.847273 280.332 
+L 107.428184 280.332 
+L 107.428184 140.4 
+L 83.847273 140.4 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 174.543087 280.332 
+L 198.123999 280.332 
+L 198.123999 118.4976 
+L 174.543087 118.4976 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 265.238902 280.332 
+L 288.819813 280.332 
+L 288.819813 112.4136 
+L 265.238902 112.4136 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 355.934716 280.332 
+L 379.515628 280.332 
+L 379.515628 131.8824 
+L 355.934716 131.8824 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 446.630531 280.332 
+L 470.211442 280.332 
+L 470.211442 148.9176 
+L 446.630531 148.9176 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 537.326345 280.332 
+L 560.907257 280.332 
+L 560.907257 114.8472 
+L 537.326345 114.8472 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 628.022159 280.332 
+L 651.603071 280.332 
+L 651.603071 120.9312 
+L 628.022159 120.9312 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #9ec5f4"/>
+   </g>
+   <g id="text_12">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="95.637729" y="135.0456" transform="rotate(-0 95.637729 135.0456)">1.15</text>
+   </g>
+   <g id="text_13">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="186.333543" y="113.1432" transform="rotate(-0 186.333543 113.1432)">1.33</text>
+   </g>
+   <g id="text_14">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="277.029358" y="107.0592" transform="rotate(-0 277.029358 107.0592)">1.38</text>
+   </g>
+   <g id="text_15">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="367.725172" y="126.528" transform="rotate(-0 367.725172 126.528)">1.22</text>
+   </g>
+   <g id="text_16">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="458.420986" y="143.5632" transform="rotate(-0 458.420986 143.5632)">1.08</text>
+   </g>
+   <g id="text_17">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="549.116801" y="109.4928" transform="rotate(-0 549.116801 109.4928)">1.36</text>
+   </g>
+   <g id="text_18">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="639.812615" y="115.5768" transform="rotate(-0 639.812615 115.5768)">1.31</text>
+   </g>
+   <g id="patch_11">
+    <path d="M 109.242101 280.332 
+L 132.823013 280.332 
+L 132.823013 159.8688 
+L 109.242101 159.8688 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 199.937915 280.332 
+L 223.518827 280.332 
+L 223.518827 136.7496 
+L 199.937915 136.7496 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_13">
+    <path d="M 290.63373 280.332 
+L 314.214641 280.332 
+L 314.214641 119.7144 
+L 290.63373 119.7144 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_14">
+    <path d="M 381.329544 280.332 
+L 404.910456 280.332 
+L 404.910456 133.0992 
+L 381.329544 133.0992 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_15">
+    <path d="M 472.025359 280.332 
+L 495.60627 280.332 
+L 495.60627 230.4432 
+L 472.025359 230.4432 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_16">
+    <path d="M 562.721173 280.332 
+L 586.302085 280.332 
+L 586.302085 100.2456 
+L 562.721173 100.2456 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="patch_17">
+    <path d="M 653.416987 280.332 
+L 676.997899 280.332 
+L 676.997899 119.7144 
+L 653.416987 119.7144 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #2a78d6"/>
+   </g>
+   <g id="text_19">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="121.032557" y="154.5144" transform="rotate(-0 121.032557 154.5144)">0.99</text>
+   </g>
+   <g id="text_20">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="211.728371" y="131.3952" transform="rotate(-0 211.728371 131.3952)">1.18</text>
+   </g>
+   <g id="text_21">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="302.424186" y="114.36" transform="rotate(-0 302.424186 114.36)">1.32</text>
+   </g>
+   <g id="text_22">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="393.12" y="127.7448" transform="rotate(-0 393.12 127.7448)">1.21</text>
+   </g>
+   <g id="text_23">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="483.815814" y="225.0888" transform="rotate(-0 483.815814 225.0888)">0.41</text>
+   </g>
+   <g id="text_24">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="574.511629" y="94.8912" transform="rotate(-0 574.511629 94.8912)">1.48</text>
+   </g>
+   <g id="text_25">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="665.207443" y="114.36" transform="rotate(-0 665.207443 114.36)">1.32</text>
+   </g>
+   <g id="patch_18">
+    <path d="M 134.636929 280.332 
+L 158.217841 280.332 
+L 158.217841 243.828 
+L 134.636929 243.828 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="patch_19">
+    <path d="M 225.332743 280.332 
+L 248.913655 280.332 
+L 248.913655 236.5272 
+L 225.332743 236.5272 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="patch_20">
+    <path d="M 316.028558 280.332 
+L 339.609469 280.332 
+L 339.609469 266.9472 
+L 316.028558 266.9472 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="patch_21">
+    <path d="M 406.724372 280.332 
+L 430.305284 280.332 
+L 430.305284 285.1992 
+L 406.724372 285.1992 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="patch_22">
+    <path d="M 497.420187 280.332 
+L 521.001098 280.332 
+L 521.001098 148.9176 
+L 497.420187 148.9176 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="patch_23">
+    <path d="M 588.116001 280.332 
+L 611.696913 280.332 
+L 611.696913 158.652 
+L 588.116001 158.652 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="patch_24">
+    <path d="M 678.811816 280.332 
+L 702.392727 280.332 
+L 702.392727 180.5544 
+L 678.811816 180.5544 
+z
+" clip-path="url(#pc1b907be0a)" style="fill: #0d366b"/>
+   </g>
+   <g id="text_26">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="146.427385" y="238.4736" transform="rotate(-0 146.427385 238.4736)">0.30</text>
+   </g>
+   <g id="text_27">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="237.123199" y="231.1728" transform="rotate(-0 237.123199 231.1728)">0.36</text>
+   </g>
+   <g id="text_28">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="327.819014" y="261.5928" transform="rotate(-0 327.819014 261.5928)">0.11</text>
+   </g>
+   <g id="text_29">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="418.514828" y="296.4656" transform="rotate(-0 418.514828 296.4656)">−0.04</text>
+   </g>
+   <g id="text_30">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="509.210642" y="143.5632" transform="rotate(-0 509.210642 143.5632)">1.08</text>
+   </g>
+   <g id="text_31">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="599.906457" y="153.2976" transform="rotate(-0 599.906457 153.2976)">1.00</text>
+   </g>
+   <g id="text_32">
+    <text style="font-size: 8px; font-family: 'Helvetica Neue'; text-anchor: middle; fill: #1f2428" x="690.602271" y="175.2" transform="rotate(-0 690.602271 175.2)">0.82</text>
+   </g>
+   <g id="line2d_17">
+    <path d="M 52.92 280.332 
+L 733.32 280.332 
+" clip-path="url(#pc1b907be0a)" style="fill: none; stroke: #1f2428; stroke-width: 0.9; stroke-linecap: square"/>
+   </g>
+   <g id="legend_1">
+    <g id="patch_25">
+     <path d="M 61.02 69.4584 
+L 79.02 69.4584 
+L 79.02 63.1584 
+L 61.02 63.1584 
+z
+" style="fill: #9ec5f4"/>
+    </g>
+    <g id="text_33">
+     <text style="font-size: 9px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #1f2428" x="86.22" y="69.4584" transform="rotate(-0 86.22 69.4584)">2011–2016</text>
+    </g>
+    <g id="patch_26">
+     <path d="M 148.7475 69.4584 
+L 166.7475 69.4584 
+L 166.7475 63.1584 
+L 148.7475 63.1584 
+z
+" style="fill: #2a78d6"/>
+    </g>
+    <g id="text_34">
+     <text style="font-size: 9px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #1f2428" x="173.9475" y="69.4584" transform="rotate(-0 173.9475 69.4584)">2016–2021</text>
+    </g>
+    <g id="patch_27">
+     <path d="M 236.475 69.4584 
+L 254.475 69.4584 
+L 254.475 63.1584 
+L 236.475 63.1584 
+z
+" style="fill: #0d366b"/>
+    </g>
+    <g id="text_35">
+     <text style="font-size: 9px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #1f2428" x="261.675" y="69.4584" transform="rotate(-0 261.675 69.4584)">2021–2024</text>
+    </g>
+   </g>
+  </g>
+  <g id="text_36">
+   <text style="font-weight: 700; font-size: 13px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #1f2428" x="9.072" y="22.035" transform="rotate(-0 9.072 22.035)">Growth in automobiles and light trucks, by period</text>
+  </g>
+  <g id="text_37">
+   <text style="font-size: 10px; font-family: 'Helvetica Neue'; text-anchor: start; fill: #5f6b74" x="9.072" y="41.344" transform="rotate(-0 9.072 41.344)">Average change per year in the number registered; the last period ends with inferred counts (2024)</text>
+  </g>
+  <g id="text_38">
+   <text style="font-size: 7.5px; font-family: 'Helvetica Neue'; fill: #5f6b74" transform="translate(9.072 350.3097)">Compound yearly rate between the files of December 31 of the two years. 2011 to 2022 are published counts; 2024 is inferred from make, model and model year (within 0.2 % on published years). « Rest of Québec » is the</text>
+   <text style="font-size: 7.5px; font-family: 'Helvetica Neue'; fill: #5f6b74" transform="translate(9.072 359.2572)">province less the five cities shown. The cause of the slower growth after 2021 is not established.</text>
+   <text style="font-size: 7.5px; font-family: 'Helvetica Neue'; fill: #5f6b74" transform="translate(9.072 368.2047)">Sources: SAAQ, open data « Véhicules en circulation », 2011–2022 (files of December 18, 2023); SAAQ, files released under the access Act, file 03.06.34729 (decision of September 17, 2025), 2023–2024.</text>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="pc1b907be0a">
+   <rect x="52.92" y="67.392" width="680.4" height="243.36"/>
+  </clipPath>
+ </defs>
+</svg>
