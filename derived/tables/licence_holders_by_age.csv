@@ -1,0 +1,337 @@
+year,scope,age_band,sex,car_licence_holders
+2011,Island of Montréal (MRC 66),16-19,F,8244
+2011,Island of Montréal (MRC 66),16-19,M,10183
+2011,Island of Montréal (MRC 66),20-24,F,31166
+2011,Island of Montréal (MRC 66),20-24,M,34033
+2011,Island of Montréal (MRC 66),25-34,F,91158
+2011,Island of Montréal (MRC 66),25-34,M,101772
+2011,Island of Montréal (MRC 66),35-44,F,88459
+2011,Island of Montréal (MRC 66),35-44,M,110121
+2011,Island of Montréal (MRC 66),45-54,F,94533
+2011,Island of Montréal (MRC 66),45-54,M,114156
+2011,Island of Montréal (MRC 66),55-64,F,75346
+2011,Island of Montréal (MRC 66),55-64,M,86905
+2011,Island of Montréal (MRC 66),65 ans ou plus,F,61476
+2011,Island of Montréal (MRC 66),65 ans ou plus,M,84415
+2011,Québec,16-19,F,76187
+2011,Québec,16-19,M,84072
+2011,Québec,20-24,F,172693
+2011,Québec,20-24,M,183156
+2011,Québec,25-34,F,411564
+2011,Québec,25-34,M,430116
+2011,Québec,35-44,F,432746
+2011,Québec,35-44,M,465025
+2011,Québec,45-54,F,545626
+2011,Québec,45-54,M,579120
+2011,Québec,55-64,F,451072
+2011,Québec,55-64,M,486437
+2011,Québec,65 ans ou plus,F,367143
+2011,Québec,65 ans ou plus,M,448855
+2012,Island of Montréal (MRC 66),16-19,F,6870
+2012,Island of Montréal (MRC 66),16-19,M,8614
+2012,Island of Montréal (MRC 66),20-24,F,31501
+2012,Island of Montréal (MRC 66),20-24,M,33845
+2012,Island of Montréal (MRC 66),25-34,F,90903
+2012,Island of Montréal (MRC 66),25-34,M,100767
+2012,Island of Montréal (MRC 66),35-44,F,89498
+2012,Island of Montréal (MRC 66),35-44,M,110013
+2012,Island of Montréal (MRC 66),45-54,F,93764
+2012,Island of Montréal (MRC 66),45-54,M,113440
+2012,Island of Montréal (MRC 66),55-64,F,76347
+2012,Island of Montréal (MRC 66),55-64,M,87934
+2012,Island of Montréal (MRC 66),65 ans ou plus,F,64544
+2012,Island of Montréal (MRC 66),65 ans ou plus,M,87277
+2012,Québec,16-19,F,67824
+2012,Québec,16-19,M,73565
+2012,Québec,20-24,F,176627
+2012,Québec,20-24,M,185895
+2012,Québec,25-34,F,410020
+2012,Québec,25-34,M,427532
+2012,Québec,35-44,F,434720
+2012,Québec,35-44,M,466196
+2012,Québec,45-54,F,537467
+2012,Québec,45-54,M,570221
+2012,Québec,55-64,F,463278
+2012,Québec,55-64,M,497327
+2012,Québec,65 ans ou plus,F,391378
+2012,Québec,65 ans ou plus,M,471906
+2013,Island of Montréal (MRC 66),16-19,F,6133
+2013,Island of Montréal (MRC 66),16-19,M,7606
+2013,Island of Montréal (MRC 66),20-24,F,31539
+2013,Island of Montréal (MRC 66),20-24,M,33990
+2013,Island of Montréal (MRC 66),25-34,F,90940
+2013,Island of Montréal (MRC 66),25-34,M,100556
+2013,Island of Montréal (MRC 66),35-44,F,90547
+2013,Island of Montréal (MRC 66),35-44,M,110253
+2013,Island of Montréal (MRC 66),45-54,F,93027
+2013,Island of Montréal (MRC 66),45-54,M,112645
+2013,Island of Montréal (MRC 66),55-64,F,77560
+2013,Island of Montréal (MRC 66),55-64,M,89411
+2013,Island of Montréal (MRC 66),65 ans ou plus,F,67531
+2013,Island of Montréal (MRC 66),65 ans ou plus,M,89611
+2013,Québec,16-19,F,64100
+2013,Québec,16-19,M,68720
+2013,Québec,20-24,F,179944
+2013,Québec,20-24,M,188512
+2013,Québec,25-34,F,408202
+2013,Québec,25-34,M,425103
+2013,Québec,35-44,F,438606
+2013,Québec,35-44,M,469414
+2013,Québec,45-54,F,527409
+2013,Québec,45-54,M,559490
+2013,Québec,55-64,F,475825
+2013,Québec,55-64,M,508419
+2013,Québec,65 ans ou plus,F,415184
+2013,Québec,65 ans ou plus,M,493993
+2014,Island of Montréal (MRC 66),16-19,F,6033
+2014,Island of Montréal (MRC 66),16-19,M,7295
+2014,Island of Montréal (MRC 66),20-24,F,31467
+2014,Island of Montréal (MRC 66),20-24,M,33893
+2014,Island of Montréal (MRC 66),25-34,F,92113
+2014,Island of Montréal (MRC 66),25-34,M,100578
+2014,Island of Montréal (MRC 66),35-44,F,92207
+2014,Island of Montréal (MRC 66),35-44,M,110870
+2014,Island of Montréal (MRC 66),45-54,F,92454
+2014,Island of Montréal (MRC 66),45-54,M,111708
+2014,Island of Montréal (MRC 66),55-64,F,78919
+2014,Island of Montréal (MRC 66),55-64,M,90819
+2014,Island of Montréal (MRC 66),65 ans ou plus,F,70525
+2014,Island of Montréal (MRC 66),65 ans ou plus,M,92299
+2014,Québec,16-19,F,62598
+2014,Québec,16-19,M,66666
+2014,Québec,20-24,F,180524
+2014,Québec,20-24,M,188223
+2014,Québec,25-34,F,407213
+2014,Québec,25-34,M,422044
+2014,Québec,35-44,F,443753
+2014,Québec,35-44,M,472175
+2014,Québec,45-54,F,515369
+2014,Québec,45-54,M,546958
+2014,Québec,55-64,F,487365
+2014,Québec,55-64,M,518114
+2014,Québec,65 ans ou plus,F,439336
+2014,Québec,65 ans ou plus,M,516538
+2015,Island of Montréal (MRC 66),16-19,F,5905
+2015,Island of Montréal (MRC 66),16-19,M,7328
+2015,Island of Montréal (MRC 66),20-24,F,31148
+2015,Island of Montréal (MRC 66),20-24,M,33653
+2015,Island of Montréal (MRC 66),25-34,F,93056
+2015,Island of Montréal (MRC 66),25-34,M,101444
+2015,Island of Montréal (MRC 66),35-44,F,94726
+2015,Island of Montréal (MRC 66),35-44,M,111974
+2015,Island of Montréal (MRC 66),45-54,F,91496
+2015,Island of Montréal (MRC 66),45-54,M,111311
+2015,Island of Montréal (MRC 66),55-64,F,80465
+2015,Island of Montréal (MRC 66),55-64,M,92418
+2015,Island of Montréal (MRC 66),65 ans ou plus,F,73297
+2015,Island of Montréal (MRC 66),65 ans ou plus,M,94927
+2015,Québec,16-19,F,61346
+2015,Québec,16-19,M,64955
+2015,Québec,20-24,F,178444
+2015,Québec,20-24,M,185988
+2015,Québec,25-34,F,407821
+2015,Québec,25-34,M,421703
+2015,Québec,35-44,F,450138
+2015,Québec,35-44,M,477099
+2015,Québec,45-54,F,503749
+2015,Québec,45-54,M,536444
+2015,Québec,55-64,F,499064
+2015,Québec,55-64,M,527667
+2015,Québec,65 ans ou plus,F,462043
+2015,Québec,65 ans ou plus,M,538066
+2016,Island of Montréal (MRC 66),16-19,F,5828
+2016,Island of Montréal (MRC 66),16-19,M,7059
+2016,Island of Montréal (MRC 66),20-24,F,31328
+2016,Island of Montréal (MRC 66),20-24,M,33917
+2016,Island of Montréal (MRC 66),25-34,F,93552
+2016,Island of Montréal (MRC 66),25-34,M,101423
+2016,Island of Montréal (MRC 66),35-44,F,97046
+2016,Island of Montréal (MRC 66),35-44,M,112671
+2016,Island of Montréal (MRC 66),45-54,F,90745
+2016,Island of Montréal (MRC 66),45-54,M,110381
+2016,Island of Montréal (MRC 66),55-64,F,81392
+2016,Island of Montréal (MRC 66),55-64,M,93844
+2016,Island of Montréal (MRC 66),65 ans ou plus,F,76279
+2016,Island of Montréal (MRC 66),65 ans ou plus,M,97376
+2016,Québec,16-19,F,58499
+2016,Québec,16-19,M,61616
+2016,Québec,20-24,F,175161
+2016,Québec,20-24,M,181619
+2016,Québec,25-34,F,409516
+2016,Québec,25-34,M,422604
+2016,Québec,35-44,F,457251
+2016,Québec,35-44,M,482537
+2016,Québec,45-54,F,492303
+2016,Québec,45-54,M,524669
+2016,Québec,55-64,F,509233
+2016,Québec,55-64,M,537554
+2016,Québec,65 ans ou plus,F,486455
+2016,Québec,65 ans ou plus,M,560530
+2017,Island of Montréal (MRC 66),16-19,F,5558
+2017,Island of Montréal (MRC 66),16-19,M,6917
+2017,Island of Montréal (MRC 66),20-24,F,30726
+2017,Island of Montréal (MRC 66),20-24,M,33343
+2017,Island of Montréal (MRC 66),25-34,F,93909
+2017,Island of Montréal (MRC 66),25-34,M,101289
+2017,Island of Montréal (MRC 66),35-44,F,99042
+2017,Island of Montréal (MRC 66),35-44,M,113647
+2017,Island of Montréal (MRC 66),45-54,F,90319
+2017,Island of Montréal (MRC 66),45-54,M,109241
+2017,Island of Montréal (MRC 66),55-64,F,82186
+2017,Island of Montréal (MRC 66),55-64,M,95224
+2017,Island of Montréal (MRC 66),65 ans ou plus,F,79211
+2017,Island of Montréal (MRC 66),65 ans ou plus,M,99826
+2017,Québec,16-19,F,56971
+2017,Québec,16-19,M,59448
+2017,Québec,20-24,F,169753
+2017,Québec,20-24,M,176094
+2017,Québec,25-34,F,411207
+2017,Québec,25-34,M,423518
+2017,Québec,35-44,F,464087
+2017,Québec,35-44,M,487691
+2017,Québec,45-54,F,480294
+2017,Québec,45-54,M,512168
+2017,Québec,55-64,F,517888
+2017,Québec,55-64,M,545482
+2017,Québec,65 ans ou plus,F,510611
+2017,Québec,65 ans ou plus,M,583114
+2018,Island of Montréal (MRC 66),16-19,F,5905
+2018,Island of Montréal (MRC 66),16-19,M,7125
+2018,Island of Montréal (MRC 66),20-24,F,30409
+2018,Island of Montréal (MRC 66),20-24,M,33475
+2018,Island of Montréal (MRC 66),25-34,F,95377
+2018,Island of Montréal (MRC 66),25-34,M,104170
+2018,Island of Montréal (MRC 66),35-44,F,101778
+2018,Island of Montréal (MRC 66),35-44,M,115713
+2018,Island of Montréal (MRC 66),45-54,F,90021
+2018,Island of Montréal (MRC 66),45-54,M,108761
+2018,Island of Montréal (MRC 66),55-64,F,83290
+2018,Island of Montréal (MRC 66),55-64,M,97267
+2018,Island of Montréal (MRC 66),65 ans ou plus,F,82525
+2018,Island of Montréal (MRC 66),65 ans ou plus,M,102495
+2018,Québec,16-19,F,57262
+2018,Québec,16-19,M,59788
+2018,Québec,20-24,F,165901
+2018,Québec,20-24,M,172142
+2018,Québec,25-34,F,415626
+2018,Québec,25-34,M,428879
+2018,Québec,35-44,F,471690
+2018,Québec,35-44,M,493641
+2018,Québec,45-54,F,468180
+2018,Québec,45-54,M,501281
+2018,Québec,55-64,F,526689
+2018,Québec,55-64,M,554065
+2018,Québec,65 ans ou plus,F,535384
+2018,Québec,65 ans ou plus,M,605911
+2019,Island of Montréal (MRC 66),16-19,F,6030
+2019,Island of Montréal (MRC 66),16-19,M,7028
+2019,Island of Montréal (MRC 66),20-24,F,29886
+2019,Island of Montréal (MRC 66),20-24,M,33265
+2019,Island of Montréal (MRC 66),25-34,F,96505
+2019,Island of Montréal (MRC 66),25-34,M,106348
+2019,Island of Montréal (MRC 66),35-44,F,103855
+2019,Island of Montréal (MRC 66),35-44,M,117411
+2019,Island of Montréal (MRC 66),45-54,F,89908
+2019,Island of Montréal (MRC 66),45-54,M,107594
+2019,Island of Montréal (MRC 66),55-64,F,83942
+2019,Island of Montréal (MRC 66),55-64,M,98796
+2019,Island of Montréal (MRC 66),65 ans ou plus,F,85513
+2019,Island of Montréal (MRC 66),65 ans ou plus,M,105105
+2019,Québec,16-19,F,57245
+2019,Québec,16-19,M,59504
+2019,Québec,20-24,F,161237
+2019,Québec,20-24,M,167517
+2019,Québec,25-34,F,419678
+2019,Québec,25-34,M,433730
+2019,Québec,35-44,F,478594
+2019,Québec,35-44,M,500838
+2019,Québec,45-54,F,458750
+2019,Québec,45-54,M,490974
+2019,Québec,55-64,F,531976
+2019,Québec,55-64,M,559833
+2019,Québec,65 ans ou plus,F,561073
+2019,Québec,65 ans ou plus,M,630370
+2020,Island of Montréal (MRC 66),16-19,F,5356
+2020,Island of Montréal (MRC 66),16-19,M,5993
+2020,Island of Montréal (MRC 66),20-24,F,28372
+2020,Island of Montréal (MRC 66),20-24,M,31939
+2020,Island of Montréal (MRC 66),25-34,F,94827
+2020,Island of Montréal (MRC 66),25-34,M,105082
+2020,Island of Montréal (MRC 66),35-44,F,103553
+2020,Island of Montréal (MRC 66),35-44,M,115734
+2020,Island of Montréal (MRC 66),45-54,F,89215
+2020,Island of Montréal (MRC 66),45-54,M,105601
+2020,Island of Montréal (MRC 66),55-64,F,83627
+2020,Island of Montréal (MRC 66),55-64,M,99382
+2020,Island of Montréal (MRC 66),65 ans ou plus,F,88370
+2020,Island of Montréal (MRC 66),65 ans ou plus,M,107238
+2020,Québec,16-19,F,51679
+2020,Québec,16-19,M,53258
+2020,Québec,20-24,F,154937
+2020,Québec,20-24,M,161475
+2020,Québec,25-34,F,419316
+2020,Québec,25-34,M,433483
+2020,Québec,35-44,F,480084
+2020,Québec,35-44,M,500278
+2020,Québec,45-54,F,452253
+2020,Québec,45-54,M,484010
+2020,Québec,55-64,F,533418
+2020,Québec,55-64,M,561108
+2020,Québec,65 ans ou plus,F,588762
+2020,Québec,65 ans ou plus,M,655648
+2021,Island of Montréal (MRC 66),16-19,F,6134
+2021,Island of Montréal (MRC 66),16-19,M,6711
+2021,Island of Montréal (MRC 66),20-24,F,28863
+2021,Island of Montréal (MRC 66),20-24,M,33826
+2021,Island of Montréal (MRC 66),25-34,F,94834
+2021,Island of Montréal (MRC 66),25-34,M,107774
+2021,Island of Montréal (MRC 66),35-44,F,102399
+2021,Island of Montréal (MRC 66),35-44,M,114859
+2021,Island of Montréal (MRC 66),45-54,F,89253
+2021,Island of Montréal (MRC 66),45-54,M,104733
+2021,Island of Montréal (MRC 66),55-64,F,83116
+2021,Island of Montréal (MRC 66),55-64,M,99437
+2021,Island of Montréal (MRC 66),65 ans ou plus,F,91200
+2021,Island of Montréal (MRC 66),65 ans ou plus,M,109592
+2021,Québec,16-19,F,55387
+2021,Québec,16-19,M,56355
+2021,Québec,20-24,F,154136
+2021,Québec,20-24,M,163914
+2021,Québec,25-34,F,428146
+2021,Québec,25-34,M,446554
+2021,Québec,35-44,F,486396
+2021,Québec,35-44,M,508052
+2021,Québec,45-54,F,453517
+2021,Québec,45-54,M,486242
+2021,Québec,55-64,F,534049
+2021,Québec,55-64,M,562076
+2021,Québec,65 ans ou plus,F,617395
+2021,Québec,65 ans ou plus,M,682337
+2022,Island of Montréal (MRC 66),16-19,F,7084
+2022,Island of Montréal (MRC 66),16-19,M,7745
+2022,Island of Montréal (MRC 66),20-24,F,30013
+2022,Island of Montréal (MRC 66),20-24,M,34480
+2022,Island of Montréal (MRC 66),25-34,F,96911
+2022,Island of Montréal (MRC 66),25-34,M,110115
+2022,Island of Montréal (MRC 66),35-44,F,103068
+2022,Island of Montréal (MRC 66),35-44,M,114698
+2022,Island of Montréal (MRC 66),45-54,F,90563
+2022,Island of Montréal (MRC 66),45-54,M,105193
+2022,Island of Montréal (MRC 66),55-64,F,82799
+2022,Island of Montréal (MRC 66),55-64,M,99768
+2022,Island of Montréal (MRC 66),65 ans ou plus,F,94763
+2022,Island of Montréal (MRC 66),65 ans ou plus,M,112747
+2022,Québec,16-19,F,60569
+2022,Québec,16-19,M,61573
+2022,Québec,20-24,F,154774
+2022,Québec,20-24,M,163215
+2022,Québec,25-34,F,432969
+2022,Québec,25-34,M,452941
+2022,Québec,35-44,F,489036
+2022,Québec,35-44,M,508899
+2022,Québec,45-54,F,457942
+2022,Québec,45-54,M,489756
+2022,Québec,55-64,F,527332
+2022,Québec,55-64,M,555192
+2022,Québec,65 ans ou plus,F,647554
+2022,Québec,65 ans ou plus,M,709755
