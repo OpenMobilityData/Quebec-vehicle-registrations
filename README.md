@@ -5,8 +5,8 @@ for Québec, one row per registered vehicle, and the tables computed from them.
 
 **Status: work in progress (November 10, 2026).** The ingestion, the vocabulary
 matching, the municipality link and the inference of vehicle type and fuel are
-built and measured, and three first figures are drawn. The results are under
-review; the note and the slide deck are not yet written.
+built and measured; four figures and a draft slide deck exist. The results are
+under review; the written note is not yet started.
 
 ## Sources
 
@@ -90,6 +90,10 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | [`holdout-error`](derived/figures/holdout-error/holdout_error_en.png) | The inference applied to each published year, against the published count |
 | [`age-bands`](derived/figures/age-bands/age_bands_en.png) | Municipality of Montréal by vehicle age, 2011–2024 (nothing inferred) |
 | [`fsa-households`](derived/figures/fsa-households/fsa_households_en.png) | Automobiles and light trucks per household by FSA (postal codes in H), 2024, against the share of commuters who drive (2021 Census) |
+
+## Documents (`docs/`)
+
+- [`vehicle_registrations_deck_en.pdf`](docs/vehicle_registrations_deck_en.pdf): slide deck, English, **draft under the author's review**; built by `scripts/build_docs.py`, every number read from the tables at build time.
 
 ## Layout
 
