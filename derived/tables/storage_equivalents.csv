@@ -1,0 +1,6 @@
+case,vehicles,curb_km_at_5.0_m,curb_km_at_5.5_m,curb_km_at_6.0_m
+"Montréal, published increase 2011 to 2021",75574,377.9,415.7,453.4
+"Montréal, 2024 (inferred) minus 2021",6658,33.3,36.6,39.9
+"Montréal, trend 2011-2021 carried from 2024 to 2034 (10 years)",78546,392.7,432.0,471.3
+"H4A and H4B, if the City's 2011-2021 yearly rate applied for 10 years",1869,9.3,10.3,11.2
+"Per 1,000 vehicles",1000,5.0,5.5,6.0
