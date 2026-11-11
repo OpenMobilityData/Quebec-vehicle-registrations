@@ -12,7 +12,7 @@ from fig_lib import *  # noqa: E402,F403
 
 s = pd.read_csv(paths.TABLES / "trend_scenario.csv").set_index("year")
 c = s["count"].dropna()
-per_year = s.trend_2011_2021[2021] - s.trend_2011_2021[2020]
+per_year = round((s.trend_2011_2021[2035] - s.trend_2011_2021[2011]) / 24)
 T = {
     "en": dict(title="Montréal: the 2011–2021 trend carried forward, and what the files show",
                sub="Automobiles and light trucks, municipality of Montréal. The axis does not start at zero.",
@@ -37,7 +37,7 @@ for lang, L in T.items():
                     arrowprops=dict(arrowstyle="-", color=AXIS, lw=0.8))
     for y in (2011, 2021):
         ax.annotate(num(c[y], lang), (y, c[y]), xytext=(0, 9), textcoords="offset points", ha="center", fontsize=8.5, color=INK)
-    ax.annotate(num(s.trend_2011_2021[2035], lang), (2035, s.trend_2011_2021[2035]), xytext=(-4, -14), textcoords="offset points", ha="right", fontsize=8.5, color=MUTED)
+    ax.annotate(num(s.trend_2011_2021[2035], lang), (2035, s.trend_2011_2021[2035]), xytext=(-2, -24), textcoords="offset points", ha="right", fontsize=8.5, color=MUTED)
     ax.set_ylim(650000, 880000); ax.set_xlim(2010.4, 2035.6); ax.set_xticks(range(2011, 2036, 3)); thousands(ax, lang)
     ax.legend(loc="lower right", fontsize=9)
     finish(fig, HERE, "trend_scenario", lang, L["title"], L["sub"], L["note"], bottom=0.16)

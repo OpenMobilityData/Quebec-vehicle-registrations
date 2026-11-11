@@ -1,0 +1,138 @@
+\documentclass[10.5pt,a4paper]{article}
+\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage[scaled=0.95]{helvet}\renewcommand{\familydefault}{\sfdefault}
+\usepackage[a4paper,margin=2.2cm]{geometry}\usepackage{graphicx,booktabs,amsmath,caption,xcolor,enumitem,array,float,fancyhdr}\usepackage[hidelinks]{hyperref}
+\captionsetup{font=small,labelfont=bf}\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}\setlist{itemsep=2pt,topsep=3pt}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}\fancyhead[C]{\small\textcolor{red!70!black}{DRAFT for the author\textquoteright{}s review, v2026-11-10-23-30-43}}
+\title{\textbf{Vehicle registrations in Québec, 2011--2024}\\[4pt]\large Joining the SAAQ's open data with the files released under the access Act}
+\author{Rick Hoge, PhD}\date{November 10, 2026 \quad {\small v2026-11-10-23-30-43}}
+\begin{document}\maketitle\thispagestyle{fancy}
+
+\section*{Summary for a general reader}
+Until 2022 the SAAQ published a yearly file with one line for every vehicle registered in Québec. It then stopped. The files it released for 2023 and 2024 under the access-to-information law give only the make, model, model year and place of registration. This note joins the two sources so that the same questions can be followed from 2011 to 2024.
+
+The kind of vehicle is worked out from its make, model and model year, using the earlier files as the key. The method was tested on the years where the answer is known: for automobiles and light trucks in Montréal it lands within 0.13 per cent of the published count. It works poorly for electric vehicles, whose newest models are missing from the key, so none are counted for 2023 and 2024.
+
+In the municipality of Montréal there were 674,497 automobiles and light trucks in 2011 and 750,071 in 2021. The published count for 2022 is lower. The counts worked out for 2023 and 2024 are about 757,000, some 18,000 below where the growth of 2011 to 2021 was heading.
+
+Vehicles are kept longer. Of the automobiles on the road at three years old, half were still registered at 13 years early in the period and at 16 years at its end. They are also heavier: in Montréal the average went from 1,458 to 1,559 kilograms between 2011 and 2022.
+
+The newer files also give the first three characters of the postal code. In the two postal areas crossed by rue de Terrebonne there are about 0.73 automobiles per household, against a middle value of 1.16 for the island of Montréal and Laval.
+
+The files count vehicles that are owned, including those of businesses. They do not say how far a vehicle is driven or where it is parked.
+
+\section*{Abstract}
+The Société de l'assurance automobile du Québec (SAAQ) published one record per registered vehicle for each year from 2011 to 2022, with the vehicle's class, type, make, model, model year, net mass, fuel and municipality. The files it released for 2023 and 2024 under the access Act carry seven columns: year, make, model, model year, municipality, region and the first three characters of the postal code (FSA). This note describes a pipeline that joins the two sources: the release's make and model strings are mapped by stated rules onto the codes of the open data (97.1~\% of the 2023 vehicles and 96.8~\% of the 2024 vehicles resolved to make and model), and the vehicle type is inferred from make, model and model year as an expected count. Applied to each published year from the years before it, the inferred count of automobiles and light trucks in the municipality of Montréal differs from the published count by 0.05~\% to 0.13~\% (21 tests); electric vehicles are under-counted by 3.8~\% to 18.8~\%, and no electric count is given for 2023--2024. Results: Montréal had 674{,}497 automobiles and light trucks in 2011, 750{,}071 in 2021, 743{,}494 in 2022 (published), and 757{,}376 and 756{,}729 in 2023 and 2024 (inferred); half of the automobiles registered in Québec at age 3 remain at 13 years in 2011--2016 and at 16 years in 2021--2024; the mean net mass of Montréal's automobiles rises from 1{,}458 to 1{,}559~kg (2011--2022); in the FSAs H4A and H4B there are 0.73 and 0.72 automobiles and light trucks per household in 2024, against a median of 1.16 for the 113 FSAs beginning with H. The files count vehicles owned, businesses included; they carry no distance driven and no place of parking.
+
+\tableofcontents
+
+\section{Sources}
+\begin{tabular}{@{}p{1.9cm}p{6.2cm}p{7.2cm}@{}}\toprule
+Years & Source & Columns \\\midrule
+2011--2022 & SAAQ open data, « Véhicules en circulation » (Données Québec, CC BY 4.0), vehicles authorized to circulate on December 31; files as revised by the SAAQ on December 18, 2023 & class, type, make, model, model year, net mass, cylinders, displacement, axles, colour, fuel (from 2017), region, MRC, municipality code \\[4pt]
+2023--2024 & Files released by the SAAQ under the access Act, file 03.06.34729 (decision of September 17, 2025) & year, make, model, model year, municipality name, region, FSA \\[4pt]
+2011--2022 & SAAQ open data, « Permis de conduire » (CC BY 4.0), licence holders on June 1 & age band, sex, MRC, region, licence type and classes, experience \\\bottomrule
+\end{tabular}
+
+The vehicle files hold 5{,}985{,}463 rows for 2011, 7{,}058{,}605 for 2022, 7{,}169{,}989 for 2023 and 7{,}189{,}594 for 2024. The open-data portal holds no vehicle file after 2022; its note reads « Les données ont été révisées pour respecter les nouvelles dispositions de la loi 25 protégeant la vie privée des Québécois ». The request of August 26, 2025 asked for the columns of the 2022 file with the FSA added; the decision cites section 53 of the Act for the columns withheld. Other sources: Statistics Canada, 2021 Census profile by dissemination area (catalogue 98-401-X2021006) and by census subdivision (98-401-X2021020); Institut de la statistique du Québec, geographic codes (July 31, 2025); postal-code points (Service Objects, March 2024) and FSA polygons (DMTI Spatial, CanMap Postal Code Suite v2024.3), both under licence.
+
+\section{Method}
+\subsection{One vocabulary of makes and models}
+The open data write makes and models as codes of at most five characters. The release mixes those codes with full names, other abbreviations and misspellings (more than 7{,}000 make strings against 418 codes). As released, 80.9~\% of the 2023 vehicles and 75.6~\% of the 2024 vehicles carry a make and model in the open data's main spelling. The rules, applied in a fixed order, are: the first five characters; punctuation removed; two short alias tables written by hand, each entry with its basis; a prefix that designates one code almost alone; and a trim or variant suffix removed. Nothing is matched by similarity of strings. After the rules, 97.1~\% and 96.8~\% of vehicles are resolved to make and model, 2.4~\% and 2.7~\% to the make only, and 0.4~\% and 0.5~\% stay unresolved.
+
+Two things were found in the course of this step. The open data hold rare variants of their own codes (16 vehicles under HONDA \texttt{CRV} beside 1.1 million under \texttt{CR-V}); codes equal but for punctuation are taken as one model. And some codes designate other vehicles in the release than in the open data: the curators had merged DODGE \texttt{CARAV} into \texttt{GRAND}, for example. These are detected from the vehicles of model year 2021 or earlier, whose number under a code cannot grow after 2022; 52 such codes (148{,}434 vehicles in 2023) are reassigned to the code whose vehicles are missing in the same numbers, model year by model year.
+
+\subsection{Municipalities}
+The open data give a municipality code and the release a name with its region. The names are linked to the codes through the ISQ's geographic codes for 98.3~\% of the 2024 vehicles; a name carried by two municipalities of the same region is left unlinked.
+
+\subsection{Type and fuel as expected counts}
+The open data of 2020--2022 give, for each make, model and model year, how many vehicles are of each type. A vehicle of 2023--2024 contributes to each type in those proportions. The key is the most specific one found: make, model and model year (94.8~\% of the 2023 vehicles, 88.3~\% of 2024), then make and model on recent model years, make and model, make and model year, and make. Vehicles matching no key stay unassigned (0.5~\% and 0.5~\%). The class (personal or commercial use) is not inferred: it describes the use made of a vehicle.
+
+\section{The method tested on published years}
+Each published year is reduced to the seven columns of the release, inferred from the three years ending one or two years earlier, and compared with the published type and fuel.
+
+\begin{figure}[H]\centering\includegraphics[width=1.0\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/holdout-error/holdout_error_en.png}\caption{Inferred against published counts of automobiles and light trucks, by year.}\end{figure}
+
+\begin{center}\begin{tabular}{@{}lr@{}}\toprule
+Quantity inferred & Difference from the published count \\\midrule
+Automobiles and light trucks, Montréal (21 tests) & $+$0.05~\% to $+$0.13~\% \\
+Automobiles and light trucks, Québec & $-$0.14~\% to $+$0.05~\% \\
+Same, by municipality, 2022: under 1{,}000 vehicles & median 0.58~\% \\
+Same, by municipality, 2022: 10{,}000 to 99{,}999 & median 0.11~\% \\\midrule
+Gasoline, Québec, one year ahead & $-$0.11~\% to 0.11~\% \\
+Electric, Québec, one year ahead & $-$7.7~\% to $-$3.8~\% \\
+Electric, Québec, two years ahead & $-$18.8~\% to $-$12.4~\% \\
+Plug-in hybrid, Québec, one year ahead & $-$25.0~\% to $+$11.1~\% \\\bottomrule
+\end{tabular}\end{center}
+
+Type is recovered to a fraction of one per cent. Electric vehicles are under-counted because the newest model years are absent from the reference, and no electric count for 2023--2024 is given in this note. The test uses the open data's own codes: it does not measure the effect of the release's unedited codes, which is the subject of the vocabulary step. A second check is the comparison with the 2025 SAAQAnalyzer application: of 12 legend values recomputed here, 11 are identical, and the other differs by 58 vehicles with an invalid model year.
+
+\section{Results}
+\subsection{Montréal, 2011--2024}
+\begin{figure}[H]\centering\includegraphics[width=1.0\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/montreal-automobiles/montreal_automobiles_en.png}\caption{Vehicles registered in the municipality of Montréal.}\end{figure}
+\begin{center}\begin{tabular}{@{}lrrrrr@{}}\toprule
+Municipality of Montréal & 2011 & 2021 & 2022 & 2023 & 2024 \\\midrule
+All vehicles (released) & 739{,}732 & 823{,}314 & 817{,}880 & 832{,}054 & 831{,}205 \\
+Automobiles and light trucks & 674{,}497 & 750{,}071 & 743{,}494 & \textit{757{,}376} & \textit{756{,}729} \\\bottomrule
+\end{tabular}\\[2pt]{\footnotesize Italic: inferred.}\end{center}
+
+From 2011 to 2021 the municipality gained 75{,}574 automobiles and light trucks ($+$11.2~\%). The published count of 2022 is 6{,}577 lower than that of 2021, and the count of all vehicles falls by 5{,}434 the same year; the reason is not established here. The inferred counts of 2023 and 2024 stand 7{,}305 and 6{,}658 above 2021. Per 1{,}000 residents, there were 419 automobiles and light trucks at the 2016 Census and 426 at the 2021 Census.
+
+\begin{figure}[H]\centering\includegraphics[width=0.9\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/trend-scenario/trend_scenario_en.png}\caption{The straight line through the counts of 2011--2021, carried to 2035, and the later counts.}\end{figure}
+
+A straight line through the published counts of 2011--2021 adds 7{,}855 vehicles a year. It is not a forecast. The published count of 2022 is 15{,}739 below it, and the inferred count of 2024 is 18{,}213 below it.
+
+\subsection{Age, and how long vehicles stay registered}
+\begin{figure}[H]\centering\includegraphics[width=0.9\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/age-bands/age_bands_en.png}\caption{Vehicles registered in the municipality of Montréal by age. Nothing is inferred.}\end{figure}\begin{figure}[H]\centering\includegraphics[width=0.9\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/cohort-survival/cohort_survival_en.png}\caption{Share of the automobiles and light trucks registered at age 3 that remain at each later age, Québec.}\end{figure}
+
+Age needs only the model year, which both sources carry. In Montréal the mean age of automobiles and light trucks goes from 6.6 years in 2011 to 8.2 in 2022 and 8.7 in 2024 (the last inferred as to type), and the share aged 10 years or more from 26~\% to 42~\%. Following each model year from one yearly file to the next for Québec as a whole, half of the automobiles and light trucks registered at age 3 remain at 13 years in 2011--2016, 15 years in 2016--2021, 16 years in 2021--2024; at 15 years, 31~\%, 42~\%, 52~\% remain. The last period includes the two inferred years, and a vehicle that leaves Québec counts as a departure.
+
+\subsection{Net mass, 2011--2022}
+\begin{figure}[H]\centering\includegraphics[width=0.9\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/mass-automobiles/mass_automobiles_en.png}\caption{Net mass of automobiles and light trucks, municipality of Montréal.}\end{figure}
+
+The mean net mass of Montréal's automobiles and light trucks goes from 1{,}458~kg in 2011 to 1{,}559~kg in 2022, and the share at 2{,}000~kg or more from 7.6~\% to 11.2~\%. The sum of net mass to the fourth power, the quantity behind the « Road Wear Index » of the 2025 application, is 1.35 times its 2011 value in 2022, and its mean per vehicle 1.22 times. Taken over automobiles, trucks, buses and tool vehicles together, that sum follows the heavy vehicles: automobiles are 95~\% of those vehicles and 1.0~\% of the sum in 2022. Its one-year drop in 2012 corresponds to the number of buses registered in Montréal: 3{,}465 in the 2011 file, 3{,}037 in 2012, 3{,}290 in 2013. The quantity uses the net mass and no distance driven: it describes the registered fleet, not the wear of a street. The 2023--2024 files carry no mass.
+
+\subsection{By FSA, 2024}
+\begin{figure}[H]\centering\includegraphics[width=1.0\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/fsa-maps/fsa_map_households_en.png}\caption{Automobiles and light trucks per household by FSA.}\end{figure}\begin{figure}[H]\centering\includegraphics[width=0.85\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/fsa-households/fsa_households_en.png}\caption{The same against the share of commuters who drive (2021 Census).}\end{figure}
+\begin{center}\begin{tabular}{@{}lrrrrr@{}}\toprule
+FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the lowest, \\
+ & trucks, 2024 (inferred) & 2021 Census & household & drive (\%) & FSAs in H \\\midrule
+H4A & 9{,}598 & 13{,}141 & 0.73 & 41.3 & 27 of 113 \\\\
+H4B & 7{,}351 & 10{,}193 & 0.72 & 42.9 & 26 of 113 \\\\
+H4V & 8{,}199 & 9{,}205 & 0.89 & 52.3 & 41 of 113 \\\\
+H3X & 9{,}999 & 10{,}747 & 0.93 & 54.6 & 43 of 113 \\\\
+\bottomrule\end{tabular}\end{center}
+
+Rue de Terrebonne's bike lane lies in H4B west of avenue Royal and in H4A east of it. Households come from the 2021 Census by dissemination area, shared among FSAs by postal codes; compared with an earlier estimate for the same FSAs they differ by a few per cent. The vehicle count includes vehicles owned by businesses, so an FSA with fleets or dealers stands high, and the ratio is an average that does not say how many households have no vehicle. The median age of the vehicles registered is 7 years in H4A and 8 years in H4B (Figure~\ref{fig:agemap}).
+
+\begin{figure}[H]\centering\includegraphics[width=\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/fsa-maps/fsa_map_age_en.png}\caption{Median age of registered vehicles by FSA. Nothing is inferred.}\label{fig:agemap}\end{figure}
+
+\subsection{Licence holders, 2011--2022}
+\begin{figure}[H]\centering\includegraphics[width=0.95\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/licences-vehicles/licences_vehicles_en.png}\caption{Automobiles and light trucks against holders of a passenger-vehicle licence.}\end{figure}\begin{figure}[H]\centering\includegraphics[width=0.85\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/licences-age/licences_age_en.png}\caption{Licence holders on the island of Montréal by age group.}\end{figure}
+
+The licence files give the MRC, not the municipality, so the comparison is made for the island of Montréal (the City and the fifteen other municipalities). On the island there are 82.8 automobiles and light trucks per 100 holders of a passenger-vehicle licence in 2011 and 83.7 in 2022; in Québec, 93.9 and 96.5. Holders aged 65 and over on the island go from 145{,}891 to 207{,}510, and holders aged 16 to 24 from 83{,}626 to 79{,}322. These are counts, not rates: no population by age is used. Probationary licences carry no class in the files and are counted as passenger-vehicle licences.
+
+\subsection{Vehicles and the space they occupy}
+\begin{center}\begin{tabular}{@{}p{8.4cm}rrr@{}}\toprule
+ & Vehicles & \multicolumn{2}{r}{Curb, if all on the street} \\
+ & & at 5.0 m each & at 6.0 m each \\\midrule
+Montréal, published increase 2011 to 2021 & 75{,}574 & 377.9 km & 453.4 km \\
+Montréal, 2024 (inferred) minus 2021 & 6{,}658 & 33.3 km & 39.9 km \\
+Montréal, trend 2011-2021 carried from 2024 to 2034 (10 years) & 78{,}546 & 392.7 km & 471.3 km \\
+H4A and H4B, if the City's 2011-2021 yearly rate applied for 10 years & 1{,}869 & 9.3 km & 11.2 km \\
+Per 1,000 vehicles & 1{,}000 & 5.0 km & 6.0 km \\
+\bottomrule\end{tabular}\end{center}
+
+A registered vehicle is somewhere when it is not moving. The table converts numbers of vehicles into lengths of curb at 5 to 6~m per vehicle. The length is an assumption given as a range, and the files do not say which vehicles are kept on the street or off it: the table is a conversion, not a measurement of parking.
+
+\section{Limits}
+\begin{itemize}
+\item Type and fuel for 2023--2024 are inferred. The class is not, and electric and plug-in counts for 2023--2024 are not given.
+\item Mass and licences stop at 2022. By FSA there are two years, so no local trend.
+\item Registrations count vehicles owned on December 31, businesses included. They carry no trips, no distance and no place of parking.
+\item The open-data files are those revised by the SAAQ on December 18, 2023; what that revision changed is not documented on the portal.
+\item The reason for the lower published count of 2022 is not established here.
+\end{itemize}
+
+\section*{Reproducing this note}
+Code, tables and figures: \url{https://github.com/OpenMobilityData/Quebec-vehicle-registrations}. Every number in this note is read from a table in \texttt{derived/tables/} when the note is built (\texttt{scripts/build\_docs.py}). The raw files are not in the repository; their sizes and SHA-256 are in \texttt{raw\_manifest.csv}.
+\end{document}
