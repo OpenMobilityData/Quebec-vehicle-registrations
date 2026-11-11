@@ -3,9 +3,8 @@
 A reproducible pipeline that joins two sources of vehicle-registration records
 for Québec, one row per registered vehicle, and the tables computed from them.
 
-**Status: draft under the author's review (November 10, 2026).** The pipeline,
-its tests, twelve figure types, a written note and a slide deck exist. Nothing
-here has been reviewed by anyone but the author.
+**Version of November 11, 2026.** The pipeline, its tests, the figures, a written
+note and a slide deck. Reviewed by the author only; not peer reviewed.
 
 ## Sources
 
@@ -89,12 +88,12 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
   (`vocabulary_codes_used_differently.csv`, `vocabulary_codes_reassigned.csv`).
   Check: motorhomes in Montréal, 723 published for 2022, 747 inferred for 2023.
 
-## Documents (`docs/`), drafts under the author's review
+## Documents (`docs/`)
 
 - [`vehicle_registrations_note_en.pdf`](docs/vehicle_registrations_note_en.pdf): the written note (English), with a summary for a general reader ([`derived/lay_abstract_en.txt`](derived/lay_abstract_en.txt)).
 - [`vehicle_registrations_deck_en.pdf`](docs/vehicle_registrations_deck_en.pdf): slide deck (English).
 
-Both are built by `scripts/build_docs.py`; every number is read from the tables at build time. `--final` removes the draft marking.
+Both are built by `scripts/build_docs.py`; every number is read from the tables at build time. They are built with `--final`; without it the pages carry a draft marking.
 
 ## Figures (`derived/figures/<type>/`, script beside its PNG and SVG, English and French)
 
