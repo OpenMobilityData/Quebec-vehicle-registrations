@@ -10,4 +10,4 @@ The newer files also give the first three characters of the postal code. In the 
 
 The files count vehicles that are owned, including those of businesses. They do not say how far a vehicle is driven or where it is parked.
 
-(300 words; v2026-11-11-06-21-36)
+(300 words; v2026-11-11-06-30-30)

@@ -29,6 +29,7 @@ Outputs (derived/tables/):
   type_by_fsa.csv, fuel_by_fsa.csv   2023-2024, inferred
   type_by_model_year.csv  Québec and Montréal, by model year (for the cohort tables)
   inference_levels.csv    share of the 2023-2024 vehicles at each level
+  automobile_fuel_by_year.csv   automobiles and light trucks by fuel, 2011-2024, Québec and Montréal
   fuel_inferred_before_2017.csv, holdout_backward.csv   fuel for 2011-2016 inferred backward from 2017-2019, and that step tested
 Run:  ~/.venvs/omd/bin/python scripts/infer.py
 """
@@ -68,15 +69,15 @@ def setup(con):
         WHERE a.source='access' GROUP BY ALL""")
 
 
-def infer(con, target, year, ref_years, out, backward=False):
+def infer(con, target, year, ref_years, out, backward=False, flt="true"):
     """Expected counts of `target` for the cells of `year`, from the reference years. Result table `out`:
     year, muni_code, fsa, level, value, n (expected), plus rows with value NULL for unassigned vehicles."""
     last = max(ref_years)
     yrs = ",".join(map(str, ref_years))
     con.execute(f"CREATE OR REPLACE TEMP TABLE ref AS SELECT make, model, model_year, {target} AS value, sum(n) n "
-                f"FROM cells WHERE source='open' AND year IN ({yrs}) AND {target} IS NOT NULL AND make IS NOT NULL GROUP BY ALL")
+                f"FROM cells WHERE source='open' AND year IN ({yrs}) AND {target} IS NOT NULL AND make IS NOT NULL AND {flt} GROUP BY ALL")
     con.execute(f"CREATE OR REPLACE TEMP TABLE tgt AS SELECT row_number() OVER () AS id, muni_code, fsa, make, model, "
-                f"model_year, {target if year <= 2022 else 'NULL'} AS truth, n FROM cells WHERE year={year}")
+                f"model_year, {target if year <= 2022 else 'NULL'} AS truth, n FROM cells WHERE year={year} AND {flt}")
     con.execute("CREATE OR REPLACE TEMP TABLE todo AS SELECT * FROM tgt")
     con.execute(f"CREATE OR REPLACE TABLE {out} (id BIGINT, muni_code VARCHAR, fsa VARCHAR, model_year INTEGER, truth VARCHAR, "
                 "level INTEGER, value VARCHAR, n DOUBLE)")
@@ -200,6 +201,26 @@ def backward(con):
     return hb
 
 
+def automobile_fuel(con):
+    """Automobiles and light trucks (type AU) by fuel, 2011-2024, Québec and Montréal. Published for 2017-2022. Before
+    2017 the type is published and the fuel is inferred backward from the automobiles of 2017-2019; for 2023-2024 type
+    and fuel are inferred together from 2020-2022."""
+    con.execute("ALTER TABLE cells ADD COLUMN IF NOT EXISTS tf VARCHAR")
+    con.execute("UPDATE cells SET tf = vtype || '|' || fuel WHERE vtype IS NOT NULL AND fuel IS NOT NULL")
+    parts = ["SELECT year, 'Québec' AS scope, fuel, sum(n) AS n, 'published' AS basis FROM cells WHERE vtype='AU' AND year BETWEEN 2017 AND 2022 GROUP BY ALL",
+             "SELECT year, 'Montréal', fuel, sum(n), 'published' FROM cells WHERE vtype='AU' AND year BETWEEN 2017 AND 2022 AND muni_code='66023' GROUP BY ALL"]
+    for T in range(2011, 2017):
+        infer(con, "fuel", T, [2017, 2018, 2019], f"af_{T}", backward=True, flt="vtype='AU'")
+        parts.append(f"SELECT {T}, 'Québec', value, sum(n), 'inferred' FROM af_{T} GROUP BY ALL")
+        parts.append(f"SELECT {T}, 'Montréal', value, sum(n), 'inferred' FROM af_{T} WHERE muni_code='66023' GROUP BY ALL")
+    for T in paths.ACCESS_YEARS:
+        infer(con, "tf", T, [2020, 2021, 2022], f"af_{T}")
+        for scope, cond in (("Québec", "true"), ("Montréal", "muni_code='66023'")):
+            parts.append(f"SELECT {T}, '{scope}', split_part(value, '|', 2), sum(n), 'inferred' FROM af_{T} WHERE value LIKE 'AU|%' AND {cond} GROUP BY ALL")
+    con.execute(f"COPY (SELECT year, scope, fuel, round(n) AS vehicles, basis FROM ({' UNION ALL '.join(parts)}) WHERE fuel IS NOT NULL ORDER BY scope, fuel, year) "
+                f"TO '{paths.TABLES}/automobile_fuel_by_year.csv' (HEADER)")
+
+
 def main():
     con = duckdb.connect()
     con.execute("SET threads=16")
@@ -211,6 +232,7 @@ def main():
     print(l[l.year == 2022].to_string(index=False))
     print(final(con).to_string(index=False))
     hb = backward(con)
+    automobile_fuel(con)
     print(hb[hb.fuel.isin(["L", "W", "H"]) & (hb.scope == "Québec")].to_string(index=False))
     print(pd.read_csv(paths.TABLES / "fuel_inferred_before_2017.csv").query("scope == 'Québec' and fuel in ['L', 'W', 'H']").pivot(index="year", columns="fuel", values="n").round(0).to_string())
 

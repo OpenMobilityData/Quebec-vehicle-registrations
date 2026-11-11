@@ -230,6 +230,14 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 """ + fig("electric", "electric") + r"""
 \end{frame}
 
+\begin{frame}{Automobiles and light trucks by fuel: Québec}
+""" + fig("automobile-fuel", "automobile_fuel_quebec") + r"""
+\end{frame}
+
+\begin{frame}{Automobiles and light trucks by fuel: Montréal}
+""" + fig("automobile-fuel", "automobile_fuel_montreal") + r"""
+\end{frame}
+
 \begin{frame}{Automobiles and licence holders, 2011--2022}
 """ + fig("licences-vehicles", "licences_vehicles") + r"""
 \end{frame}
