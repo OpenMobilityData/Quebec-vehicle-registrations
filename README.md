@@ -3,16 +3,16 @@
 A reproducible pipeline that joins two sources of vehicle-registration records
 for Québec, one row per registered vehicle, and the tables computed from them.
 
-**Status: work in progress (November 10, 2026).** The ingestion, the vocabulary
-matching, the municipality link and the inference of vehicle type and fuel are
-built and measured; four figures and a draft slide deck exist. The results are
-under review; the written note is not yet started.
+**Status: draft under the author's review (November 10, 2026).** The pipeline,
+its tests, twelve figure types, a written note and a slide deck exist. Nothing
+here has been reviewed by anyone but the author.
 
 ## Sources
 
 | Years | Source | Columns | Licence or basis |
 |---|---|---|---|
 | 2011–2022 | SAAQ, open data « [Véhicules en circulation](https://www.donneesquebec.ca/recherche/dataset/vehicules-en-circulation) » (Données Québec) | class, type, make, model, model year, net mass, cylinders, displacement, axles, colour, fuel (from 2017), region, MRC, municipality code | CC BY 4.0 |
+| 2011–2022 | SAAQ, open data « [Permis de conduire](https://www.donneesquebec.ca/recherche/dataset/permis-de-conduire) »: licence holders on June 1 | age band, sex, MRC, region, licence type and classes, experience | CC BY 4.0 |
 | 2023–2024 | SAAQ, files released under the Act respecting access to documents held by public bodies (file 03.06.34729, decision of September 17, 2025) | year, make, model, model year, municipality name, region code, first three characters of the postal code (FSA) | released under the Act |
 
 - The open-data files used are those on the portal on November 10, 2026. The
@@ -48,6 +48,11 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | 3 | `scripts/geography.py` | Municipality names of 2023–2024 linked to the codes of 2011–2022 | `municipalities`, `municipality_match` |
 | 4 | `scripts/infer.py` | Type and fuel for 2023–2024 as expected counts; the same method applied to each published year and compared with what was published | `holdout_summary`, `holdout_levels`, `holdout_municipal`, `type_by_municipality`, `fuel_by_municipality`, `type_by_fsa`, `fuel_by_fsa`, `inference_levels` |
 | 5 | `scripts/census_fsa.py` | 2021 Census counts by FSA, built from dissemination areas shared among FSAs by postal codes; joined to the vehicles of 2023–2024 | `fsa_census_2021`, `fsa_vehicles_census` |
+| 6 | `scripts/series.py` | Yearly series for every municipality (all vehicles, age bands), Québec by type, and the check against twelve legend values of the 2025 SAAQAnalyzer charts | `vehicles_by_municipality`, `age_bands_by_municipality`, `type_by_year_quebec`, `reproduction_checks` |
+| 7 | `scripts/mass.py` | Net mass 2011–2022 and the fourth power of mass | `mass_automobiles`, `mass_fourth_power_by_type_montreal` |
+| 8 | `scripts/cohorts.py` | Retention of each model year from one file to the next; age summaries | `cohort_retention`, `cohort_survival`, `vehicle_age_summary` |
+| 9 | `scripts/licences.py` | Driver's licence holders 2011–2022 (open data « Permis de conduire », June 1) and automobiles per licence holder | `licence_holders_by_mrc`, `licence_holders_by_age`, `vehicles_per_licence` |
+| 10 | `scripts/scenarios.py` | The 2011–2021 line carried forward, storage equivalents, vehicles per 1,000 residents at two censuses | `trend_scenario`, `storage_equivalents`, `vehicles_per_1000_residents` |
 
 ## Measurements so far
 
@@ -82,18 +87,29 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
   (`vocabulary_codes_used_differently.csv`, `vocabulary_codes_reassigned.csv`).
   Check: motorhomes in Montréal, 723 published for 2022, 747 inferred for 2023.
 
-## Figures so far (`derived/figures/<type>/`, script beside its PNG and SVG, English and French)
+## Documents (`docs/`), drafts under the author's review
+
+- [`vehicle_registrations_note_en.pdf`](docs/vehicle_registrations_note_en.pdf): the written note (English), with a summary for a general reader ([`derived/lay_abstract_en.txt`](derived/lay_abstract_en.txt)).
+- [`vehicle_registrations_deck_en.pdf`](docs/vehicle_registrations_deck_en.pdf): slide deck (English).
+
+Both are built by `scripts/build_docs.py`; every number is read from the tables at build time. `--final` removes the draft marking.
+
+## Figures (`derived/figures/<type>/`, script beside its PNG and SVG, English and French)
 
 | Figure | What it shows |
 |---|---|
 | [`montreal-automobiles`](derived/figures/montreal-automobiles/montreal_automobiles_en.png) | Municipality of Montréal, 2011–2024: all vehicles, and automobiles and light trucks (published to 2022, inferred for 2023–2024) |
 | [`holdout-error`](derived/figures/holdout-error/holdout_error_en.png) | The inference applied to each published year, against the published count |
+| [`trend-scenario`](derived/figures/trend-scenario/trend_scenario_en.png) | The straight line through 2011–2021 carried to 2035, beside the later counts |
 | [`age-bands`](derived/figures/age-bands/age_bands_en.png) | Municipality of Montréal by vehicle age, 2011–2024 (nothing inferred) |
-| [`fsa-households`](derived/figures/fsa-households/fsa_households_en.png) | Automobiles and light trucks per household by FSA (postal codes in H), 2024, against the share of commuters who drive (2021 Census) |
-
-## Documents (`docs/`)
-
-- [`vehicle_registrations_deck_en.pdf`](docs/vehicle_registrations_deck_en.pdf): slide deck, English, **draft under the author's review**; built by `scripts/build_docs.py`, every number read from the tables at build time.
+| [`cohort-survival`](derived/figures/cohort-survival/cohort_survival_en.png) | Share of the automobiles registered at age 3 that remain at each later age, Québec, three periods |
+| [`mass-automobiles`](derived/figures/mass-automobiles/mass_automobiles_en.png) | Net mass of Montréal's automobiles and light trucks, 2011–2022 |
+| [`fsa-households`](derived/figures/fsa-households/fsa_households_en.png) | Automobiles and light trucks per household by FSA, 2024, against the share of commuters who drive |
+| [`fsa-maps`](derived/figures/fsa-maps/fsa_map_households_en.png) | Maps by FSA, 2024: automobiles per household, and [median vehicle age](derived/figures/fsa-maps/fsa_map_age_en.png) |
+| [`licences-vehicles`](derived/figures/licences-vehicles/licences_vehicles_en.png) | Automobiles against holders of a passenger-vehicle licence, island of Montréal and Québec, 2011–2022 |
+| [`licences-age`](derived/figures/licences-age/licences_age_en.png) | Licence holders on the island of Montréal by age group, 2011–2022 |
+| [`enclaves`](derived/figures/enclaves/enclaves_en.png) | All vehicles in Côte-Saint-Luc, Westmount, Hampstead and Montréal-Ouest, 2011–2024 |
+| [`snowmobiles-mopeds`](derived/figures/snowmobiles-mopeds/snowmobiles_mopeds_en.png) | Snowmobiles and mopeds in Québec, 2011–2024 |
 
 ## Layout
 
