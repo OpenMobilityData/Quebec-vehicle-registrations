@@ -53,6 +53,7 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | 8 | `scripts/cohorts.py` | Retention of each model year from one file to the next; age summaries | `cohort_retention`, `cohort_survival`, `vehicle_age_summary` |
 | 9 | `scripts/licences.py` | Driver's licence holders 2011–2022 (open data « Permis de conduire », June 1) and automobiles per licence holder | `licence_holders_by_mrc`, `licence_holders_by_age`, `vehicles_per_licence` |
 | 10 | `scripts/scenarios.py` | The 2011–2021 line carried forward, storage equivalents, vehicles per 1,000 residents at two censuses | `trend_scenario`, `storage_equivalents`, `vehicles_per_1000_residents` |
+| 11 | `scripts/street_space.py` | Two physical bounds for the municipality of Montréal from the City's street network (géobase, CC BY 4.0): curb length and lane length, as numbers of vehicles under stated spacings | `street_space_bounds` |
 
 ## Measurements so far
 
@@ -100,7 +101,7 @@ Both are built by `scripts/build_docs.py`; every number is read from the tables 
 |---|---|
 | [`montreal-automobiles`](derived/figures/montreal-automobiles/montreal_automobiles_en.png) | Municipality of Montréal, 2011–2024: all vehicles, and automobiles and light trucks (published to 2022, inferred for 2023–2024) |
 | [`holdout-error`](derived/figures/holdout-error/holdout_error_en.png) | The inference applied to each published year, against the published count |
-| [`trend-scenario`](derived/figures/trend-scenario/trend_scenario_en.png) | The straight line through 2011–2021 carried to 2035, beside the later counts |
+| [`trend-scenario`](derived/figures/trend-scenario/trend_scenario_en.png) | The straight line through 2011–2021 carried to 2035, beside the later counts; and [the same against two hypothetical bounds](derived/figures/trend-scenario/trend_thresholds_en.png) of the street network (every curb used for parking; every lane full) |
 | [`age-bands`](derived/figures/age-bands/age_bands_en.png) | Municipality of Montréal by vehicle age, 2011–2024 (nothing inferred) |
 | [`cohort-survival`](derived/figures/cohort-survival/cohort_survival_en.png) | Share of the automobiles registered at age 3 that remain at each later age, Québec, three periods |
 | [`mass-automobiles`](derived/figures/mass-automobiles/mass_automobiles_en.png) | Net mass of Montréal's automobiles and light trucks, 2011–2022 |

@@ -54,6 +54,7 @@ lag = la.assign(g=la.age_band.map({"16-19": "y", "20-24": "y", "65 ans ou plus":
 sc = pd.read_csv(T / "trend_scenario.csv").set_index("year"); per_year = round((sc.trend_2011_2021[2035] - sc.trend_2011_2021[2011]) / 24)
 st = pd.read_csv(T / "storage_equivalents.csv").set_index("case")
 pr = pd.read_csv(T / "vehicles_per_1000_residents.csv").set_index("year")
+sb = pd.read_csv(T / "street_space_bounds.csv").set_index("quantity").value
 fa = pd.read_csv(T / "fsa_vehicle_age.csv").set_index("fsa")
 qt = pd.read_csv(T / "type_by_year_quebec.csv")
 enc = pd.read_csv(T / "vehicles_by_municipality.csv", dtype={"muni_code": str}); enc = enc[enc.muni_code.isin(["66062", "66047", "66058", "66032"])].groupby("year").n.sum()
@@ -248,6 +249,10 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 """ + fig("trend-scenario", "trend_scenario") + r"""
 \end{frame}
 
+\begin{frame}{The same series against two hypothetical bounds}
+""" + fig("trend-scenario", "trend_thresholds") + r"""
+\end{frame}
+
 \begin{frame}{Vehicles and the space they occupy}
 \small
 \footnotesize\begin{tabular}{@{}p{7.4cm}rrr@{}}\toprule
@@ -412,6 +417,10 @@ The licence files give the MRC, not the municipality, so the comparison is made 
 \bottomrule\end{tabular}\end{center}
 
 A registered vehicle is somewhere when it is not moving. The table converts numbers of vehicles into lengths of curb at 5 to 6~m per vehicle. The length is an assumption given as a range, and the files do not say which vehicles are kept on the street or off it: the table is a conversion, not a measurement of parking.
+
+""" + nfig("trend-scenario", "trend_thresholds", "The Montréal series and two hypothetical bounds computed from the City's street network.", 0.92) + r"""
+
+Two physical bounds can be computed from the City's street file (géobase of October 14, 2026), which gives """ + n(sb["street centreline in the municipality of Montréal (km)"]) + r"""~km of street in the municipality once autoroutes, bridges, tunnels, ramps and back lanes are left out. If every metre of both curbs were used for parking, with no deduction for corners, driveways, hydrants, bus stops or signs, the """ + n(sb["curb, both sides (km)"]) + r"""~km of curb would hold """ + n(sb["curb bound: vehicles at 6.0 m each"]) + r""" to """ + n(sb["curb bound: vehicles at 5.0 m each"]) + r""" vehicles at 6 to 5~m each; the automobiles and light trucks of 2024 are """ + p(sb["the same as a share of the curb bound at 5.5 m (%)"], 0) + r"""~\% of that bound at 5.5~m. If every lane were full nose to tail, counting one lane for a one-way street and two for a two-way street because the file gives no lane count, the """ + n(sb["lanes, at least (km)"]) + r"""~km of lanes would hold """ + n(sb["standstill bound: vehicles at 8.0 m each"]) + r""" to """ + n(sb["standstill bound: vehicles at 6.0 m each"]) + r""" vehicles at 8 to 6~m each. These are limits under stated assumptions, not measurements: real street parking is below the first, vehicles kept off the street are in neither, the registered vehicles are never all on the road at once, and traffic stops flowing well before the second is reached.
 
 \section{Limits}
 \begin{itemize}

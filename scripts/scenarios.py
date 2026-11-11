@@ -1,7 +1,7 @@
 """Stage 7: the 2011-2021 trend carried forward, set beside what the files show.
 
 Nothing here is a forecast. A straight line is fitted to the published counts of automobiles and light trucks in the
-municipality of Montréal for 2011-2021 (the last year before the published count fell) and carried to 2035. Beside it:
+municipality of Montréal for 2011-2021 (the last year before the published count fell) and carried forward (to 2050 in the table). Beside it:
 the published count for 2022 and the inferred counts for 2023 and 2024. The same is done for the mean net mass
 (2011-2022, the only years with mass).
 
@@ -32,7 +32,7 @@ def main():
     b, a = np.polyfit(fit.index, fit.values, 1)
     resid = fit.values - (a + b * fit.index.values)
     rows = []
-    for y in range(2011, 2036):
+    for y in range(2011, 2051):
         rows.append({"year": y, "trend_2011_2021": round(a + b * y), "count": round(au[y]) if y in au.index else None,
                      "basis": "published" if y <= 2022 else ("inferred" if y <= 2024 else ""),
                      "count_minus_trend": round(au[y] - (a + b * y)) if y in au.index else None})

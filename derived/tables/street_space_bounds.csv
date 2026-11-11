@@ -1,0 +1,13 @@
+quantity,value,assumption
+street centreline in the municipality of Montréal (km),4129.0,"géobase of October 14, 2026; autoroutes, bridges, tunnels, ramps and lanes left out"
+"curb, both sides (km)",8257.0,each side inside the municipality
+"lanes, at least (km)",6297.0,"one lane for a one-way segment, two for a two-way segment"
+curb bound: vehicles at 5.0 m each,1651402.0,"every metre of curb, no deduction"
+curb bound: vehicles at 5.5 m each,1501275.0,"every metre of curb, no deduction"
+curb bound: vehicles at 6.0 m each,1376168.0,"every metre of curb, no deduction"
+standstill bound: vehicles at 6.0 m each,1049536.0,"every lane full, nose to tail"
+standstill bound: vehicles at 7.0 m each,899602.0,"every lane full, nose to tail"
+standstill bound: vehicles at 8.0 m each,787152.0,"every lane full, nose to tail"
+"automobiles and light trucks registered, 2024 (inferred)",756729.0,type inferred
+the same as a share of the curb bound at 5.5 m (%),50.4,
+the same as a share of the standstill bound at 7.0 m (%),84.1,
