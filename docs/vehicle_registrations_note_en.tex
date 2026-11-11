@@ -2,9 +2,9 @@
 \usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}\usepackage[scaled=0.95]{helvet}\renewcommand{\familydefault}{\sfdefault}
 \usepackage[a4paper,margin=2.2cm]{geometry}\usepackage{graphicx,booktabs,amsmath,caption,xcolor,enumitem,array,float,fancyhdr}\usepackage[hidelinks]{hyperref}
 \captionsetup{font=small,labelfont=bf}\setlength{\parskip}{0.5em}\setlength{\parindent}{0pt}\setlist{itemsep=2pt,topsep=3pt}
-\pagestyle{fancy}\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}\fancyhead[C]{\small\textcolor{red!70!black}{DRAFT for the author\textquoteright{}s review, v2026-11-10-23-30-43}}
+\pagestyle{fancy}\fancyhf{}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0pt}\fancyhead[C]{\small\textcolor{red!70!black}{DRAFT for the author\textquoteright{}s review, v2026-11-10-23-31-27}}
 \title{\textbf{Vehicle registrations in Québec, 2011--2024}\\[4pt]\large Joining the SAAQ's open data with the files released under the access Act}
-\author{Rick Hoge, PhD}\date{November 10, 2026 \quad {\small v2026-11-10-23-30-43}}
+\author{Rick Hoge, PhD}\date{November 10, 2026 \quad {\small v2026-11-10-23-31-27}}
 \begin{document}\maketitle\thispagestyle{fancy}
 
 \section*{Summary for a general reader}
@@ -19,6 +19,9 @@ Vehicles are kept longer. Of the automobiles on the road at three years old, hal
 The newer files also give the first three characters of the postal code. In the two postal areas crossed by rue de Terrebonne there are about 0.73 automobiles per household, against a middle value of 1.16 for the island of Montréal and Laval.
 
 The files count vehicles that are owned, including those of businesses. They do not say how far a vehicle is driven or where it is parked.
+
+\begin{figure}[H]\centering\includegraphics[width=1.0\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/montreal-automobiles/montreal_automobiles_en.png}\caption{Overview: vehicles registered in the municipality of Montréal, 2011--2024. The 2023 and 2024 counts of automobiles and light trucks are inferred.}\end{figure}
+\newpage
 
 \section*{Abstract}
 The Société de l'assurance automobile du Québec (SAAQ) published one record per registered vehicle for each year from 2011 to 2022, with the vehicle's class, type, make, model, model year, net mass, fuel and municipality. The files it released for 2023 and 2024 under the access Act carry seven columns: year, make, model, model year, municipality, region and the first three characters of the postal code (FSA). This note describes a pipeline that joins the two sources: the release's make and model strings are mapped by stated rules onto the codes of the open data (97.1~\% of the 2023 vehicles and 96.8~\% of the 2024 vehicles resolved to make and model), and the vehicle type is inferred from make, model and model year as an expected count. Applied to each published year from the years before it, the inferred count of automobiles and light trucks in the municipality of Montréal differs from the published count by 0.05~\% to 0.13~\% (21 tests); electric vehicles are under-counted by 3.8~\% to 18.8~\%, and no electric count is given for 2023--2024. Results: Montréal had 674{,}497 automobiles and light trucks in 2011, 750{,}071 in 2021, 743{,}494 in 2022 (published), and 757{,}376 and 756{,}729 in 2023 and 2024 (inferred); half of the automobiles registered in Québec at age 3 remain at 13 years in 2011--2016 and at 16 years in 2021--2024; the mean net mass of Montréal's automobiles rises from 1{,}458 to 1{,}559~kg (2011--2022); in the FSAs H4A and H4B there are 0.73 and 0.72 automobiles and light trucks per household in 2024, against a median of 1.16 for the 113 FSAs beginning with H. The files count vehicles owned, businesses included; they carry no distance driven and no place of parking.
@@ -68,7 +71,7 @@ Type is recovered to a fraction of one per cent. Electric vehicles are under-cou
 
 \section{Results}
 \subsection{Montréal, 2011--2024}
-\begin{figure}[H]\centering\includegraphics[width=1.0\linewidth]{/Users/rhoge/GitHub/Quebec-vehicle-registrations/derived/figures/montreal-automobiles/montreal_automobiles_en.png}\caption{Vehicles registered in the municipality of Montréal.}\end{figure}
+The counts are shown in Figure~1.
 \begin{center}\begin{tabular}{@{}lrrrrr@{}}\toprule
 Municipality of Montréal & 2011 & 2021 & 2022 & 2023 & 2024 \\\midrule
 All vehicles (released) & 739{,}732 & 823{,}314 & 817{,}880 & 832{,}054 & 831{,}205 \\

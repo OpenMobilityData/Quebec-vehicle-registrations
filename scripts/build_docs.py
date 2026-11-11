@@ -313,6 +313,9 @@ NOTE = r"""\documentclass[10.5pt,a4paper]{article}
 \section*{Summary for a general reader}
 """ + tex(LAY) + r"""
 
+""" + nfig("montreal-automobiles", "montreal_automobiles", "Overview: vehicles registered in the municipality of Montréal, 2011--2024. The 2023 and 2024 counts of automobiles and light trucks are inferred.") + r"""
+\newpage
+
 \section*{Abstract}
 The Société de l'assurance automobile du Québec (SAAQ) published one record per registered vehicle for each year from 2011 to 2022, with the vehicle's class, type, make, model, model year, net mass, fuel and municipality. The files it released for 2023 and 2024 under the access Act carry seven columns: year, make, model, model year, municipality, region and the first three characters of the postal code (FSA). This note describes a pipeline that joins the two sources: the release's make and model strings are mapped by stated rules onto the codes of the open data (""" + p(lvl[(2023, "make and model")]) + r"""~\% of the 2023 vehicles and """ + p(lvl[(2024, "make and model")]) + r"""~\% of the 2024 vehicles resolved to make and model), and the vehicle type is inferred from make, model and model year as an expected count. Applied to each published year from the years before it, the inferred count of automobiles and light trucks in the municipality of Montréal differs from the published count by """ + p(aum.min(), 2) + r"""~\% to """ + p(aum.max(), 2) + r"""~\% (""" + str(len(aum)) + r""" tests); electric vehicles are under-counted by """ + p(abs(fr("L", 1)[1])) + r"""~\% to """ + p(abs(fr("L", 2)[0])) + r"""~\%, and no electric count is given for 2023--2024. Results: Montréal had """ + n(mau[2011]) + r""" automobiles and light trucks in 2011, """ + n(mau[2021]) + r""" in 2021, """ + n(mau[2022]) + r""" in 2022 (published), and """ + n(mau[2023]) + r""" and """ + n(mau[2024]) + r""" in 2023 and 2024 (inferred); half of the automobiles registered in Québec at age 3 remain at """ + str(half[PER[0]]) + r""" years in """ + PER[0].replace(" to ", "--") + r""" and at """ + str(half[PER[2]]) + r""" years in """ + PER[2].replace(" to ", "--") + r"""; the mean net mass of Montréal's automobiles rises from """ + n(mam.mean_kg[2011]) + r""" to """ + n(mam.mean_kg[2022]) + r"""~kg (2011--2022); in the FSAs H4A and H4B there are """ + p(v24.loc["H4A"].au_per_household, 2) + r""" and """ + p(v24.loc["H4B"].au_per_household, 2) + r""" automobiles and light trucks per household in 2024, against a median of """ + p(isl.au_per_household.median(), 2) + r""" for the """ + str(len(isl)) + r""" FSAs beginning with H. The files count vehicles owned, businesses included; they carry no distance driven and no place of parking.
 
@@ -361,7 +364,7 @@ Type is recovered to a fraction of one per cent. Electric vehicles are under-cou
 
 \section{Results}
 \subsection{Montréal, 2011--2024}
-""" + nfig("montreal-automobiles", "montreal_automobiles", "Vehicles registered in the municipality of Montréal.") + r"""
+The counts are shown in Figure~1.
 \begin{center}\begin{tabular}{@{}lrrrrr@{}}\toprule
 Municipality of Montréal & 2011 & 2021 & 2022 & 2023 & 2024 \\\midrule
 All vehicles (released) & """ + " & ".join(n(allv[y]) for y in (2011, 2021, 2022, 2023, 2024)) + r""" \\
