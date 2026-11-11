@@ -107,6 +107,7 @@ Both are built by `scripts/build_docs.py`; every number is read from the tables 
 | [`mass-automobiles`](derived/figures/mass-automobiles/mass_automobiles_en.png) | Net mass of Montréal's automobiles and light trucks, 2011–2022 |
 | [`fsa-households`](derived/figures/fsa-households/fsa_households_en.png) | Automobiles and light trucks per household by FSA, 2024, against the share of commuters who drive |
 | [`fsa-maps`](derived/figures/fsa-maps/fsa_map_households_en.png) | Maps by FSA, 2024: automobiles per household, and [median vehicle age](derived/figures/fsa-maps/fsa_map_age_en.png) |
+| [`electric`](derived/figures/electric/electric_en.png) | Electric, plug-in hybrid and hybrid vehicles, Québec and Montréal, 2017–2022 (published counts; none after 2022) |
 | [`licences-vehicles`](derived/figures/licences-vehicles/licences_vehicles_en.png) | Automobiles against holders of a passenger-vehicle licence, island of Montréal and Québec, 2011–2022 |
 | [`licences-age`](derived/figures/licences-age/licences_age_en.png) | Licence holders on the island of Montréal by age group, 2011–2022 |
 | [`enclaves`](derived/figures/enclaves/enclaves_en.png) | All vehicles in Côte-Saint-Luc, Westmount, Hampstead and Montréal-Ouest, 2011–2024 |

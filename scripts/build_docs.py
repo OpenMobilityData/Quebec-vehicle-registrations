@@ -226,6 +226,10 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 \end{itemize}
 \end{frame}
 
+\begin{frame}{Electric and hybrid vehicles, 2017--2022 (published)}
+""" + fig("electric", "electric") + r"""
+\end{frame}
+
 \begin{frame}{Automobiles and licence holders, 2011--2022}
 """ + fig("licences-vehicles", "licences_vehicles") + r"""
 \end{frame}
