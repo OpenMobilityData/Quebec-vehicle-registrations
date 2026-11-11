@@ -29,6 +29,7 @@ Outputs (derived/tables/):
   type_by_fsa.csv, fuel_by_fsa.csv   2023-2024, inferred
   type_by_model_year.csv  Québec and Montréal, by model year (for the cohort tables)
   inference_levels.csv    share of the 2023-2024 vehicles at each level
+  fuel_inferred_before_2017.csv, holdout_backward.csv   fuel for 2011-2016 inferred backward from 2017-2019, and that step tested
 Run:  ~/.venvs/omd/bin/python scripts/infer.py
 """
 import duckdb
@@ -67,7 +68,7 @@ def setup(con):
         WHERE a.source='access' GROUP BY ALL""")
 
 
-def infer(con, target, year, ref_years, out):
+def infer(con, target, year, ref_years, out, backward=False):
     """Expected counts of `target` for the cells of `year`, from the reference years. Result table `out`:
     year, muni_code, fsa, level, value, n (expected), plus rows with value NULL for unassigned vehicles."""
     last = max(ref_years)
@@ -82,6 +83,8 @@ def infer(con, target, year, ref_years, out):
     for lvl, (_, key, cond) in LEVELS.items():
         k = ", ".join(key)
         on = " AND ".join(f"t.{c} = r.{c}" for c in key)
+        if backward and lvl == 2:          # going back in time: the model years that existed by the target year
+            cond = f"AND model_year <= {year} + 1"
         con.execute(f"CREATE OR REPLACE TEMP TABLE r AS SELECT {k}, value, sum(n) n, "
                     f"sum(sum(n)) OVER (PARTITION BY {k}) tot FROM ref WHERE true {cond.format(last=last)} GROUP BY {k}, value")
         con.execute(f"INSERT INTO {out} SELECT t.id, t.muni_code, t.fsa, t.model_year, t.truth, {lvl}, r.value, t.n * r.n / r.tot "
@@ -172,6 +175,31 @@ def final(con):
     return pd.DataFrame(lev)
 
 
+def backward(con):
+    """Fuel before 2017, when the column did not exist: inferred from the reference years 2017-2019, and the same
+    backward step tested on 2017-2019 from the three later years available."""
+    rows = []
+    for T, ref in ((2017, [2018, 2019, 2020]), (2017, [2019, 2020, 2021]), (2017, [2020, 2021, 2022]),
+                   (2018, [2019, 2020, 2021]), (2018, [2020, 2021, 2022]), (2019, [2020, 2021, 2022])):
+        infer(con, "fuel", T, ref, "hb", backward=True)
+        for scope, cond in (("Québec", "true"), ("Montréal", "muni_code='66023'")):
+            true = dict(con.execute(f"SELECT truth, sum(n) FROM tgt WHERE {cond} GROUP BY 1").fetchall())
+            pred = dict(con.execute(f"SELECT value, sum(n) FROM hb WHERE {cond} AND level < 6 GROUP BY 1").fetchall())
+            for v in ("E", "D", "H", "L", "W"):
+                rows.append({"year": T, "reference": f"{ref[0]}-{ref[-1]}", "years_back": ref[0] - T, "scope": scope, "fuel": v,
+                             "true": int(true.get(v, 0)), "inferred": round(pred.get(v, 0)),
+                             "pct_error": round(100 * (pred.get(v, 0) - true[v]) / true[v], 2)})
+    hb = pd.DataFrame(rows); hb.to_csv(paths.TABLES / "holdout_backward.csv", index=False)
+    parts = []
+    for T in range(2011, 2017):
+        infer(con, "fuel", T, [2017, 2018, 2019], f"bw_{T}", backward=True)
+        parts.append(f"SELECT {T} AS year, 'Québec' AS scope, value AS fuel, sum(n) AS n FROM bw_{T} GROUP BY ALL")
+        parts.append(f"SELECT {T}, 'Montréal', value, sum(n) FROM bw_{T} WHERE muni_code='66023' GROUP BY ALL")
+    con.execute(f"COPY (SELECT year, scope, fuel, round(n, 1) AS n, 'inferred' AS basis FROM ({' UNION ALL '.join(parts)}) ORDER BY ALL) "
+                f"TO '{paths.TABLES}/fuel_inferred_before_2017.csv' (HEADER)")
+    return hb
+
+
 def main():
     con = duckdb.connect()
     con.execute("SET threads=16")
@@ -182,6 +210,9 @@ def main():
     print(m[m.year == 2022].to_string(index=False))
     print(l[l.year == 2022].to_string(index=False))
     print(final(con).to_string(index=False))
+    hb = backward(con)
+    print(hb[hb.fuel.isin(["L", "W", "H"]) & (hb.scope == "Québec")].to_string(index=False))
+    print(pd.read_csv(paths.TABLES / "fuel_inferred_before_2017.csv").query("scope == 'Québec' and fuel in ['L', 'W', 'H']").pivot(index="year", columns="fuel", values="n").round(0).to_string())
 
 
 if __name__ == "__main__":

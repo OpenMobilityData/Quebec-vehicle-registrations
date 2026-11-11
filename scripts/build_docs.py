@@ -145,7 +145,7 @@ Plug-in hybrid, Québec, one year ahead & """ + p(fr("W", 1)[0]) + r"""~\% to $+
 \medskip
 \begin{itemize}\setlength\itemsep{3pt}
 \item Type is recovered to a fraction of one per cent.
-\item Electric vehicles are under-counted, because the newest model years are missing from the reference. No electric count for 2023--2024 is given here.
+\item Electric vehicles are under-counted, because the newest model years are missing from the reference: the inferred electric counts for 2023--2024 run low.
 \item The test uses the open data's own codes. It does not measure the effect of the release's unedited codes.
 \end{itemize}
 \end{frame}
@@ -226,7 +226,7 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Electric and hybrid vehicles, 2017--2022 (published)}
+\begin{frame}{Electric and hybrid vehicles, 2011--2024 (published 2017--2022, inferred before and after)}
 """ + fig("electric", "electric") + r"""
 \end{frame}
 
@@ -275,7 +275,7 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 
 \begin{frame}{Limits, and what is not yet done}
 \begin{itemize}\setlength\itemsep{5pt}
-\item Type and fuel for 2023--2024 are inferred; class cannot be. Electric and plug-in counts for 2023--2024 are not given.
+\item Type and fuel for 2023--2024 are inferred; class cannot be. Electric and plug-in counts outside 2017--2022 are inferred and shown as such; forward they run low (electric by 4 to 19~\% on published years).
 \item Mass and licences stop at 2022. By FSA there are two years, so no local trend.
 \item Registrations count vehicles owned, not trips made or distance driven. Vehicles owned by businesses are included everywhere.
 \item The reason for the lower published count of 2022 is not established here.
