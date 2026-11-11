@@ -43,7 +43,7 @@ for lang, L in T.items():
             if code == "H":
                 ax.annotate(num(s[2017], lang), (2017, s[2017]), xytext=(0, 7), textcoords="offset points", ha="center", fontsize=8, color=INK)
         e17 = d[(d.fuel == "L") & (d.year == 2017)].vehicles.iloc[0]; w17 = d[(d.fuel == "W") & (d.year == 2017)].vehicles.iloc[0]
-        ax.annotate(f"{NAMES[lang]['L']} {num(e17, lang)}\n{NAMES[lang]['W']} {num(w17, lang)}", (2017, max(e17, w17)), xytext=(-4, 10), textcoords="offset points", ha="left", fontsize=8, color=INK)
+        ax.annotate(f"{NAMES[lang]['L']} {num(e17, lang)}\n{NAMES[lang]['W']} {num(w17, lang)}", (2017, max(e17, w17)), xytext=(-4, 30), textcoords="offset points", ha="left", fontsize=8, color=INK)
         ax.set_ylim(0, d.vehicles.max() * 1.15); ax.set_xlim(2016.6, 2024.4); ax.set_xticks(range(2017, 2023)); thousands(ax, lang)
         ax.set_title(L["scopes"][scope], fontsize=10.5, color=INK, loc="left")
     finish(fig, HERE, "electric", lang, L["title"], L["sub"], L["note"], bottom=0.17)
