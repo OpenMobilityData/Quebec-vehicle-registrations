@@ -1,6 +1,6 @@
 Until 2022 the SAAQ published a yearly file with one line for every vehicle registered in Québec. It then stopped. The files it released for 2023 and 2024 under the access-to-information law give only the make, model, model year and place of registration. This note joins the two sources so that the same questions can be followed from 2011 to 2024.
 
-The kind of vehicle is worked out from its make, model and model year, using the earlier files as the key. The method was tested on the years where the answer is known: for automobiles and light trucks in Montréal it lands within 0.13 per cent of the published count. It works poorly for electric vehicles, whose newest models are missing from the key, so none are counted for 2023 and 2024.
+The kind of vehicle is worked out from its make, model and model year, using the earlier files as the key. The method was tested on the years where the answer is known: for automobiles and light trucks in Montréal it lands within 0.13 per cent of the published count. It runs low for electric vehicles, whose newest models are missing from the key, so their 2023 and 2024 counts are likely low.
 
 In the municipality of Montréal there were 674,497 automobiles and light trucks in 2011 and 750,071 in 2021. The published count for 2022 is lower. The counts worked out for 2023 and 2024 are about 757,000, some 18,000 below where the growth of 2011 to 2021 was heading.
 
@@ -10,4 +10,4 @@ The newer files also give the first three characters of the postal code. The two
 
 The files count vehicles that are owned, including those of businesses. They do not say how far a vehicle is driven or where it is parked.
 
-(299 words; v2026-11-11-07-39-40)
+(300 words; v2026-11-11-07-56-25)
