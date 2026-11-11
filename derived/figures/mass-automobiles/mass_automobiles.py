@@ -12,17 +12,18 @@ from fig_lib import *  # noqa: E402,F403
 
 a = pd.read_csv(paths.TABLES / "mass_automobiles.csv")
 m = a[a.scope == "Montréal"].set_index("year")
+assert m.pct_with_mass.min() > 99.9
 T = {
     "en": dict(title="Net mass of automobiles and light trucks registered in Montréal, 2011–2022",
                sub="Municipality of Montréal; net mass is the vehicle empty, as recorded by the SAAQ",
                l=("Net mass (kg)", ["90th percentile", "median", "10th percentile"]), r="Share at 2,000 kg or more (%)",
                note=f"Mean {num(m.mean_kg[2011], 'en')} kg in 2011, {num(m.mean_kg[2022], 'en')} kg in 2022. The 2023–2024 files carry no mass. "
-                    f"Mass is recorded for {num(m.pct_with_mass.min(), 'en', 1)} % or more of these vehicles each year."),
+                    "Mass is recorded for more than 99.9 % of these vehicles each year."),
     "fr": dict(title="Masse nette des automobiles et camions légers immatriculés à Montréal, 2011–2022",
                sub="Municipalité de Montréal ; la masse nette est celle du véhicule à vide, telle que consignée par la SAAQ",
                l=("Masse nette (kg)", ["90e centile", "médiane", "10e centile"]), r="Part à 2 000 kg ou plus (%)",
                note=f"Moyenne de {num(m.mean_kg[2011], 'fr')} kg en 2011, de {num(m.mean_kg[2022], 'fr')} kg en 2022. Les fichiers de 2023–2024 ne donnent pas la masse. "
-                    f"La masse est consignée pour {num(m.pct_with_mass.min(), 'fr', 1)} % ou plus de ces véhicules chaque année."),
+                    "La masse est consignée pour plus de 99,9 % de ces véhicules chaque année."),
 }
 for lang, L in T.items():
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(11, 4.9), gridspec_kw=dict(width_ratios=[1.25, 1]))

@@ -35,7 +35,7 @@ for lang, L in T.items():
     ax.text(3.1, 51.5, L["half"], fontsize=8.5, color=MUTED)
     for c in P:
         ax.plot(q.index, q[c], color=COL[c], lw=2.2)
-        ax.annotate(f"{L['lab'](c)}  {pct(q[c][25], lang, 0, sign=False)}", (25, q[c][25]), xytext=(8, 0), textcoords="offset points", va="center", fontsize=9, color=INK)
+        ax.annotate(f"{L['lab'](c)}  {pct(q[c][25], lang, 0, sign=False)}", (25, q[c][25]), xytext=(8, {0: -7, 1: 4, 2: 6}[P.index(c)]), textcoords="offset points", va="center", fontsize=9, color=INK)
         ax.plot([15], [q[c][15]], marker="o", ms=7, color=COL[c], mec=SURFACE, mew=1.5)
     ax.text(15.4, 78, L["fifteen"] + "\n" + "\n".join(f"{L['lab'](c)}  {pct(q[c][15], lang, 0, sign=False)}" for c in P), fontsize=9, color=INK, va="top")
     ax.set_ylim(0, 105); ax.set_xlim(3, 29.5); ax.set_xticks(range(3, 26, 2)); ax.set_xlabel(L["x"])
