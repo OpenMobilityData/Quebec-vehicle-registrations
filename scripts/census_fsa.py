@@ -1,18 +1,14 @@
 """Stage 4b: 2021 Census counts by FSA, built from dissemination areas, and joined to the vehicles of
 2023-2024.
 
-Statistics Canada publishes a census profile by FSA; its site refused an automated download on
-November 10, 2026, so the counts are built here from the profile by dissemination area (catalogue
-98-401-X2021006, Québec), which was on hand. A dissemination area is shared among FSAs in
-proportion to the postal codes of each FSA located inside it (postal-code points: Service Objects,
-March 2024, used under licence, not redistributed); one with no postal code inside it goes to the
-FSA whose polygon contains its representative point (DMTI Spatial, CanMap Postal Code Suite
-v2024.3, used under licence, not redistributed). The shares count postal codes, not residents.
-Counts are summed; rates and medians are not
-carried over. Statistics Canada rounds each count of a dissemination area at random to a multiple of
-five, so the sums differ a little from the agency's own FSA figures.
+The counts are Statistics Canada's own: the 2021 Census profile by forward sortation area (catalogue
+98-401-X2021013), downloaded November 11, 2026. Before that file was on hand the counts had been built from the
+profile by dissemination area (98-401-X2021006), each area shared among FSAs in proportion to the postal codes of
+each FSA located inside it (postal-code points: Service Objects, March 2024; FSA polygons: DMTI Spatial, CanMap
+Postal Code Suite v2024.3; both under licence, not redistributed). That estimate is still computed, as a check on
+the method: fsa_census_comparison.csv sets it beside the official counts.
 
-Outputs (derived/tables/): fsa_census_2021.csv, fsa_vehicles_census.csv
+Outputs (derived/tables/): fsa_census_2021.csv, fsa_census_comparison.csv, fsa_vehicles_census.csv
 Run:  ~/.venvs/omd/bin/python scripts/census_fsa.py
 """
 import os
@@ -30,6 +26,21 @@ DA_SHP = TP / "statcan-census-2021/boundaries/lda_000a21a_e/lda_000a21a_e.shp"
 PC_CSV = TP / "serviceobjects-2024-03/CanadianPostalCodes202403.csv"
 FSA_SHP = TP / "canmap-v2024.3/CanMapPostalCodeSuitev2024.3/Shapefiles/ForwardSortationAreasRegion.shp"
 CACHE = paths.PARQUET_DIR.parent / "census_da_extract.parquet"
+FSA_CSV = TP / "statcan-census-2021/98-401-X2021013_FSA/98-401-X2021013_English_CSV_data.csv"
+FSA_CACHE = paths.PARQUET_DIR.parent / "census_fsa_extract.parquet"
+
+
+def official():
+    """Statistics Canada's own profile by FSA (catalogue 98-401-X2021013), Québec FSAs (G, H, J)."""
+    if not FSA_CACHE.exists():
+        ids = ",".join(f"'{i}'" for i in CHAR)
+        duckdb.connect().execute(f"""
+            COPY (SELECT ALT_GEO_CODE AS fsa, CAST(CHARACTERISTIC_ID AS INTEGER) AS id, TRY_CAST(C1_COUNT_TOTAL AS DOUBLE) AS v
+                  FROM read_csv('{FSA_CSV}', all_varchar=true, encoding='latin-1', header=true)
+                  WHERE GEO_LEVEL = 'Forward sortation area' AND left(ALT_GEO_CODE, 1) IN ('G', 'H', 'J') AND CHARACTERISTIC_ID IN ({ids}))
+            TO '{FSA_CACHE}' (FORMAT parquet)""")
+    d = pd.read_parquet(FSA_CACHE)
+    return d.pivot(index="fsa", columns="id", values="v").rename(columns=CHAR)
 CHAR = {1: "population", 4: "private_dwellings", 5: "households", 13: "pop_15_64", 24: "pop_65_plus",
         41: "dwellings_by_type_total", 42: "single_detached", 1414: "tenure_total", 1415: "owner", 1416: "renter",
         2603: "commuters", 2605: "commute_car_driver", 2606: "commute_car_passenger", 2607: "commute_transit",
@@ -80,6 +91,22 @@ def main():
     c.insert(0, "dissemination_areas", g.size())
     c["pop_15_plus"] = c.pop_15_64 + c.pop_65_plus
     c = c.drop(columns=["dwellings_by_type_total", "tenure_total"]).round(0).astype("Int64")
+    # Statistics Canada's own FSA profile replaces the estimate; the estimate is kept as a comparison
+    est = c
+    o = official()
+    o["pop_15_plus"] = o.pop_15_64 + o.pop_65_plus
+    o = o.drop(columns=["dwellings_by_type_total", "tenure_total"]).round(0).astype("Int64")
+    o.insert(0, "dissemination_areas", est.dissemination_areas.reindex(o.index))
+    cmp = o[["population", "households", "commuters"]].join(est[["population", "households", "commuters"]], rsuffix="_from_dissemination_areas", how="left")
+    for k in ("population", "households", "commuters"):
+        cmp[f"{k}_pct_difference"] = (100 * (cmp[f"{k}_from_dissemination_areas"].astype(float) / cmp[k].astype(float) - 1)).round(2)
+    cmp.to_csv(paths.TABLES / "fsa_census_comparison.csv")
+    big = cmp[cmp.households >= 1000]
+    print("estimate against the official FSA profile, FSAs of 1,000 households or more:", len(big),
+          "| households: median abs difference %.2f %%, 90th percentile %.2f %%, largest %.2f %%" % (
+              big.households_pct_difference.abs().median(), big.households_pct_difference.abs().quantile(0.9), big.households_pct_difference.abs().max()))
+    print(cmp.loc[["H4A", "H4B", "H4V", "H3X"], ["households", "households_from_dissemination_areas", "households_pct_difference", "population", "population_pct_difference"]].to_string())
+    c = o[[x for x in est.columns if x in o.columns]]
     c.to_csv(paths.TABLES / "fsa_census_2021.csv")
 
     t = pd.read_csv(paths.TABLES / "type_by_fsa.csv")

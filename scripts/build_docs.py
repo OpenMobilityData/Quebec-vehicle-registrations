@@ -56,6 +56,7 @@ st = pd.read_csv(T / "storage_equivalents.csv").set_index("case")
 pr = pd.read_csv(T / "vehicles_per_1000_residents.csv").set_index("year")
 sb = pd.read_csv(T / "street_space_bounds.csv").set_index("quantity").value
 fa = pd.read_csv(T / "fsa_vehicle_age.csv").set_index("fsa")
+fc = pd.read_csv(T / "fsa_census_comparison.csv").set_index("fsa"); fc = fc[fc.households >= 1000]
 qt = pd.read_csv(T / "type_by_year_quebec.csv")
 enc = pd.read_csv(T / "vehicles_by_municipality.csv", dtype={"muni_code": str}); enc = enc[enc.muni_code.isin(["66062", "66047", "66058", "66032"])].groupby("year").n.sum()
 
@@ -187,7 +188,7 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 \begin{itemize}\setlength\itemsep{3pt}
 \item Rue de Terrebonne runs through H4A and H4B. The median of the """ + str(len(isl)) + r""" FSAs is """ + p(isl.au_per_household.median(), 2) + r""" per household.
 \item The vehicle count includes vehicles owned by businesses. The ratio is an average: it does not say how many households have no vehicle.
-\item Households come from the 2021 Census by dissemination area, shared among FSAs by postal codes (a few per cent of uncertainty); vehicles are of 2024.
+\item Households are those of Statistics Canada's 2021 Census profile by FSA; vehicles are of 2024.
 \end{itemize}
 \end{frame}
 
@@ -306,8 +307,8 @@ LAY = (
     f"some {n(round(abs(sc.count_minus_trend[2024]), -3)).replace('{,}', ',')} below where the growth of 2011 to 2021 was heading.\n\n"
     f"Vehicles are kept longer. Of the automobiles on the road at three years old, half were still registered at {half[PER[0]]} years early in the period "
     f"and at {half[PER[2]]} years at its end. They are also heavier: in Montréal the average went from {n(mam.mean_kg[2011]).replace('{,}', ',')} to {n(mam.mean_kg[2022]).replace('{,}', ',')} kilograms between 2011 and 2022.\n\n"
-    f"The newer files also give the first three characters of the postal code. In the two postal areas crossed by rue de Terrebonne there are about "
-    f"{p(v24.loc['H4A'].au_per_household, 2)} automobiles per household, against a middle value of {p(isl.au_per_household.median(), 2)} for the island of Montréal and Laval.\n\n"
+    f"The newer files also give the first three characters of the postal code. The two postal areas crossed by rue de Terrebonne have "
+    f"{p(v24.loc['H4A'].au_per_household, 2)} and {p(v24.loc['H4B'].au_per_household, 2)} automobiles per household, against a middle value of {p(isl.au_per_household.median(), 2)} for the island of Montréal and Laval.\n\n"
     "The files count vehicles that are owned, including those of businesses. They do not say how far a vehicle is driven or where it is parked."
 )
 WORDS = len(LAY.split())
@@ -346,7 +347,7 @@ Years & Source & Columns \\\midrule
 2011--2022 & SAAQ open data, « Permis de conduire » (CC BY 4.0), licence holders on June 1 & age band, sex, MRC, region, licence type and classes, experience \\\bottomrule
 \end{tabular}
 
-The vehicle files hold """ + n(ing.n_rows[2011]) + r""" rows for 2011, """ + n(ing.n_rows[2022]) + r""" for 2022, """ + n(ing.n_rows[2023]) + r""" for 2023 and """ + n(ing.n_rows[2024]) + r""" for 2024. The open-data portal holds no vehicle file after 2022; its note reads « Les données ont été révisées pour respecter les nouvelles dispositions de la loi 25 protégeant la vie privée des Québécois ». The request of August 26, 2025 asked for the columns of the 2022 file with the FSA added; the decision cites section 53 of the Act for the columns withheld. Asked by the author why the portal holds nothing after 2022, the SAAQ's open-data team replied on October 22, 2024: « L'équipe est actuellement à définir la nouvelle solution pour produire ces informations à la suite de notre migration de systèmes de 2023 »; on April 2, 2025: « Il y a encore certaines décisions qui doivent être prises sur les règles de nettoyage à appliquer aux données »; and on October 1, 2025: « les versions 2023 et 2024 ne sont pas encore disponibles sur notre site et nous n'avons pas d'échéance quant à leurs disponibilités ». A request for the licence files of 2023 and 2024 (file 03.06.34793) was refused on October 24, 2025 under section 15 of the Act; the note enclosed with the decision states that those data « sont en cours de validation et de correction (redressements) », that « un délai d'au moins trois mois est requis » and that « une publication sur le site web de Données Québec dans un nouveau format est prévue par la suite ». On November 10, 2026 the portal's vehicle and licence datasets still end in 2022. Other sources: Statistics Canada, 2021 Census profile by dissemination area (catalogue 98-401-X2021006) and by census subdivision (98-401-X2021020); Institut de la statistique du Québec, geographic codes (July 31, 2025); postal-code points (Service Objects, March 2024) and FSA polygons (DMTI Spatial, CanMap Postal Code Suite v2024.3), both under licence.
+The vehicle files hold """ + n(ing.n_rows[2011]) + r""" rows for 2011, """ + n(ing.n_rows[2022]) + r""" for 2022, """ + n(ing.n_rows[2023]) + r""" for 2023 and """ + n(ing.n_rows[2024]) + r""" for 2024. The open-data portal holds no vehicle file after 2022; its note reads « Les données ont été révisées pour respecter les nouvelles dispositions de la loi 25 protégeant la vie privée des Québécois ». The request of August 26, 2025 asked for the columns of the 2022 file with the FSA added; the decision cites section 53 of the Act for the columns withheld. Asked by the author why the portal holds nothing after 2022, the SAAQ's open-data team replied on October 22, 2024: « L'équipe est actuellement à définir la nouvelle solution pour produire ces informations à la suite de notre migration de systèmes de 2023 »; on April 2, 2025: « Il y a encore certaines décisions qui doivent être prises sur les règles de nettoyage à appliquer aux données »; and on October 1, 2025: « les versions 2023 et 2024 ne sont pas encore disponibles sur notre site et nous n'avons pas d'échéance quant à leurs disponibilités ». A request for the licence files of 2023 and 2024 (file 03.06.34793) was refused on October 24, 2025 under section 15 of the Act; the note enclosed with the decision states that those data « sont en cours de validation et de correction (redressements) », that « un délai d'au moins trois mois est requis » and that « une publication sur le site web de Données Québec dans un nouveau format est prévue par la suite ». On November 10, 2026 the portal's vehicle and licence datasets still end in 2022. Other sources: Statistics Canada, 2021 Census profile by forward sortation area (catalogue 98-401-X2021013), by dissemination area (98-401-X2021006) and by census subdivision (98-401-X2021020); Institut de la statistique du Québec, geographic codes (July 31, 2025); postal-code points (Service Objects, March 2024) and FSA polygons (DMTI Spatial, CanMap Postal Code Suite v2024.3), both under licence.
 
 \section{Method}
 \subsection{One vocabulary of makes and models}
@@ -412,7 +413,7 @@ FSA & Automobiles and light & Households, & Per & Commuters who & Rank from the 
 """ + "\n".join(fsarow(f).replace("\\\\", r"\\\\") for f in ("H4A", "H4B", "H4V", "H3X")) + r"""
 \bottomrule\end{tabular}\end{center}
 
-Rue de Terrebonne's bike lane lies in H4B west of avenue Royal and in H4A east of it. Households come from the 2021 Census by dissemination area, shared among FSAs by postal codes; compared with an earlier estimate for the same FSAs they differ by a few per cent. The vehicle count includes vehicles owned by businesses, so an FSA with fleets or dealers stands high, and the ratio is an average that does not say how many households have no vehicle. The median age of the vehicles registered is """ + p(fa.median_age["H4A"], 0) + r""" years in H4A and """ + p(fa.median_age["H4B"], 0) + r""" years in H4B (Figure~\ref{fig:agemap}).
+Rue de Terrebonne's bike lane lies in H4B west of avenue Royal and in H4A east of it. Households are those of Statistics Canada's 2021 Census profile by FSA. An estimate built from dissemination areas shared among FSAs by postal codes, used before that file was on hand, differs from it by """ + p(fc.households_pct_difference.abs().median()) + r"""~\% at the median and by more than """ + p(fc.households_pct_difference.abs().quantile(0.9), 0) + r"""~\% for one FSA in ten (H4A: $+$""" + p(fc.households_pct_difference["H4A"]) + r"""~\%); it is kept only as a comparison (\texttt{fsa\_census\_comparison.csv}). The vehicle count includes vehicles owned by businesses, so an FSA with fleets or dealers stands high, and the ratio is an average that does not say how many households have no vehicle. The median age of the vehicles registered is """ + p(fa.median_age["H4A"], 0) + r""" years in H4A and """ + p(fa.median_age["H4B"], 0) + r""" years in H4B (Figure~\ref{fig:agemap}).
 
 \begin{figure}[H]\centering\includegraphics[width=\linewidth]{""" + str(FIG / "fsa-maps" / "fsa_map_age_en.png") + r"""}\caption{Median age of registered vehicles by FSA. Nothing is inferred.}\label{fig:agemap}\end{figure}
 

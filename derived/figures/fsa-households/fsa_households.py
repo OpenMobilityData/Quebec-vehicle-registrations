@@ -20,17 +20,17 @@ T = {
                x="Commuters who drive a car, truck or van to work, 2021 Census (%)", y="Automobiles and light trucks per household",
                med=f"median of these FSAs: {num(med, 'en', 2)}",
                note="Vehicles: 2024 file, type inferred from make, model and model year; all owners, businesses included, so an FSA with fleets or "
-                    "dealers stands high. Households and commuting: 2021 Census, dissemination areas shared among FSAs by postal codes (a few per cent "
-                    "of uncertainty). The two quantities are three years apart. One FSA is above the scale (H2Z, 4.67). Statistics Canada, 2021 Census, "
-                    "catalogue 98-401-X2021006; postal codes: Service Objects (March 2024) and DMTI Spatial, CanMap Postal Code Suite v2024.3."),
+                    "dealers stands high. Households and commuting: 2021 Census profile by FSA. "
+                    "The two quantities are three years apart. {above} Statistics Canada, 2021 Census, "
+                    "catalogue 98-401-X2021013."),
     "fr": dict(title="Automobiles et camions légers par ménage, selon la RTA : île de Montréal et Laval, 2024",
                sub=f"Chaque point est une RTA commençant par H ({len(d)} comptant 1 000 ménages ou plus) ; la rue de Terrebonne traverse H4A et H4B",
                x="Navetteurs qui conduisent une automobile, un camion ou une fourgonnette, Recensement de 2021 (%)", y="Automobiles et camions légers par ménage",
                med=f"médiane de ces RTA : {num(med, 'fr', 2)}",
                note="Véhicules : fichier de 2024, type inféré de la marque, du modèle et de l’année du modèle ; tous les propriétaires, entreprises comprises : "
-                    "une RTA où logent des parcs ou des concessionnaires ressort donc haut. Ménages et navettage : Recensement de 2021, aires de diffusion réparties "
-                    "entre les RTA selon les codes postaux (quelques pour cent d’incertitude). Trois ans séparent les deux grandeurs. Une RTA dépasse l’échelle (H2Z, 4,67). Statistique Canada, Recensement de 2021, "
-                    "no 98-401-X2021006 au catalogue ; codes postaux : Service Objects (mars 2024) et DMTI Spatial, CanMap Postal Code Suite v2024.3."),
+                    "une RTA où logent des parcs ou des concessionnaires ressort donc haut. Ménages et navettage : profil du Recensement de 2021 par RTA. "
+                    "Trois ans séparent les deux grandeurs. {above} Statistique Canada, Recensement de 2021, "
+                    "no 98-401-X2021013 au catalogue."),
 }
 for lang, L in T.items():
     fig, ax = plt.subplots(figsize=(10, 6))
@@ -50,7 +50,9 @@ for lang, L in T.items():
     ax.set_ylim(0, min(3.2, d.au_per_household.max() * 1.05)); ax.set_xlabel(L["x"]); ax.set_ylabel(L["y"])
     ax.yaxis.set_major_formatter(matplotlib.ticker.FuncFormatter(lambda v_, _: num(v_, lang, 1)))
     ax.grid(axis="x", color=GRID, lw=0.8)
-    finish(fig, HERE, "fsa_households", lang, L["title"], L["sub"], L["note"], bottom=0.2)
+    hi = d[d.au_per_household > 3.2].sort_values("au_per_household")
+    above = "" if hi.empty else ("Above the scale: " if lang == "en" else "Au-dessus de l’échelle : ") + ", ".join(f"{r.fsa} {num(r.au_per_household, lang, 2)}" for r in hi.itertuples()) + "."
+    finish(fig, HERE, "fsa_households", lang, L["title"], L["sub"], L["note"].replace("{above}", above), bottom=0.2)
 print(d.sort_values("au_per_household").head(6)[["fsa", "au_per_household", "pct_commute_car_driver"]].to_string(index=False))
 print(d.sort_values("au_per_household").tail(8)[["fsa", "au_per_household", "households", "automobiles_light_trucks_inferred"]].to_string(index=False))
 print("rank of H4A, H4B from the lowest:", (d.au_per_household.rank().loc[d.fsa.isin(MAIN)]).tolist(), "of", len(d))

@@ -6,8 +6,8 @@ In the municipality of Montréal there were 674,497 automobiles and light trucks
 
 Vehicles are kept longer. Of the automobiles on the road at three years old, half were still registered at 13 years early in the period and at 16 years at its end. They are also heavier: in Montréal the average went from 1,458 to 1,559 kilograms between 2011 and 2022.
 
-The newer files also give the first three characters of the postal code. In the two postal areas crossed by rue de Terrebonne there are about 0.73 automobiles per household, against a middle value of 1.16 for the island of Montréal and Laval.
+The newer files also give the first three characters of the postal code. The two postal areas crossed by rue de Terrebonne have 0.79 and 0.70 automobiles per household, against a middle value of 1.16 for the island of Montréal and Laval.
 
 The files count vehicles that are owned, including those of businesses. They do not say how far a vehicle is driven or where it is parked.
 
-(300 words; v2026-11-11-06-30-30)
+(299 words; v2026-11-11-06-34-15)

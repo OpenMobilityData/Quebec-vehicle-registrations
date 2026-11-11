@@ -41,12 +41,12 @@ MAPS = {
     "fsa_map_households": dict(col="au_per_household", bins=[0.6, 0.9, 1.2, 1.5], dec=2, mask=True,
         en=("Automobiles and light trucks per household, by FSA, 2024", "Island of Montréal and Laval (postal codes beginning with H)",
             ["under 0.6", "0.6 to 0.9", "0.9 to 1.2", "1.2 to 1.5", "1.5 or more"], "fewer than 1,000 households", "rue de Terrebonne bike lane",
-            "Vehicles: 2024 file, type inferred from make, model and model year; all owners, businesses included. Households: 2021 Census, dissemination areas shared among FSAs by postal codes. "
-            "FSA boundaries: DMTI Spatial, CanMap Postal Code Suite v2024.3. Statistics Canada, catalogue 98-401-X2021006."),
+            "Vehicles: 2024 file, type inferred from make, model and model year; all owners, businesses included. Households: 2021 Census profile by FSA. "
+            "FSA boundaries: DMTI Spatial, CanMap Postal Code Suite v2024.3. Statistics Canada, catalogue 98-401-X2021013."),
         fr=("Automobiles et camions légers par ménage, selon la RTA, 2024", "Île de Montréal et Laval (codes postaux commençant par H)",
             ["moins de 0,6", "0,6 à 0,9", "0,9 à 1,2", "1,2 à 1,5", "1,5 ou plus"], "moins de 1 000 ménages", "piste cyclable de la rue de Terrebonne",
-            "Véhicules : fichier de 2024, type inféré de la marque, du modèle et de l’année du modèle ; tous les propriétaires, entreprises comprises. Ménages : Recensement de 2021, aires de diffusion réparties entre les RTA selon les codes postaux. "
-            "Limites des RTA : DMTI Spatial, CanMap Postal Code Suite v2024.3. Statistique Canada, no 98-401-X2021006 au catalogue.")),
+            "Véhicules : fichier de 2024, type inféré de la marque, du modèle et de l’année du modèle ; tous les propriétaires, entreprises comprises. Ménages : profil du Recensement de 2021 par RTA. "
+            "Limites des RTA : DMTI Spatial, CanMap Postal Code Suite v2024.3. Statistique Canada, no 98-401-X2021013 au catalogue.")),
     "fsa_map_age": dict(col="median_age", bins=[6, 7, 8, 9], dec=0, mask=False,
         en=("Median age of registered vehicles, by FSA, 2024", "Island of Montréal and Laval (postal codes beginning with H); all vehicle types; age = 2024 minus model year",
             ["5 years or less", "6 years", "7 years", "8 years", "9 years or more"], "fewer than 1,000 vehicles", "rue de Terrebonne bike lane",

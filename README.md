@@ -22,10 +22,11 @@ here has been reviewed by anyone but the author.
 - The raw files are not in this repository (0.7 to 0.9 GB each).
   `derived/tables/raw_manifest.csv` gives each file's size and SHA-256, and the
   download address of each open-data file.
-- Census: Statistics Canada, 2021 Census profile by dissemination area
-  (catalogue 98-401-X2021006). Postal-code points and FSA polygons used to share
-  dissemination areas among FSAs: Service Objects (March 2024) and DMTI Spatial,
-  CanMap Postal Code Suite v2024.3, both under licence and not redistributed.
+- Census: Statistics Canada, 2021 Census profile by forward sortation area
+  (catalogue 98-401-X2021013, downloaded November 11, 2026). The profile by
+  dissemination area (98-401-X2021006) serves only for a comparison estimate.
+  FSA polygons for the maps: DMTI Spatial, CanMap Postal Code Suite v2024.3,
+  under licence and not redistributed; postal-code points: Service Objects (March 2024).
 - Municipality codes and names: Institut de la statistique du Québec, « Banque
   de données des codes géographiques », image of July 31, 2025 (CC BY 4.0).
 
@@ -47,7 +48,7 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | 2 | `scripts/vocabulary.py` | The make and model strings of 2023–2024 mapped by stated rules onto the codes of the open data | `vocabulary_map`, `vocabulary_coverage`, `vocabulary_review` |
 | 3 | `scripts/geography.py` | Municipality names of 2023–2024 linked to the codes of 2011–2022 | `municipalities`, `municipality_match` |
 | 4 | `scripts/infer.py` | Type and fuel for 2023–2024 as expected counts; the same method applied to each published year and compared with what was published | `holdout_summary`, `holdout_levels`, `holdout_municipal`, `type_by_municipality`, `fuel_by_municipality`, `type_by_fsa`, `fuel_by_fsa`, `inference_levels` |
-| 5 | `scripts/census_fsa.py` | 2021 Census counts by FSA, built from dissemination areas shared among FSAs by postal codes; joined to the vehicles of 2023–2024 | `fsa_census_2021`, `fsa_vehicles_census` |
+| 5 | `scripts/census_fsa.py` | 2021 Census counts by FSA (Statistics Canada's profile by FSA; an estimate from dissemination areas is kept as a comparison); joined to the vehicles of 2023–2024 | `fsa_census_2021`, `fsa_census_comparison`, `fsa_vehicles_census` |
 | 6 | `scripts/series.py` | Yearly series for every municipality (all vehicles, age bands), Québec by type, and the check against twelve legend values of the 2025 SAAQAnalyzer charts | `vehicles_by_municipality`, `age_bands_by_municipality`, `type_by_year_quebec`, `reproduction_checks` |
 | 7 | `scripts/mass.py` | Net mass 2011–2022 and the fourth power of mass | `mass_automobiles`, `mass_fourth_power_by_type_montreal` |
 | 8 | `scripts/cohorts.py` | Retention of each model year from one file to the next; age summaries | `cohort_retention`, `cohort_survival`, `vehicle_age_summary` |
