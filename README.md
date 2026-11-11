@@ -117,7 +117,8 @@ Both are built by `scripts/build_docs.py`; every number is read from the tables 
 - `scripts/`: the pipeline; `aliases_make.csv` and `aliases_model.csv` are the
   only hand-written mappings, each with its basis.
 - `derived/tables/`: the tables above (CSV).
-- `access-request-03.06.34729/`: the request and the SAAQ's decision (to come).
+- `access-request-03.06.34729/`: the request for the vehicle files of 2023–2024, the acknowledgment and the decision.
+- `access-request-03.06.34793/`: the SAAQ's letters on the request for the licence files of 2023–2024, refused on October 24, 2025, with the internal note enclosed.
 
 ## Author
 
