@@ -1,13 +1,18 @@
 quantity,value,assumption
-street centreline in the municipality of Montréal (km),4129.0,"géobase of October 14, 2026; autoroutes, bridges, tunnels, ramps and lanes left out"
-"curb, both sides (km)",8257.0,each side inside the municipality
-"lanes, at least (km)",6297.0,"one lane for a one-way segment, two for a two-way segment"
-curb bound: vehicles at 5.0 m each,1651402.0,"every metre of curb, no deduction"
-curb bound: vehicles at 5.5 m each,1501275.0,"every metre of curb, no deduction"
-curb bound: vehicles at 6.0 m each,1376168.0,"every metre of curb, no deduction"
-standstill bound: vehicles at 6.0 m each,1049536.0,"every lane full, nose to tail"
-standstill bound: vehicles at 7.0 m each,899602.0,"every lane full, nose to tail"
-standstill bound: vehicles at 8.0 m each,787152.0,"every lane full, nose to tail"
+travel lanes in the municipality of Montréal (km),8443.0,"OpenStreetMap lane counts, autoroutes included; service ways and ways closed to motor vehicles left out"
+share of those lane-kilometres with a lane count in OpenStreetMap (%),85.9,the rest take the median of their class and direction
+length of those ways (km),4343.0,each carriageway of a divided road is a separate way
+"curb, both sides (km)",8257.0,"géobase; autoroutes, bridges, tunnels, ramps and back lanes left out"
+curb after 5 m kept clear at each end of each block face (km),7553.0,assumption for intersections
+"share of that curb where stopping or parking is forbidden at all times, boroughs with a complete sign inventory (%)",10.9,applied to the other boroughs
+legal curb (km),6733.0,"driveways, hydrants, bus stops and hourly or permit restrictions not deducted"
+parking bound: vehicles at 5.0 m each,1346649.0,every legal metre of curb
+parking bound: vehicles at 5.5 m each,1224227.0,every legal metre of curb
+parking bound: vehicles at 6.0 m each,1122208.0,every legal metre of curb
+driving bound: vehicles at 6.0 m each,1407180.0,"every travel lane full, nose to tail"
+driving bound: vehicles at 7.0 m each,1206154.0,"every travel lane full, nose to tail"
+driving bound: vehicles at 8.0 m each,1055385.0,"every travel lane full, nose to tail"
 "automobiles and light trucks registered, 2024 (inferred)",756729.0,type inferred
-the same as a share of the curb bound at 5.5 m (%),50.4,
-the same as a share of the standstill bound at 7.0 m (%),84.1,
+the same as a share of the parking bound at 5.5 m (%),61.8,
+the same as a share of the driving bound at 7.0 m (%),62.7,
+"arrow coding check: stretches marked from both ends, chosen coding (%)",44.1,the other coding gives 9.2 %

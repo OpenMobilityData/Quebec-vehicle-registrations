@@ -54,7 +54,7 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | 8 | `scripts/cohorts.py` | Retention of each model year from one file to the next; age summaries | `cohort_retention`, `cohort_survival`, `vehicle_age_summary` |
 | 9 | `scripts/licences.py` | Driver's licence holders 2011–2022 (open data « Permis de conduire », June 1) and automobiles per licence holder | `licence_holders_by_mrc`, `licence_holders_by_age`, `vehicles_per_licence` |
 | 10 | `scripts/scenarios.py` | The 2011–2021 line carried forward, storage equivalents, vehicles per 1,000 residents at two censuses | `trend_scenario`, `storage_equivalents`, `vehicles_per_1000_residents` |
-| 11 | `scripts/street_space.py` | Two physical bounds for the municipality of Montréal from the City's street network (géobase, CC BY 4.0): curb length and lane length, as numbers of vehicles under stated spacings | `street_space_bounds` |
+| 11 | `scripts/street_space.py` | Two hypothetical bounds for the municipality of Montréal: legal curb (City géobase and parking-sign inventory, CC BY 4.0) and travel lanes (OpenStreetMap, ODbL, autoroutes included), as numbers of vehicles under stated spacings | `street_space_bounds`, `street_lanes_by_class`, `street_curb_by_borough` |
 
 ## Measurements so far
 

@@ -1,0 +1,10 @@
+cls,km_of_way,lane_km,mean_lanes,pct_lane_km_from_tag
+residential,2518.2,4071.6,1.62,74.0
+secondary,636.3,1698.4,2.67,98.5
+tertiary,557.1,1123.4,2.02,94.5
+autoroute,181.9,562.9,3.09,100.0
+primary,187.4,538.6,2.87,99.0
+other local,140.6,258.4,1.84,84.0
+autoroute ramp,85.6,111.9,1.31,99.9
+expressway,21.3,57.3,2.69,100.0
+expressway ramp,14.7,20.6,1.4,100.0
