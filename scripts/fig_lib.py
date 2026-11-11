@@ -52,3 +52,12 @@ def finish(fig, here, stem, lang, title, subtitle, note, bottom=0.2):
     for ext in ("png", "svg"):
         fig.savefig(Path(here) / f"{stem}_{lang}.{ext}", dpi=200)
     plt.close(fig)
+
+
+def released_inferred(ax, s, color, last_released=2022, label=None, inferred_label=None):
+    """A yearly series whose points after `last_released` are inferred: hollow markers, dashed link."""
+    a, b = s.loc[:last_released], s.loc[last_released:]
+    ax.plot(a.index, a.values, color=color, lw=2, marker="o", ms=4.5, label=label)
+    if len(b) > 1:
+        ax.plot(b.index, b.values, color=color, lw=1.6, ls=(0, (3, 2)))
+        ax.plot(b.index[1:], b.values[1:], ls="none", marker="o", ms=6, mfc=SURFACE, mec=color, mew=1.8, label=inferred_label)

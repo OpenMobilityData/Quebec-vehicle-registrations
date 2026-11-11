@@ -27,6 +27,7 @@ Outputs (derived/tables/):
   type_by_municipality.csv   2011-2024, released (2011-2022) and inferred (2023-2024)
   fuel_by_municipality.csv   2017-2024, the same
   type_by_fsa.csv, fuel_by_fsa.csv   2023-2024, inferred
+  type_by_model_year.csv  Québec and Montréal, by model year (for the cohort tables)
   inference_levels.csv    share of the 2023-2024 vehicles at each level
 Run:  ~/.venvs/omd/bin/python scripts/infer.py
 """
@@ -76,18 +77,18 @@ def infer(con, target, year, ref_years, out):
     con.execute(f"CREATE OR REPLACE TEMP TABLE tgt AS SELECT row_number() OVER () AS id, muni_code, fsa, make, model, "
                 f"model_year, {target if year <= 2022 else 'NULL'} AS truth, n FROM cells WHERE year={year}")
     con.execute("CREATE OR REPLACE TEMP TABLE todo AS SELECT * FROM tgt")
-    con.execute(f"CREATE OR REPLACE TABLE {out} (id BIGINT, muni_code VARCHAR, fsa VARCHAR, truth VARCHAR, "
+    con.execute(f"CREATE OR REPLACE TABLE {out} (id BIGINT, muni_code VARCHAR, fsa VARCHAR, model_year INTEGER, truth VARCHAR, "
                 "level INTEGER, value VARCHAR, n DOUBLE)")
     for lvl, (_, key, cond) in LEVELS.items():
         k = ", ".join(key)
         on = " AND ".join(f"t.{c} = r.{c}" for c in key)
         con.execute(f"CREATE OR REPLACE TEMP TABLE r AS SELECT {k}, value, sum(n) n, "
                     f"sum(sum(n)) OVER (PARTITION BY {k}) tot FROM ref WHERE true {cond.format(last=last)} GROUP BY {k}, value")
-        con.execute(f"INSERT INTO {out} SELECT t.id, t.muni_code, t.fsa, t.truth, {lvl}, r.value, t.n * r.n / r.tot "
+        con.execute(f"INSERT INTO {out} SELECT t.id, t.muni_code, t.fsa, t.model_year, t.truth, {lvl}, r.value, t.n * r.n / r.tot "
                     f"FROM todo t JOIN r ON {on}")
         con.execute(f"CREATE OR REPLACE TEMP TABLE todo AS SELECT t.* FROM todo t WHERE NOT EXISTS "
                     f"(SELECT 1 FROM {out} o WHERE o.id = t.id AND o.level = {lvl})")
-    con.execute(f"INSERT INTO {out} SELECT id, muni_code, fsa, truth, 6, NULL, n FROM todo")
+    con.execute(f"INSERT INTO {out} SELECT id, muni_code, fsa, model_year, truth, 6, NULL, n FROM todo")
 
 
 def holdout(con):
@@ -159,6 +160,14 @@ def final(con):
                     f"ORDER BY year, muni_code, value) TO '{paths.TABLES}/{'type' if target == 'vtype' else 'fuel'}_by_municipality.csv' (HEADER)")
         con.execute(f"COPY (SELECT year, fsa, value AS {target}, n FROM ({' UNION ALL '.join(fsa_parts)}) "
                     f"ORDER BY year, fsa, value) TO '{paths.TABLES}/{'type' if target == 'vtype' else 'fuel'}_by_fsa.csv' (HEADER)")
+    # type by model year, Québec and the municipality of Montréal (for the cohort tables)
+    parts = ["SELECT year, 'Québec' AS scope, model_year, vtype, sum(n) AS n, 'released' AS basis FROM cells WHERE source='open' GROUP BY ALL",
+             "SELECT year, 'Montréal', model_year, vtype, sum(n), 'released' FROM cells WHERE source='open' AND muni_code='66023' GROUP BY ALL"]
+    for T in paths.ACCESS_YEARS:
+        parts.append(f"SELECT {T}, 'Québec', model_year, value, sum(n), 'inferred' FROM inf_vtype_{T} GROUP BY ALL")
+        parts.append(f"SELECT {T}, 'Montréal', model_year, value, sum(n), 'inferred' FROM inf_vtype_{T} WHERE muni_code='66023' GROUP BY ALL")
+    con.execute(f"COPY (SELECT year, scope, model_year, vtype, round(n, 1) AS n, basis FROM ({' UNION ALL '.join(parts)}) "
+                f"WHERE model_year BETWEEN 1950 AND 2026 ORDER BY ALL) TO '{paths.TABLES}/type_by_model_year.csv' (HEADER)")
     pd.DataFrame(lev).to_csv(paths.TABLES / "inference_levels.csv", index=False)
     return pd.DataFrame(lev)
 
