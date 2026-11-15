@@ -27,6 +27,7 @@ Outputs (derived/tables/):
   type_by_municipality.csv   2011-2024, released (2011-2022) and inferred (2023-2024)
   fuel_by_municipality.csv   2017-2024, the same
   type_by_fsa.csv, fuel_by_fsa.csv   2023-2024, inferred
+  type_by_fsa_municipality.csv   2023-2024, inferred, by FSA and municipality (an FSA can lie in several municipalities)
   type_by_model_year.csv  Québec and Montréal, by model year (for the cohort tables)
   inference_levels.csv    share of the 2023-2024 vehicles at each level
   automobile_fuel_by_year.csv   automobiles and light trucks by fuel, 2011-2024, Québec and Montréal
@@ -152,10 +153,12 @@ def final(con):
         parts = [f"SELECT year, muni_code, {target} AS value, sum(n) AS n, 'released' AS basis FROM cells "
                  f"WHERE source='open' AND year >= {first} GROUP BY ALL"]
         fsa_parts = []
+        fsam_parts = []
         for T in paths.ACCESS_YEARS:
             infer(con, target, T, [2020, 2021, 2022], f"inf_{target}_{T}")
             parts.append(f"SELECT {T}, muni_code, value, sum(n), 'inferred' FROM inf_{target}_{T} GROUP BY ALL")
             fsa_parts.append(f"SELECT {T} AS year, fsa, value, round(sum(n), 1) AS n FROM inf_{target}_{T} GROUP BY ALL")
+            fsam_parts.append(f"SELECT {T} AS year, fsa, muni_code, value, round(sum(n), 1) AS n FROM inf_{target}_{T} GROUP BY ALL")
             d = con.execute(f"SELECT level, sum(n) FROM inf_{target}_{T} GROUP BY 1 ORDER BY 1").fetchall()
             tot = sum(x[1] for x in d)
             lev += [{"target": target, "year": T, "level": l, "key": LEVELS.get(l, ("none (unassigned)",))[0],
@@ -164,6 +167,9 @@ def final(con):
                     f"ORDER BY year, muni_code, value) TO '{paths.TABLES}/{'type' if target == 'vtype' else 'fuel'}_by_municipality.csv' (HEADER)")
         con.execute(f"COPY (SELECT year, fsa, value AS {target}, n FROM ({' UNION ALL '.join(fsa_parts)}) "
                     f"ORDER BY year, fsa, value) TO '{paths.TABLES}/{'type' if target == 'vtype' else 'fuel'}_by_fsa.csv' (HEADER)")
+        if target == "vtype":      # the same by FSA and municipality: an FSA can lie in several municipalities (muni_code empty: not matched)
+            con.execute(f"COPY (SELECT year, fsa, muni_code, value AS vtype, n FROM ({' UNION ALL '.join(fsam_parts)}) "
+                        f"ORDER BY year, fsa, muni_code, value) TO '{paths.TABLES}/type_by_fsa_municipality.csv' (HEADER)")
     # type by model year, Québec and the municipality of Montréal (for the cohort tables)
     parts = ["SELECT year, 'Québec' AS scope, model_year, vtype, sum(n) AS n, 'released' AS basis FROM cells WHERE source='open' GROUP BY ALL",
              "SELECT year, 'Montréal', model_year, vtype, sum(n), 'released' FROM cells WHERE source='open' AND muni_code='66023' GROUP BY ALL"]
