@@ -5,14 +5,21 @@ length of those ways (km),4343.0,each carriageway of a divided road is a separat
 "curb, both sides (km)",8257.0,"géobase; autoroutes, bridges, tunnels, ramps and back lanes left out"
 curb after 5 m kept clear at each end of each block face (km),7553.0,assumption for intersections
 "share of that curb where stopping or parking is forbidden at all times, boroughs with a complete sign inventory (%)",10.9,applied to the other boroughs
-legal curb (km),6733.0,"driveways, hydrants, bus stops and hourly or permit restrictions not deducted"
-parking bound: vehicles at 5.0 m each,1346649.0,every legal metre of curb
-parking bound: vehicles at 5.5 m each,1224227.0,every legal metre of curb
-parking bound: vehicles at 6.0 m each,1122208.0,every legal metre of curb
+legal curb before the hydrant and bus-stop deductions (km),6733.0,"the figure used until November 15, 2026"
+hydrants on a curb of the municipality (number),23596.0,"City file, hydrants marked EXISTANT, within 20 m of a street segment"
+curb deducted for hydrants (km),118.4,"3 m on each side (Highway Safety Code, art. 386 par. 2); metres already forbidden not counted twice"
+STM bus stops on a curb of the municipality (number),7050.0,"STM file, metro stations and entrances left out, within 20 m of a street segment"
+curb deducted for bus stops at 20 m each (km),112.9,the length of a stop zone is an assumption; metres already forbidden or within a hydrant clearance not counted twice
+the same at 15 m each (km),87.9,sensitivity
+the same at 30 m each (km),156.6,sensitivity
+legal curb (km),6502.0,driveways and hourly or permit restrictions not deducted
+parking bound: vehicles at 5.0 m each,1300387.0,every legal metre of curb
+parking bound: vehicles at 5.5 m each,1182170.0,every legal metre of curb
+parking bound: vehicles at 6.0 m each,1083656.0,every legal metre of curb
 driving bound: vehicles at 6.0 m each,1407180.0,"every travel lane full, nose to tail"
 driving bound: vehicles at 7.0 m each,1206154.0,"every travel lane full, nose to tail"
 driving bound: vehicles at 8.0 m each,1055385.0,"every travel lane full, nose to tail"
 "automobiles and light trucks registered, 2024 (inferred)",756729.0,type inferred
-the same as a share of the parking bound at 5.5 m (%),61.8,
+the same as a share of the parking bound at 5.5 m (%),64.0,
 the same as a share of the driving bound at 7.0 m (%),62.7,
 "arrow coding check: stretches marked from both ends, chosen coding (%)",44.1,the other coding gives 9.2 %

@@ -15,8 +15,14 @@ PARKING BOUND: every legal metre of curb used for parking.
   (« Signalisation - stationnement », file of October 23, 2026, CC BY 4.0) shows stopping or parking forbidden at
   all times (« \\A EN TOUT TEMPS », « \\P EN TOUT TEMPS »). A sign governs the stretch from its pole to the next
   pole in the direction of its arrow (half the stretch on each side when it has no arrow). The inventory is
-  complete only in some boroughs: the share forbidden there is applied to the others (an assumption). Not deducted:
-  driveways, hydrants, bus stops, and restrictions by hour, day or permit. Vehicles at 5.0 to 6.0 m each.
+  complete only in some boroughs: the share forbidden there is applied to the others (an assumption).
+  Also deducted (added November 15, 2026): 3 m on each side of every fire hydrant, on the hydrant's side of the
+  street (Highway Safety Code, art. 386 par. 2, read on LégisQuébec November 15, 2026; City file « Bornes
+  d'incendie », CC BY 4.0, downloaded November 15, 2026, hydrants marked EXISTANT), and a zone of 20 m at every
+  STM bus stop, on the stop's side (the length is an assumption, 15 and 30 m given as a range; STM file
+  « stm_arrets_sig », downloaded November 15, 2026, metro stations and entrances left out). A metre already inside
+  an end clearance or an all-time prohibition is not deducted twice. Not deducted: driveways, and restrictions by
+  hour, day or permit. Vehicles at 5.0 to 6.0 m each.
 
 Both are bounds under stated assumptions, not measurements of parking or of congestion: vehicles kept off the street
 are in neither, the registered vehicles are never all on the road at once, vehicles from elsewhere are not counted,
@@ -40,6 +46,11 @@ GEOBASE = TP / "montreal-opendata/geobase_2026-10-14.json"
 SIGNS = TP / "montreal-opendata/signalisation-2026-10-23/signalisation_stationnement.csv"
 LIMITS = TP / "montreal-opendata/limadmin/limadmin.json"
 OSM = TP / "osm/quebec-geofabrik-2026-11-11/montreal_highways.gpkg"
+HYDRANTS = TP / "montreal-opendata/bornes-incendie-2026-11-15/aqu_borneincendie_p.csv"
+STOPS = TP / "stm-artm/stm_sig-2026-11-15/stm_arrets_sig.shp"
+HYDRANT_CLEAR = 3.0  # metres on each side of a hydrant (Highway Safety Code, art. 386 par. 2)
+BUS_ZONE = 20.0      # metres of curb taken by a bus stop (assumption); BUS_RANGE gives the sensitivity
+BUS_RANGE = (15.0, 30.0)
 CLASSES = {"motorway": "autoroute", "motorway_link": "autoroute ramp", "trunk": "expressway", "trunk_link": "expressway ramp",
            "primary": "primary", "primary_link": "primary", "secondary": "secondary", "secondary_link": "secondary",
            "tertiary": "tertiary", "tertiary_link": "tertiary", "residential": "residential", "unclassified": "other local",
@@ -102,7 +113,7 @@ def parking():
 
     def banned(code2_forward_on_right):
         """Banned length per face (clear of the END zones), and the agreement score of the arrow coding."""
-        out, both, one = {}, 0, 0
+        out, both, one, st = {}, 0, 0, {}
         for (trc, side), v in groups.items():
             L = v.L.iloc[0]; ts = [0.0] + list(v.t) + [L]; ids = [None] + list(v.POTEAU_ID_POT) + [None]
             n = len(ts) - 1; w = np.zeros(n); marks = np.zeros(n, dtype=int)
@@ -122,28 +133,80 @@ def parking():
                 if w[k]:
                     lo, hi = max(ts[k], END), min(ts[k + 1], L - END)
                     tot += w[k] * max(0.0, hi - lo)
-            out[(trc, side)] = tot
-        return out, both / max(1, both + one)
+            out[(trc, side)] = tot; st[(trc, side)] = (ts, w)
+        return out, both / max(1, both + one), st
 
-    o1, s1 = banned(True); o2, s2 = banned(False)
-    ban_len, score, other = (o1, s1, s2) if s1 >= s2 else (o2, s2, s1)
+    o1, s1, st1 = banned(True); o2, s2, st2 = banned(False)
+    ban_len, score, other, stretches = (o1, s1, s2, st1) if s1 >= s2 else (o2, s2, s1, st2)
     faces["banned"] = [min(ban_len.get((t, sd), 0.0), n_) for t, sd, n_ in zip(faces.ID_TRC, faces.side, faces.net)]
     faces["poles"] = [len(groups[(t, sd)]) if (t, sd) in groups else 0 for t, sd in zip(faces.ID_TRC, faces.side)]
-    bt = faces.groupby("borough").agg(curb_km=("L", lambda x: x.sum() / 1000), net_km=("net", lambda x: x.sum() / 1000),
+
+    # hydrants and bus stops: a point is given to the nearest street segment and to the side it stands on
+    def place(pts, maxd):
+        q = gpd.sjoin_nearest(pts, g[["ID_TRC", "L", "geometry"]], max_distance=maxd, distance_col="d")
+        q = q[~q.index.duplicated()]
+        ln = g.geometry.loc[q.index_right].values
+        q["t"] = line_locate_point(ln, q.geometry.values)
+        a_ = gpd.GeoSeries(ln, crs=32188).interpolate(np.clip(q.t.values - 1, 0, None)).values
+        b_ = gpd.GeoSeries(ln, crs=32188).interpolate(np.clip(q.t.values + 1, None, q.L.values)).values
+        ax_, ay_, bx_, by_ = [np.array(v) for v in ([p.x for p in a_], [p.y for p in a_], [p.x for p in b_], [p.y for p in b_])]
+        cr = (bx_ - ax_) * (q.geometry.y.values - ay_) - (by_ - ay_) * (q.geometry.x.values - ax_)
+        q["side"] = np.where(cr > 0, "L", "R")
+        return q.groupby(["ID_TRC", "side"]).t.apply(list).to_dict(), len(pts), len(q)
+
+    h = pd.read_csv(HYDRANTS, low_memory=False); h = h[h.STATUT_ACTIF == "EXISTANT"]
+    hyd, n_h, n_hm = place(gpd.GeoDataFrame(h[["ID_BI"]], geometry=gpd.points_from_xy(h.COORDONNEE_SPATIALE_X, h.COORDONNEE_SPATIALE_Y), crs=32188), 20)
+    b = gpd.read_file(STOPS).to_crs(32188); b = b[(b.loc_type == 0) & ~b.stop_url.fillna("").str.contains("/metro/")]
+    bus, n_b, n_bm = place(b[["stop_id", "geometry"]].reset_index(drop=True), 20)
+
+    def uncovered(key, L, ivs, use_w):
+        """Length of the intervals (merged) that lies clear of the END zones and outside the all-time prohibitions."""
+        ivs = sorted((max(a_, END), min(b_, L - END)) for a_, b_ in ivs); m = []
+        for a_, b_ in ivs:
+            if b_ <= a_: continue
+            if m and a_ <= m[-1][1]: m[-1][1] = max(m[-1][1], b_)
+            else: m.append([a_, b_])
+        ts, w = stretches.get(key, ([0.0, L], np.zeros(1))) if use_w else ([0.0, L], np.zeros(1))
+        return sum((1 - w[k]) * max(0.0, min(b_, ts[k + 1]) - max(a_, ts[k])) for a_, b_ in m for k in range(len(ts) - 1))
+
+    def extras(half_bus):
+        eh, eb = [], []
+        for t, sd, L, bo in zip(faces.ID_TRC, faces.side, faces.L, faces.borough):
+            k = (t, sd); hi = [(x - HYDRANT_CLEAR, x + HYDRANT_CLEAR) for x in hyd.get(k, [])]
+            bi = [(x - half_bus, x + half_bus) for x in bus.get(k, [])]
+            if not hi and not bi: eh.append(0.0); eb.append(0.0); continue
+            uw = complete.get(bo, False)
+            a_ = uncovered(k, L, hi, uw); eh.append(a_); eb.append(uncovered(k, L, hi + bi, uw) - a_)
+        return np.array(eh), np.array(eb)
+
+    ppk = faces.groupby("borough").apply(lambda x: x.poles.sum() / (x.L.sum() / 1000), include_groups=False)
+    complete = (ppk >= DENSE).to_dict()
+    faces["hydrant"], faces["bus"] = extras(BUS_ZONE / 2)
+    bus_alt = {z: extras(z / 2)[1] for z in BUS_RANGE}
+    for z, v in bus_alt.items(): faces[f"bus_{z:g}"] = v
+    bt = faces.groupby("borough").agg(hydrant_km=("hydrant", lambda x: x.sum() / 1000), bus_km=("bus", lambda x: x.sum() / 1000),
+                                      **{f"bus_{z:g}_km": (f"bus_{z:g}", lambda x: x.sum() / 1000) for z in BUS_RANGE},curb_km=("L", lambda x: x.sum() / 1000), net_km=("net", lambda x: x.sum() / 1000),
                                       banned_km=("banned", lambda x: x.sum() / 1000), poles=("poles", "sum"))
     bt["poles_per_km"] = bt.poles / bt.curb_km
     bt["inventory"] = np.where(bt.poles_per_km >= DENSE, "complete", "partial")
     share = bt[bt.inventory == "complete"].banned_km.sum() / bt[bt.inventory == "complete"].net_km.sum()
     bt["pct_banned_of_net"] = np.where(bt.inventory == "complete", 100 * bt.banned_km / bt.net_km, np.nan)
-    bt["legal_km"] = np.where(bt.inventory == "complete", bt.net_km - bt.banned_km, bt.net_km * (1 - share))
+    bt["legal_before_km"] = np.where(bt.inventory == "complete", bt.net_km - bt.banned_km, bt.net_km * (1 - share))
+    f = np.where(bt.inventory == "complete", 1.0, 1 - share)      # where the inventory is partial, the extra metres are assumed to be forbidden in the same share
+    for c in ["hydrant_km", "bus_km"] + [f"bus_{z:g}_km" for z in BUS_RANGE]: bt[c] = bt[c] * f
+    bt["legal_km"] = bt.legal_before_km - bt.hydrant_km - bt.bus_km
     bt.round(2).sort_values("curb_km", ascending=False).to_csv(paths.TABLES / "street_curb_by_borough.csv")
-    return faces.L.sum() / 1000, faces.net.sum() / 1000, bt.legal_km.sum(), 100 * share, bt, score, other, g.L.sum() / 1000
+    fk = set(zip(faces.ID_TRC, faces.side))
+    x = dict(before=bt.legal_before_km.sum(), hydrant=bt.hydrant_km.sum(), bus=bt.bus_km.sum(), n_h=n_hm, n_b=n_bm, n_h_all=n_h, n_b_all=n_b,
+             n_h_faces=sum(len(v) for k, v in hyd.items() if k in fk), n_b_faces=sum(len(v) for k, v in bus.items() if k in fk),
+             **{f"bus_{z:g}": bt[f"bus_{z:g}_km"].sum() for z in BUS_RANGE})
+    return faces.L.sum() / 1000, faces.net.sum() / 1000, bt.legal_km.sum(), 100 * share, bt, score, other, x
 
 
 def main():
     city = gpd.read_file(LIMITS); city = city[city.TYPE == "Arrondissement"].to_crs(32188).dissolve()
     lane_km, way_km, pct_tag, t = driving(city)
-    curb_km, net_km, legal_km, share, bt, score, other, _ = parking()
+    curb_km, net_km, legal_km, share, bt, score, other, x = parking()
     ty = pd.read_csv(paths.TABLES / "type_by_municipality.csv", dtype={"muni_code": str})
     au = ty[(ty.muni_code == "66023") & (ty.vtype == "AU")].set_index("year").n
     R = lambda q, v, a="": {"quantity": q, "value": round(v, 1) if abs(v) < 1000 else round(v), "assumption": a}
@@ -153,7 +216,13 @@ def main():
             R("curb, both sides (km)", curb_km, "géobase; autoroutes, bridges, tunnels, ramps and back lanes left out"),
             R("curb after 5 m kept clear at each end of each block face (km)", net_km, "assumption for intersections"),
             R("share of that curb where stopping or parking is forbidden at all times, boroughs with a complete sign inventory (%)", share, "applied to the other boroughs"),
-            R("legal curb (km)", legal_km, "driveways, hydrants, bus stops and hourly or permit restrictions not deducted")]
+            R("legal curb before the hydrant and bus-stop deductions (km)", x["before"], "the figure used until November 15, 2026"),
+            R("hydrants on a curb of the municipality (number)", x["n_h_faces"], "City file, hydrants marked EXISTANT, within 20 m of a street segment"),
+            R("curb deducted for hydrants (km)", x["hydrant"], "3 m on each side (Highway Safety Code, art. 386 par. 2); metres already forbidden not counted twice"),
+            R("STM bus stops on a curb of the municipality (number)", x["n_b_faces"], "STM file, metro stations and entrances left out, within 20 m of a street segment"),
+            R("curb deducted for bus stops at 20 m each (km)", x["bus"], "the length of a stop zone is an assumption; metres already forbidden or within a hydrant clearance not counted twice"),
+            R("the same at 15 m each (km)", x["bus_15"], "sensitivity"), R("the same at 30 m each (km)", x["bus_30"], "sensitivity"),
+            R("legal curb (km)", legal_km, "driveways and hourly or permit restrictions not deducted")]
     rows += [R(f"parking bound: vehicles at {L} m each", 1000 * legal_km / L, "every legal metre of curb") for L in (5.0, 5.5, 6.0)]
     rows += [R(f"driving bound: vehicles at {L} m each", 1000 * lane_km / L, "every travel lane full, nose to tail") for L in (6.0, 7.0, 8.0)]
     rows += [R("automobiles and light trucks registered, 2024 (inferred)", au[2024], "type inferred"),
