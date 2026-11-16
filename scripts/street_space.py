@@ -21,8 +21,9 @@ PARKING BOUND: every legal metre of curb used for parking.
   d'incendie », CC BY 4.0, downloaded November 15, 2026, hydrants marked EXISTANT), and a zone of 20 m at every
   STM bus stop, on the stop's side (the length is an assumption, 15 and 30 m given as a range; STM file
   « stm_arrets_sig », downloaded November 15, 2026, metro stations and entrances left out). A metre already inside
-  an end clearance or an all-time prohibition is not deducted twice. Not deducted: driveways, and restrictions by
-  hour, day or permit. Vehicles at 5.0 to 6.0 m each.
+  an end clearance or an all-time prohibition is not deducted twice. Not deducted: restrictions by hour, day or
+  permit, and driveways (each takes about one place at the curb and gives at least one private place, which the
+  bound does not count: the two partly offset; the garages of large apartment buildings are the larger omission). Vehicles at 5.0 to 6.0 m each.
 
 Both are bounds under stated assumptions, not measurements of parking or of congestion: vehicles kept off the street
 are in neither, the registered vehicles are never all on the road at once, vehicles from elsewhere are not counted,
