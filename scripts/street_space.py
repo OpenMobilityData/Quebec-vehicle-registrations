@@ -25,6 +25,12 @@ PARKING BOUND: every legal metre of curb used for parking.
   permit, and driveways (each takes about one place at the curb and gives at least one private place, which the
   bound does not count: the two partly offset; the garages of large apartment buildings are the larger omission). Vehicles at 5.0 to 6.0 m each.
 
+  Whole vehicles (added November 16, 2026): the legal curb is not one continuous strip. Each uninterrupted stretch
+  (between an end clearance, an all-time prohibition, a hydrant clearance or a bus-stop zone and the next) holds a
+  whole number of vehicles, and what is left over is lost. Where the sign inventory is complete the count is made
+  stretch by stretch (a stretch governed by a sign without an arrow counts for half its length); elsewhere the
+  ratio of that count to the plain division, found in the boroughs with a complete inventory, is applied.
+
 Both are bounds under stated assumptions, not measurements of parking or of congestion: vehicles kept off the street
 are in neither, the registered vehicles are never all on the road at once, vehicles from elsewhere are not counted,
 and traffic stops flowing well before every lane is full.
@@ -185,7 +191,34 @@ def parking():
     faces["hydrant"], faces["bus"] = extras(BUS_ZONE / 2)
     bus_alt = {z: extras(z / 2)[1] for z in BUS_RANGE}
     for z, v in bus_alt.items(): faces[f"bus_{z:g}"] = v
-    bt = faces.groupby("borough").agg(hydrant_km=("hydrant", lambda x: x.sum() / 1000), bus_km=("bus", lambda x: x.sum() / 1000),
+
+    def pieces(key, L, bo):
+        """Lengths of the uninterrupted legal stretches of a block face."""
+        blk = sorted([(x - HYDRANT_CLEAR, x + HYDRANT_CLEAR) for x in hyd.get(key, [])] + [(x - BUS_ZONE / 2, x + BUS_ZONE / 2) for x in bus.get(key, [])])
+        ts, w = stretches.get(key, ([0.0, L], np.zeros(1))) if complete.get(bo, False) else ([0.0, L], np.zeros(1))
+        out, acc = [], 0.0                                   # acc: legal length accumulated since the last interruption
+        for i in range(len(ts) - 1):                         # a sign pole is not an interruption: adjacent legal stretches join
+            lo, hi = max(ts[i], END), min(ts[i + 1], L - END)
+            if hi <= lo: continue
+            if w[i] >= 1:
+                if acc > 0: out.append(acc); acc = 0.0
+                continue
+            cur = lo
+            for a_, b_ in blk:
+                if b_ <= cur or a_ >= hi: continue
+                if a_ > cur: acc += (a_ - cur) * (1 - w[i])
+                if acc > 0: out.append(acc); acc = 0.0
+                cur = max(cur, b_)
+            if cur < hi: acc += (hi - cur) * (1 - w[i])
+        if acc > 0: out.append(acc)
+        return out
+
+    CARS = (5.0, 5.5, 6.0)
+    pc = [pieces((t, sd), L, bo) for t, sd, L, bo in zip(faces.ID_TRC, faces.side, faces.L, faces.borough)]
+    faces["piece_m"] = [sum(v) for v in pc]; faces["n_pieces"] = [len(v) for v in pc]
+    for c in CARS: faces[f"whole_{c}"] = [sum(int(x // c) for x in v) for v in pc]
+    bt = faces.groupby("borough").agg(piece_km=("piece_m", lambda x: x.sum() / 1000), n_pieces=("n_pieces", "sum"),
+                                      **{f"whole_{c}": (f"whole_{c}", "sum") for c in CARS}, hydrant_km=("hydrant", lambda x: x.sum() / 1000), bus_km=("bus", lambda x: x.sum() / 1000),
                                       **{f"bus_{z:g}_km": (f"bus_{z:g}", lambda x: x.sum() / 1000) for z in BUS_RANGE},curb_km=("L", lambda x: x.sum() / 1000), net_km=("net", lambda x: x.sum() / 1000),
                                       banned_km=("banned", lambda x: x.sum() / 1000), poles=("poles", "sum"))
     bt["poles_per_km"] = bt.poles / bt.curb_km
@@ -197,8 +230,12 @@ def parking():
     for c in ["hydrant_km", "bus_km"] + [f"bus_{z:g}_km" for z in BUS_RANGE]: bt[c] = bt[c] * f
     bt["legal_km"] = bt.legal_before_km - bt.hydrant_km - bt.bus_km
     bt.round(2).sort_values("curb_km", ascending=False).to_csv(paths.TABLES / "street_curb_by_borough.csv")
+    cm = bt.inventory == "complete"
+    ratio = {c: bt[cm][f"whole_{c}"].sum() / (1000 * bt[cm].legal_km.sum() / c) for c in CARS}
+    whole = {c: bt[cm][f"whole_{c}"].sum() + ratio[c] * 1000 * bt[~cm].legal_km.sum() / c for c in CARS}
+    check = bt[cm].piece_km.sum() / bt[cm].legal_km.sum()
     fk = set(zip(faces.ID_TRC, faces.side))
-    x = dict(before=bt.legal_before_km.sum(), hydrant=bt.hydrant_km.sum(), bus=bt.bus_km.sum(), n_h=n_hm, n_b=n_bm, n_h_all=n_h, n_b_all=n_b,
+    x = dict(whole=whole, ratio=ratio, check=check, n_pieces=int(bt[cm].n_pieces.sum()), legal_complete=bt[cm].legal_km.sum(), before=bt.legal_before_km.sum(), hydrant=bt.hydrant_km.sum(), bus=bt.bus_km.sum(), n_h=n_hm, n_b=n_bm, n_h_all=n_h, n_b_all=n_b,
              n_h_faces=sum(len(v) for k, v in hyd.items() if k in fk), n_b_faces=sum(len(v) for k, v in bus.items() if k in fk),
              **{f"bus_{z:g}": bt[f"bus_{z:g}_km"].sum() for z in BUS_RANGE})
     return faces.L.sum() / 1000, faces.net.sum() / 1000, bt.legal_km.sum(), 100 * share, bt, score, other, x
@@ -224,10 +261,14 @@ def main():
             R("curb deducted for bus stops at 20 m each (km)", x["bus"], "the length of a stop zone is an assumption; metres already forbidden or within a hydrant clearance not counted twice"),
             R("the same at 15 m each (km)", x["bus_15"], "sensitivity"), R("the same at 30 m each (km)", x["bus_30"], "sensitivity"),
             R("legal curb (km)", legal_km, "driveways and hourly or permit restrictions not deducted")]
-    rows += [R(f"parking bound: vehicles at {L} m each", 1000 * legal_km / L, "every legal metre of curb") for L in (5.0, 5.5, 6.0)]
+    rows += [R("uninterrupted legal stretches, boroughs with a complete sign inventory (number)", x["n_pieces"], f"mean length {1000 * x['legal_complete'] / x['n_pieces']:.1f} m"),
+             R("their total length as a share of the legal curb of those boroughs (%)", 100 * x["check"], "check of the stretch-by-stretch count: 100 expected")]
+    rows += [R(f"parking bound by plain division: vehicles at {L} m each", 1000 * legal_km / L, "the figure used until November 16, 2026") for L in (5.0, 5.5, 6.0)]
+    rows += [R(f"whole vehicles as a share of the plain division at {L} m (%)", 100 * x["ratio"][L], "boroughs with a complete sign inventory; applied to the others") for L in (5.0, 5.5, 6.0)]
+    rows += [R(f"parking bound: vehicles at {L} m each", x["whole"][L], "whole vehicles in each uninterrupted stretch of legal curb") for L in (5.0, 5.5, 6.0)]
     rows += [R(f"driving bound: vehicles at {L} m each", 1000 * lane_km / L, "every travel lane full, nose to tail") for L in (6.0, 7.0, 8.0)]
     rows += [R("automobiles and light trucks registered, 2024 (inferred)", au[2024], "type inferred"),
-             R("the same as a share of the parking bound at 5.5 m (%)", 100 * au[2024] / (1000 * legal_km / 5.5)),
+             R("the same as a share of the parking bound at 5.5 m (%)", 100 * au[2024] / x["whole"][5.5]),
              R("the same as a share of the driving bound at 7.0 m (%)", 100 * au[2024] / (1000 * lane_km / 7.0)),
              R("arrow coding check: stretches marked from both ends, chosen coding (%)", 100 * score, f"the other coding gives {100 * other:.1f} %")]
     d = pd.DataFrame(rows); d.to_csv(paths.TABLES / "street_space_bounds.csv", index=False)
