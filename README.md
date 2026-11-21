@@ -125,5 +125,7 @@ Both are built by `scripts/build_docs.py`; every number is read from the tables 
 
 ## Author
 
-Rick Hoge, PhD. Commits are co-authored with Claude (Anthropic), which wrote the
+Rick Hoge, a researcher in the Faculty of Medicine at McGill University. The views expressed here are the author's own and do not reflect the position of any institution or organization. Unless otherwise indicated, analyses presented here should be considered preliminary pre-peer-review drafts - feedback from other researchers and members of the public is welcome in the GitHub 'Issues' board. Commits are co-authored with Claude (Anthropic), which wrote the
 code under the author's direction.
+
+Nothing in this repository should be considered an engineering opinion or legal advice.
