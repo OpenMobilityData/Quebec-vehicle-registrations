@@ -23,7 +23,11 @@ PARKING BOUND: every legal metre of curb used for parking.
   « stm_arrets_sig », downloaded November 15, 2026, metro stations and entrances left out). A metre already inside
   an end clearance or an all-time prohibition is not deducted twice. Not deducted: restrictions by hour, day or
   permit, and driveways (each takes about one place at the curb and gives at least one private place, which the
-  bound does not count: the two partly offset; the garages of large apartment buildings are the larger omission). Vehicles at 5.0 to 6.0 m each.
+  bound does not count: the two partly offset; the garages of large apartment buildings are the larger omission). Vehicles at 5.0 to 6.0 m each;
+  central value 5.37 m (since November 23, 2026; 5.5 m before): the length at which, on rue de Terrebonne, the count of places net of
+  driveway entrances (4 m each, the median length of the curb cuts measured on the City's 2015 LiDAR) and fire hydrants equals the
+  consultant's count on the block faces where the street as built and the design retained in the 2023 study place the parking on the
+  same side (EXP 2023, Annexe C); see the corridor note. Here no driveway is deducted, so the bound stays an upper one.
 
   Whole vehicles (added November 16, 2026): the legal curb is not one continuous strip. Each uninterrupted stretch
   (between an end clearance, an all-time prohibition, a hydrant clearance or a bus-stop zone and the next) holds a
@@ -65,6 +69,13 @@ CLASSES = {"motorway": "autoroute", "motorway_link": "autoroute ramp", "trunk": 
 OUT = ("autoroute", "pont", "tunnel", "voie", "ruelle")
 END = 5.0            # metres kept clear at each end of a block face
 DENSE = 8.0          # poles per km of curb above which a borough's inventory is taken as complete
+CAR_CENTRAL = 5.37   # metres per parked vehicle, central value: the length at which, on rue de Terrebonne, the count of places net of
+                     # driveway entrances (4 m each, the median length of the curb cuts measured on the City's 2015 LiDAR) and fire
+                     # hydrants equals the consultant's count on the block faces where the street as built and the design retained in
+                     # the 2023 study place the parking on the same side (EXP 2023, Annexe C); see the corridor note
+                     # (Terrebonne-open-sources, 2026-terrebonne-corridor-vehicles-and-curb). Before November 23, 2026: 5.5 m.
+CAR_BEFORE = 5.5     # the central value until November 23, 2026: kept in the table beside the new one
+CAR_LENGTHS = (5.0, CAR_CENTRAL, CAR_BEFORE, 6.0)   # 5.0 and 6.0 m are the bounds of the band
 
 
 def driving(city):
@@ -213,7 +224,7 @@ def parking():
         if acc > 0: out.append(acc)
         return out
 
-    CARS = (5.0, 5.5, 6.0)
+    CARS = CAR_LENGTHS
     pc = [pieces((t, sd), L, bo) for t, sd, L, bo in zip(faces.ID_TRC, faces.side, faces.L, faces.borough)]
     faces["piece_m"] = [sum(v) for v in pc]; faces["n_pieces"] = [len(v) for v in pc]
     for c in CARS: faces[f"whole_{c}"] = [sum(int(x // c) for x in v) for v in pc]
@@ -263,12 +274,15 @@ def main():
             R("legal curb (km)", legal_km, "driveways and hourly or permit restrictions not deducted")]
     rows += [R("uninterrupted legal stretches, boroughs with a complete sign inventory (number)", x["n_pieces"], f"mean length {1000 * x['legal_complete'] / x['n_pieces']:.1f} m"),
              R("their total length as a share of the legal curb of those boroughs (%)", 100 * x["check"], "check of the stretch-by-stretch count: 100 expected")]
-    rows += [R(f"parking bound by plain division: vehicles at {L} m each", 1000 * legal_km / L, "the figure used until November 16, 2026") for L in (5.0, 5.5, 6.0)]
-    rows += [R(f"whole vehicles as a share of the plain division at {L} m (%)", 100 * x["ratio"][L], "boroughs with a complete sign inventory; applied to the others") for L in (5.0, 5.5, 6.0)]
-    rows += [R(f"parking bound: vehicles at {L} m each", x["whole"][L], "whole vehicles in each uninterrupted stretch of legal curb") for L in (5.0, 5.5, 6.0)]
+    rows += [R(f"parking bound by plain division: vehicles at {L} m each", 1000 * legal_km / L, "the figure used until November 16, 2026") for L in CAR_LENGTHS]
+    rows += [R(f"whole vehicles as a share of the plain division at {L} m (%)", 100 * x["ratio"][L], "boroughs with a complete sign inventory; applied to the others") for L in CAR_LENGTHS]
+    rows += [R(f"parking bound: vehicles at {L} m each", x["whole"][L], "whole vehicles in each uninterrupted stretch of legal curb" + ("; the central length until November 23, 2026" if L == CAR_BEFORE else "; the central length (see CAR_CENTRAL in the script)" if L == CAR_CENTRAL else "")) for L in CAR_LENGTHS]
     rows += [R(f"driving bound: vehicles at {L} m each", 1000 * lane_km / L, "every travel lane full, nose to tail") for L in (6.0, 7.0, 8.0)]
     rows += [R("automobiles and light trucks registered, 2024 (inferred)", au[2024], "type inferred"),
-             R("the same as a share of the parking bound at 5.5 m (%)", 100 * au[2024] / x["whole"][5.5]),
+             R(f"the same as a share of the parking bound at {CAR_CENTRAL} m (%)", 100 * au[2024] / x["whole"][CAR_CENTRAL], "the central length since November 23, 2026"),
+             R(f"the same as a share of the parking bound at {CAR_BEFORE} m (%)", 100 * au[2024] / x["whole"][CAR_BEFORE], "the central length until November 23, 2026"),
+             R("the same as a share of the parking bound at 5.0 m (%)", 100 * au[2024] / x["whole"][5.0], "lower end of the band"),
+             R("the same as a share of the parking bound at 6.0 m (%)", 100 * au[2024] / x["whole"][6.0], "upper end of the band"),
              R("the same as a share of the driving bound at 7.0 m (%)", 100 * au[2024] / (1000 * lane_km / 7.0)),
              R("arrow coding check: stretches marked from both ends, chosen coding (%)", 100 * score, f"the other coding gives {100 * other:.1f} %")]
     d = pd.DataFrame(rows); d.to_csv(paths.TABLES / "street_space_bounds.csv", index=False)

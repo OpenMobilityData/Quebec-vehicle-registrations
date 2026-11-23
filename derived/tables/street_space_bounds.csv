@@ -16,18 +16,24 @@ legal curb (km),6502.0,driveways and hourly or permit restrictions not deducted
 "uninterrupted legal stretches, boroughs with a complete sign inventory (number)",61369.0,mean length 65.5 m
 their total length as a share of the legal curb of those boroughs (%),100.0,check of the stretch-by-stretch count: 100 expected
 parking bound by plain division: vehicles at 5.0 m each,1300387.0,"the figure used until November 16, 2026"
+parking bound by plain division: vehicles at 5.37 m each,1210789.0,"the figure used until November 16, 2026"
 parking bound by plain division: vehicles at 5.5 m each,1182170.0,"the figure used until November 16, 2026"
 parking bound by plain division: vehicles at 6.0 m each,1083656.0,"the figure used until November 16, 2026"
 whole vehicles as a share of the plain division at 5.0 m (%),96.2,boroughs with a complete sign inventory; applied to the others
+whole vehicles as a share of the plain division at 5.37 m (%),95.9,boroughs with a complete sign inventory; applied to the others
 whole vehicles as a share of the plain division at 5.5 m (%),95.9,boroughs with a complete sign inventory; applied to the others
 whole vehicles as a share of the plain division at 6.0 m (%),95.5,boroughs with a complete sign inventory; applied to the others
 parking bound: vehicles at 5.0 m each,1251233.0,whole vehicles in each uninterrupted stretch of legal curb
-parking bound: vehicles at 5.5 m each,1133268.0,whole vehicles in each uninterrupted stretch of legal curb
+parking bound: vehicles at 5.37 m each,1161644.0,whole vehicles in each uninterrupted stretch of legal curb; the central length (see CAR_CENTRAL in the script)
+parking bound: vehicles at 5.5 m each,1133268.0,"whole vehicles in each uninterrupted stretch of legal curb; the central length until November 23, 2026"
 parking bound: vehicles at 6.0 m each,1034690.0,whole vehicles in each uninterrupted stretch of legal curb
 driving bound: vehicles at 6.0 m each,1407180.0,"every travel lane full, nose to tail"
 driving bound: vehicles at 7.0 m each,1206154.0,"every travel lane full, nose to tail"
 driving bound: vehicles at 8.0 m each,1055385.0,"every travel lane full, nose to tail"
 "automobiles and light trucks registered, 2024 (inferred)",756729.0,type inferred
-the same as a share of the parking bound at 5.5 m (%),66.8,
+the same as a share of the parking bound at 5.37 m (%),65.1,"the central length since November 23, 2026"
+the same as a share of the parking bound at 5.5 m (%),66.8,"the central length until November 23, 2026"
+the same as a share of the parking bound at 5.0 m (%),60.5,lower end of the band
+the same as a share of the parking bound at 6.0 m (%),73.1,upper end of the band
 the same as a share of the driving bound at 7.0 m (%),62.7,
 "arrow coding check: stretches marked from both ends, chosen coding (%)",44.1,the other coding gives 9.2 %

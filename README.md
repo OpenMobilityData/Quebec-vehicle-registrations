@@ -53,7 +53,7 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 | 8 | `scripts/cohorts.py` | Retention of each model year from one file to the next; age summaries | `cohort_retention`, `cohort_survival`, `vehicle_age_summary` |
 | 9 | `scripts/licences.py` | Driver's licence holders 2011–2022 (open data « Permis de conduire », June 1) and automobiles per licence holder | `licence_holders_by_mrc`, `licence_holders_by_age`, `vehicles_per_licence` |
 | 10 | `scripts/scenarios.py` | The 2011–2021 line carried forward, storage equivalents, vehicles per 1,000 residents at two censuses | `trend_scenario`, `storage_equivalents`, `vehicles_per_1000_residents` |
-| 11 | `scripts/street_space.py` | Two hypothetical bounds for the municipality of Montréal: legal curb (City géobase, parking-sign inventory and hydrant file, CC BY 4.0; STM bus stops; hydrant clearances and bus-stop zones deducted since November 15, 2026) and travel lanes (OpenStreetMap, ODbL, autoroutes included), as numbers of vehicles under stated spacings | `street_space_bounds`, `street_lanes_by_class`, `street_curb_by_borough` |
+| 11 | `scripts/street_space.py` | Two hypothetical bounds for the municipality of Montréal: legal curb (City géobase, parking-sign inventory and hydrant file, CC BY 4.0; STM bus stops; hydrant clearances and bus-stop zones deducted since November 15, 2026) and travel lanes (OpenStreetMap, ODbL, autoroutes included), as numbers of vehicles under stated spacings (parked vehicles at 5 to 6 m each; central length 5.37 m since November 23, 2026, 5.5 m before: see the revision under « Documents ») | `street_space_bounds`, `street_lanes_by_class`, `street_curb_by_borough` |
 
 ## Measurements so far
 
@@ -94,6 +94,8 @@ Run with a Python that has `duckdb`, `pyarrow` and `pandas`, in this order.
 - [`vehicle_registrations_deck_en.pdf`](docs/vehicle_registrations_deck_en.pdf): slide deck (English).
 
 Both are built by `scripts/build_docs.py`; every number is read from the tables at build time. They are built with `--final`; without it the pages carry a draft marking.
+
+**Revision of November 23, 2026 (v2026-11-23-09-08-26).** The central length of a parked vehicle in the hypothetical parking bound (`scripts/street_space.py`) is 5.37 m in place of 5.5 m: the length at which, on rue de Terrebonne, the count of places net of driveway entrances (4 m each, the median length of the curb cuts measured on the City's 2015 LiDAR) and fire hydrants equals the consultant's count on the block faces where the street as built and the design retained in the 2023 study place the parking on the same side (EXP 2023, Annexe C; see the [corridor note](https://github.com/OpenMobilityData/Terrebonne-open-sources/blob/main/2026-terrebonne-corridor-vehicles-and-curb/README.md)). No driveway is deducted here, so the bound remains an upper one. What changes: the bound at the central length, 1,133,268 → 1,161,644 vehicles, and the 2024 automobiles and light trucks (inferred) as a share of it, 67 % → 65 % (60 to 73 % at 5 to 6 m). Unchanged: the band at 6 to 5 m (1,034,690 to 1,251,233 vehicles), the figure `trend_thresholds`, the driving bound and every other number. `street_space_bounds.csv` keeps the 5.5 m rows beside the new ones; `storage_equivalents.csv` and `street_curb_by_borough.csv` gain a 5.37 m column. These remain hypothetical bounds under stated assumptions, never measurements of parking or of congestion.
 
 ## Figures (`derived/figures/<type>/`, script beside its PNG and SVG, English and French)
 

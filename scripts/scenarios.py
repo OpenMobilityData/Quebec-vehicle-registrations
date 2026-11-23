@@ -6,7 +6,7 @@ the published count for 2022 and the inferred counts for 2023 and 2024. The same
 (2011-2022, the only years with mass).
 
 Storage. A registered vehicle is somewhere when it is not moving. The table converts a number of vehicles into a
-length of curb at 5.0, 5.5 and 6.0 m per vehicle: an assumption stated as a range, not a measurement, and it applies
+length of curb at 5.0, 5.37, 5.5 and 6.0 m per vehicle (5.37 m: the central length of street_space.py since November 23, 2026; 5.5 m before): an assumption stated as a range, not a measurement, and it applies
 only to the vehicles kept on the street (the files do not say which are).
 
 Outputs (derived/tables/): trend_scenario.csv, storage_equivalents.csv, vehicles_per_1000_residents.csv
@@ -48,7 +48,7 @@ def main():
              ("Montréal, trend 2011-2021 carried from 2024 to 2034 (10 years)", 10 * b),
              ("H4A and H4B, if the City's 2011-2021 yearly rate applied for 10 years", local * rate * 10),
              ("Per 1,000 vehicles", 1000)]
-    st = pd.DataFrame([{"case": c, "vehicles": round(v), **{f"curb_km_at_{l}_m": round(v * l / 1000, 1) for l in (5.0, 5.5, 6.0)}} for c, v in cases])
+    st = pd.DataFrame([{"case": c, "vehicles": round(v), **{f"curb_km_at_{l}_m": round(v * l / 1000, 1) for l in (5.0, 5.37, 5.5, 6.0)}} for c, v in cases])
     st.to_csv(paths.TABLES / "storage_equivalents.csv", index=False)
 
     pop = duckdb.connect().execute(f"""SELECT CHARACTERISTIC_ID AS id, TRY_CAST(C1_COUNT_TOTAL AS DOUBLE) AS v
