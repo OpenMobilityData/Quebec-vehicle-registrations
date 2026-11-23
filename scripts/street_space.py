@@ -25,9 +25,9 @@ PARKING BOUND: every legal metre of curb used for parking.
   permit, and driveways (each takes about one place at the curb and gives at least one private place, which the
   bound does not count: the two partly offset; the garages of large apartment buildings are the larger omission). Vehicles at 5.0 to 6.0 m each;
   central value 5.37 m (since November 23, 2026; 5.5 m before): the length at which, on rue de Terrebonne, the count of places net of
-  driveway entrances (4 m each, the median length of the curb cuts measured on the City's 2015 LiDAR) and fire hydrants equals the
-  consultant's count on the block faces where the street as built and the design retained in the 2023 study place the parking on the
-  same side (EXP 2023, Annexe C); see the corridor note. Here no driveway is deducted, so the bound stays an upper one.
+  driveway entrances (4 m each, the median length of the curb cuts detected on the City's 2015 LiDAR) and fire hydrants comes within
+  about 1 % of the consultant's count on the block faces where the street as built and the design retained in the 2023 study place the
+  parking on the same side (139.5 against 138; EXP 2023, Annexe C); see the corridor note. Here no driveway is deducted, so the bound stays an upper one.
 
   Whole vehicles (added November 16, 2026): the legal curb is not one continuous strip. Each uninterrupted stretch
   (between an end clearance, an all-time prohibition, a hydrant clearance or a bus-stop zone and the next) holds a
@@ -70,9 +70,9 @@ OUT = ("autoroute", "pont", "tunnel", "voie", "ruelle")
 END = 5.0            # metres kept clear at each end of a block face
 DENSE = 8.0          # poles per km of curb above which a borough's inventory is taken as complete
 CAR_CENTRAL = 5.37   # metres per parked vehicle, central value: the length at which, on rue de Terrebonne, the count of places net of
-                     # driveway entrances (4 m each, the median length of the curb cuts measured on the City's 2015 LiDAR) and fire
-                     # hydrants equals the consultant's count on the block faces where the street as built and the design retained in
-                     # the 2023 study place the parking on the same side (EXP 2023, Annexe C); see the corridor note
+                     # driveway entrances (4 m each, the median length of the curb cuts detected on the City's 2015 LiDAR) and fire
+                     # hydrants comes within about 1 % of the consultant's count on the block faces where the street as built and the
+                     # design retained in the 2023 study place the parking on the same side (139.5 against 138; EXP 2023, Annexe C); see the corridor note
                      # (Terrebonne-open-sources, 2026-terrebonne-corridor-vehicles-and-curb). Before November 23, 2026: 5.5 m.
 CAR_BEFORE = 5.5     # the central value until November 23, 2026: kept in the table beside the new one
 CAR_LENGTHS = (5.0, CAR_CENTRAL, CAR_BEFORE, 6.0)   # 5.0 and 6.0 m are the bounds of the band
